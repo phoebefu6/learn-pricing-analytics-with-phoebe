@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Analyst session 4 of 6. Promo lift and the dip after: lift is actual minus baseline, three baselines and what each one counts, pull-forward and carryover in the months after, cannibalisation between sibling products, and how a clean price test is set up. Real Olist rows around Black Friday 2017; Kettle &amp; Co examples are constructed.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Promo lift and the dip after - learn pricing analytics with phoebe">
+<meta property="og:description" content="Analyst session 4 of 6. The baseline is the whole argument: real Black Friday 2017 rows, a comparison group, and the month after.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-pricing-analytics-with-phoebe/courses/a4-promo-lift-and-the-dip-after.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-pricing-analytics-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Promo lift and the dip after - learn pricing analytics with phoebe">
+<meta name="twitter:description" content="Analyst session 4 of 6. Baseline, lift, the month after and the siblings, on real rows.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-pricing-analytics-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Analyst session 4 · Promo lift and the dip after - learn pricing analytics with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-pricing-analytics-with-phoebe</a> / Analyst session 4 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Pricing Analytics with Phoebe · Analyst session 4 of 6</div>
+    <h1>Promo lift and the <span class="accent">dip after</span></h1>
+    <p class="sub">A promotion report says the discount added so many units. That number is actual sales minus a baseline, the sales you would have had without the discount, and nobody ever observes the baseline. Choose it badly and the season, the trend or next month's sales get credited to the price cut. Tonight works three baselines on real Olist marketplace rows around Black Friday 2017, looks at the month after for a dip, and asks what a promoted product took from its siblings.</p>
+    <div class="chip-row">
+      <span class="chip level">🟡 Analyst</span>
+      <span class="chip audience">Analysts who build pricing and margin reporting</span>
+      <span class="chip audience">Hands-on in the browser</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:4">3-18 · Baseline, the month after, the siblings</span>
+      <span class="a3" style="flex:5">18-40 · Build-along: four rungs on real rows</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where we start</h2>
+    </div>
+    <p class="lede">Analyst session 3 decided with a number somebody else measured. Tonight you measure one. The rows are real: real Olist marketplace rows (Brazilian e-commerce, delivered orders, prices in BRL), monthly units and mean prices for every product sold in October, November and December 2017. Some sellers cut their November price and some did not. That split is the only reason a fair lift can be computed at all, and it comes with a condition: sellers chose which products to cut, so the comparison rests on an assumption you will learn to say out loud.</p>
+
+    <div class="legend">
+      <span class="pill">🎫 Clear all three quiz questions to stamp your passport</span>
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">★ Build-along = everyone builds it</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> Three baselines and what each one quietly counts as lift; the four-rung climb from a naive November jump to a two-month net lift on real rows; a check of the month after for pull-forward; and one baseline sentence you can put under any promotion number before it reaches a commercial lead.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers baseline and lift</span>
+      <h2>Lift is actual minus baseline, and the baseline is the argument</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">Actual sales are on the report. The baseline is a claim about a month that did not happen. Last month as the baseline counts the season as lift. The same month last year counts a year of growth as lift. A comparison group in the same month, products that did not get the discount, takes the season out, but only if those products would have moved in step with the promoted ones. On the real rows the choice changes the answer by more than half.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two lines of monthly units for real Olist products, October to December 2017. The 29 products that cut price more than 3 percent in November went from 310 to 654 to 388 units. The 54 products that held price went from 310 to 513 to 365. Both groups started at 310 units in October. The gap between the lines is shaded: 141 units in November and 23 in December, 164 over the two months. The held group's growth of 65.5 percent sets the cut group's expected November at 513 units.">
+        <defs>
+          <filter id="a4aSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="61" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a4aHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a4aAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a4aH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .a4aL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .a4aS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .a4aA { font: 700 11px Inter, sans-serif; fill: #7C1428; }
+          .a4aB { font: 800 11px Inter, sans-serif; fill: #08433A; }
+          .a4aW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .a4aN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="a4aH" x="30" y="26">UNITS SOLD, OCTOBER TO DECEMBER 2017 · CUT VS HELD AT 3%</text>
+        <text class="a4aS" x="30" y="44">29 cut and 54 held products · real Olist rows</text>
+
+        <g filter="url(#a4aSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M110 60 L110 280 L700 280"/>
+          <path d="M160 252 L400 91.5 L640 215.6 L640 226.3 L400 157.3 Z" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <path d="M160 252 L400 157.3 L640 226.3" stroke-dasharray="6 4"/>
+          <path d="M160 252 L400 91.5 L640 215.6" stroke="#B4233C" stroke-width="2.6"/>
+          <circle cx="160" cy="252" r="4.5" fill="#FFFFFF"/>
+          <circle cx="400" cy="91.5" r="4.5" fill="#B4233C" stroke="#B4233C"/>
+          <circle cx="640" cy="215.6" r="4.5" fill="#B4233C" stroke="#B4233C"/>
+          <circle cx="400" cy="157.3" r="4.5" fill="#FFFFFF"/>
+          <circle cx="640" cy="226.3" r="4.5" fill="#FFFFFF"/>
+          <rect x="726" y="60" width="134" height="202" rx="10" transform="rotate(0.6 793 161)" fill="#FFFFFF"/>
+          <!-- doodle: a price tag -->
+          <path d="M796 20 L830 20 L842 31 L830 42 L796 42 Z" transform="rotate(-4 819 31)"/>
+          <circle cx="803" cy="31" r="2.5"/>
+        </g>
+
+        <text class="a4aS" x="100" y="260.7" text-anchor="end">300</text>
+        <text class="a4aS" x="100" y="167.3" text-anchor="end">500</text>
+        <text class="a4aS" x="100" y="74" text-anchor="end">700</text>
+        <text class="a4aA" x="44" y="226" transform="rotate(-90 44 226)">units sold</text>
+
+        <text class="a4aS" x="170" y="272">both 310</text>
+        <text class="a4aA" x="400" y="80" text-anchor="middle">cut 654</text>
+        <rect x="368" y="172" width="64" height="17" rx="4" fill="#FFFFFF"/>
+        <text class="a4aL" x="400" y="184" text-anchor="middle">held 513</text>
+        <text class="a4aW" x="446" y="157">+141</text>
+        <text class="a4aA" x="652" y="210">cut 388</text>
+        <text class="a4aL" x="652" y="236">held 365</text>
+
+        <text class="a4aS" x="160" y="298" text-anchor="middle">October</text>
+        <text class="a4aS" x="400" y="298" text-anchor="middle">November</text>
+        <text class="a4aS" x="640" y="298" text-anchor="middle">December</text>
+
+        <text class="a4aH" x="740" y="84">THE GAP</text>
+        <text class="a4aS" x="740" y="106">Nov: 654 - 513</text>
+        <text class="a4aB" x="740" y="124">= 141 units</text>
+        <text class="a4aS" x="740" y="150">Dec: 388 - 365</text>
+        <text class="a4aB" x="740" y="168">= 23 units</text>
+        <text class="a4aS" x="740" y="194">two months</text>
+        <text class="a4aB" x="740" y="212">= 164 units</text>
+        <text class="a4aS" x="740" y="238">dashed = held</text>
+
+        <text class="a4aN" x="30" y="320">Held growth 513 / 310 = +65.5%, so the cut group's expected November is 513. Real Olist rows.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the held line is the cut group's baseline; only the shaded gap is the discount's</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Three baselines, three lifts<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>Last month.</strong> October as the baseline for November. The cut group went from 310 to 654 units: 344 extra units, +111.0%. That number counts Black Friday, the run-up to Christmas and everything else November brings. Across the whole panel, products that cut and products that did not, November units rose +74.7% on October. Most of the cut group's jump would have happened anyway.</p>
+        <p><strong>The same month last year.</strong> November 2016 as the baseline for November 2017. It takes the season out, because both rows are Novembers, and puts a year of growth in: a marketplace that grew through 2017 shows lift from growth alone. The rows here start in July 2017, so this baseline cannot be computed on them. On your own data, scale last year's month by the year's trend before you subtract, and say that you did.</p>
+        <p><strong>A comparison group in the same month.</strong> The 54 products that held price grew +65.5% from October to November. Applied to the cut group's October, that growth sets an expected November of 513 units. 654 minus 513 leaves 141 extra units, out of the 344 that last month credited. The comparison keeps the season out of the answer as long as the held products would have tracked the cut ones without the discount.</p>
+        <div class="prompt-box good"><span class="label">★ The arithmetic, on real rows</span>last month:        654 - 310 = 344 extra units (+111.0%)
+comparison group:  310 x (513 / 310) = 513 expected
+                   654 - 513 = 141 extra units
+share of the naive figure the comparison keeps: 141 / 344 = 41%</div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Parallel trends, in one paragraph<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>The comparison group works only if, without any discount, the cut products would have grown at the held products' rate. That is the parallel-trends assumption, and on these rows it is an assumption, not a fact: sellers chose which products to cut. A seller who cut price on the products they expected to sell best at Black Friday would make the cut group look better than the discount deserves; a seller who cut price on slow movers would do the opposite. Look at the months before: if the two groups moved together from July to October, the assumption is easier to believe, never proven. The method and its checks are taught in <a href="https://phoebefu6.github.io/learn-experimentation-with-phoebe/courses/b9-difference-in-differences.html">Experimentation, difference-in-differences ↗</a>; when you cannot assign the discount yourself, read <a href="https://phoebefu6.github.io/learn-experimentation-with-phoebe/courses/a5-when-you-cant-randomize.html">Experimentation, when you can't randomize ↗</a>.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>Black Friday sits inside the November row.</strong> Brazil's Black Friday 2017 fell on Friday 24 November; the Ebit report, via Mercado e Consumo on 29 November 2017, called it the main offers day. Every product on the marketplace felt it, whether or not its seller cut the price. That is why the whole panel rose +74.7% in November, and why a promotion report that uses October as the baseline hands Black Friday to the discount.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers pull-forward and carryover</span>
+      <h2>The month after: a dip, or a tail</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">A discount can create new purchases, or it can move purchases that would have happened anyway to an earlier date. If it only moves them, the month after sits below its baseline: customers bought in November what they would have bought in December. That is pull-forward, and the dip is how you see it. The opposite also happens: new buyers come back, and the months after sit above baseline. That is carryover. Either way, the promotion month alone is not the lift.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 356" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A schematic with no data. A dashed baseline runs flat across six months. In the promo month sales spike well above it. After the spike two paths are drawn: a solid path that falls below the baseline in the next month and climbs back over two months, the dip of pull-forward, with the area under the baseline shaded; and a dashed path that stays above the baseline and settles slowly, the raised tail of carryover.">
+        <defs>
+          <filter id="a4bSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="67" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a4bHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a4bAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a4bH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .a4bL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .a4bS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .a4bA { font: 700 11px Inter, sans-serif; fill: #7C1428; }
+          .a4bB { font: 800 11px Inter, sans-serif; fill: #08433A; }
+          .a4bN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="a4bH" x="30" y="26">THE MONTH AFTER: TWO WAYS A PROMOTION CAN END</text>
+        <text class="a4bS" x="30" y="44">schematic, constructed shape: what you look for, not a measurement</text>
+
+        <g filter="url(#a4bSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M220 200 L340 90 L422.5 200 Z" fill="url(#a4bHc)" stroke="none"/>
+          <path d="M422.5 200 L460 250 L580 215 L700 200 Z" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <path d="M80 200 L800 200" stroke="#5F5154" stroke-dasharray="7 5"/>
+          <path d="M100 200 L220 200 L340 90 L460 250 L580 215 L700 200" stroke-width="2.4"/>
+          <path d="M340 90 L460 170 L580 185 L700 200" stroke="#7C1428" stroke-dasharray="6 4"/>
+          <!-- doodle: a price tag -->
+          <path d="M794 22 L828 22 L840 33 L828 44 L794 44 Z" transform="rotate(3 817 33)"/>
+          <circle cx="801" cy="33" r="2.5"/>
+        </g>
+
+        <text class="a4bS" x="724" y="192">baseline</text>
+        <text class="a4bA" x="340" y="78" text-anchor="middle">promo month</text>
+        <text class="a4bA" x="110" y="140">spike: the lift you see</text>
+        <text class="a4bA" x="500" y="160">carryover: a raised tail</text>
+        <text class="a4bB" x="520" y="282" text-anchor="middle">pull-forward: the dip</text>
+        <text class="a4bS" x="520" y="298" text-anchor="middle">units bought early, missing later</text>
+
+        <text class="a4bS" x="100" y="322" text-anchor="middle">before</text>
+        <text class="a4bS" x="220" y="322" text-anchor="middle">before</text>
+        <text class="a4bL" x="340" y="322" text-anchor="middle">promo</text>
+        <text class="a4bS" x="460" y="322" text-anchor="middle">after 1</text>
+        <text class="a4bS" x="580" y="322" text-anchor="middle">after 2</text>
+        <text class="a4bS" x="700" y="322" text-anchor="middle">after 3</text>
+
+        <text class="a4bN" x="30" y="344">Net lift = the spike minus the dip, or plus the tail. Measure the months after before you add it up.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the shaded dip is lift the promo month borrowed; subtract it, or the report counts it twice</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Net lift = promo month + the months after<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>The rule.</strong> Net lift is the promotion month's extra units plus the extra units, positive or negative, of every month after, each against the same kind of baseline. A dip subtracts; a tail adds. Stop counting when the gap is back to zero, and say how many months you looked at.</p>
+        <p><strong>All products, real rows.</strong> In December the cut group sold 388 units against an expected 365 from the held group's growth: +23 units, not a dip. Add it to November's 141 and the two-month net lift is 164 extra units. At monthly grain, for all products, there is no sign of pull-forward.</p>
+        <p><strong>One category, real rows.</strong> Narrow the scope to Home and garden in the lab of Analyst session 6 and the month after turns negative. The lab prints: "Rung 4: December -16.6 units against the held group, so 30.5 extra units over November and December." Same method, a different slice, and the answer changes sign. Report the scope with the number.</p>
+        <div class="prompt-box good"><span class="label">★ Net lift over two months, all products</span>November: 654 - 513 = +141
+December: 388 - 365 =  +23
+net:      141 + 23  = 164 extra units</div>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Stockpiling and why daily data matters<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Products that keep, like tea, detergent or batteries, invite stockpiling: a buyer who would have bought one a month buys three at the discount and nothing for two months. Products that spoil, or that buyers cannot store, have less room for it. That is where to look hardest for a dip.</p>
+        <p>The grain decides what you can see. These rows are monthly, so Black Friday is one day inside the November row and December is one number. A dip in December's first week that recovers by Christmas would vanish inside the month total; the rows cannot tell you whether that happened. Daily or weekly data, with the same comparison group, would show Black Friday itself and the days after it. When the dip matters to the decision, ask for the finer grain before you declare there was none.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>The dip that depended on the slice.</strong> On the real Olist rows, all products together show December above the comparison: +23 units. The 37 Home and garden products, 16 cut and 20 held, show December below it: -16.6 units, leaving 30.5 extra units over the two months. Neither answer is wrong. A promotion review that reports only the total would never see that one category gave back part of its November.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers cannibalisation and price test design</span>
+      <h2>The siblings pay for it, and the test that would tell you</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">A promoted product can take its extra units from a sibling: the same buyer, the same occasion, a cheaper pack this month. The promoted product's lift then counts sales the category already had. Measuring it needs sales of the siblings beside the promoted product, and the Olist panel does not carry that link: products are anonymised, with no tie between a product and its siblings. So cannibalisation is taught here on a constructed Kettle example, and on the real rows it stays unmeasured.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 312" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A constructed Kettle example in units against each product's baseline in the promo month. The promoted 100 gram tin rose from 2,000 to 2,400, plus 400 units. Its sibling, the 250 gram caddy, fell from 900 to 750, minus 150 units, drawn as a bar to the left of zero with an arrow showing those units switching to the tin. The category net is 2,900 to 3,150, plus 250 units. Category lift is 8.6 percent against the tin's 20.0 percent. In grams of tea, plus 40 kilograms minus 37.5 kilograms is plus 2.5 kilograms.">
+        <defs>
+          <filter id="a4cSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="71" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a4cHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a4cAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a4cH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .a4cL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .a4cS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .a4cA { font: 700 11px Inter, sans-serif; fill: #7C1428; }
+          .a4cB { font: 800 11px Inter, sans-serif; fill: #08433A; }
+          .a4cW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .a4cN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="a4cH" x="30" y="26">UNITS AGAINST BASELINE IN THE PROMO MONTH</text>
+        <text class="a4cS" x="30" y="44">Constructed Kettle &amp; Co example</text>
+
+        <g filter="url(#a4cSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M400 58 L400 248"/>
+          <rect x="400" y="70" width="320" height="34" rx="4" transform="rotate(-0.6 560 87)" fill="#B4233C" stroke="#B4233C"/>
+          <rect x="280" y="130" width="120" height="34" rx="4" transform="rotate(0.6 340 147)" fill="url(#a4cHc)"/>
+          <path d="M500 148 L700 114" marker-end="url(#a4cAr)"/>
+          <rect x="400" y="200" width="200" height="34" rx="4" transform="rotate(-0.5 500 217)" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <!-- doodle: a tea tin -->
+          <rect x="818" y="20" width="24" height="28" rx="3" transform="rotate(3 830 34)"/>
+          <path d="M816 26 L844 26"/>
+        </g>
+
+        <text class="a4cL" x="30" y="84">100 g tin, promoted</text>
+        <text class="a4cS" x="30" y="100">2,000 to 2,400</text>
+        <text class="a4cW" x="412" y="92">+400 units</text>
+
+        <text class="a4cL" x="30" y="144">250 g caddy, sibling</text>
+        <text class="a4cS" x="30" y="160">900 to 750</text>
+        <text class="a4cA" x="412" y="152">-150 units</text>
+        <text class="a4cS" x="560" y="168">switched to the tin, not new</text>
+
+        <text class="a4cL" x="30" y="214">category, net</text>
+        <text class="a4cS" x="30" y="230">2,900 to 3,150</text>
+        <text class="a4cW" x="412" y="222">+250 units</text>
+        <text class="a4cB" x="620" y="214">category lift +8.6%</text>
+        <text class="a4cS" x="620" y="230">tin alone: +20.0%</text>
+
+        <text class="a4cN" x="30" y="276">In tea, not tins: +400 x 100 g = +40 kg; -150 x 250 g = -37.5 kg; net +2.5 kg.</text>
+        <text class="a4cN" x="30" y="298">Report the category's lift. The tin's +400 counts the caddy's lost sales as a win.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the promoted product's bar is not the promotion's result; the green category bar is</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Lift for the category, not the product<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>The question.</strong> The decision was "should we discount the tin?", and the business lives on the category, not the tin. So the lift that answers it is the category's: promoted product plus every sibling a buyer could have switched from, each against its own baseline.</p>
+        <p><strong>Kettle, constructed.</strong> In the promotion month the 100 g tin sold 2,400 against a baseline of 2,000: +400 units, +20.0%. The 250 g caddy sold 750 against 900: -150 units. Category net: +250 units on a baseline of 2,900, +8.6%. Count in tea and it nearly disappears: the tin added 40 kg, the caddy lost 37.5 kg, so the category sold 2.5 kg more tea, at a discount on the tin.</p>
+        <div class="prompt-box good"><span class="label">★ Category lift · Constructed Kettle &amp; Co example</span>tin:      2,400 - 2,000 = +400 units   (400 / 2,000 = +20.0%)
+caddy:      750 -   900 = -150 units
+category: 3,150 - 2,900 = +250 units   (250 / 2,900 = +8.6%)
+in tea:   400 x 100 g = 40 kg; 150 x 250 g = 37.5 kg; net +2.5 kg</div>
+        <p><strong>On the real rows.</strong> The Olist panel cannot do this. Products are anonymised and nothing links a product to its siblings, so a cut product's 141 extra units may include sales taken from a similar product in the held group. If it did, the held group's baseline is a little low and the gap a little high. Say that in the report as a limit, not a footnote.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>What a clean price test needs<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Everything above reads a promotion after the fact, with a comparison group sellers chose. A test you design removes that weak point. Three things make it clean. <strong>Randomise who gets the price</strong>: by store, region, customer or week, decided by a random draw, so the cut group cannot be the products or customers someone expected to do well. <strong>Hold a group back</strong>: a share that keeps the old price through the test and the weeks after, so you can see both the lift and the dip against the same baseline. <strong>Size it in advance</strong>: decide how many units or customers you need to see the lift you care about before you start, and do not stop early because the number looks good.</p>
+        <p>The sizing and the analysis belong to <a href="https://phoebefu6.github.io/learn-experimentation-with-phoebe/courses/b4-run-an-ab-test.html">Experimentation, run an A/B test ↗</a>; use its method rather than a rule of thumb. For price tests, add two pricing-specific checks: measure the siblings as well as the tested product, and run long enough to cover the month after.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>Kettle's November tin promotion.</strong> Kettle's online shop ran 10% off the 100 g tin for November. The campaign recap compared November with October and credited the whole rise to the discount. The analyst's rebuild changed three things: the baseline became the same month for tins outside the promotion, which took the season out and left the tin at +400 units, +20.0%; the caddy went into the count, which took out the 150 units that switched and left the category at +250, +8.6%; and December went in, to look for buyers who had stocked up. The decision on next November was taken on the category's number. Constructed Kettle &amp; Co example.</p>
+    </div>
+  </section>
+
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Build-along</span>
+      <h2>Climb four rungs on real rows</h2>
+      <span class="tag demo">★ 22 min · everyone builds</span>
+    </div>
+    <p class="lede">The widget holds the real Olist rows for products sold in October, November and December 2017 and splits them by their November price against October. It recomputes everything in your browser. Work the six steps in order, copy what it prints, and finish with a baseline sentence you could put under a promotion report tomorrow.</p>
+
+    <div class="pra-widget" data-mode="promo"></div>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 246" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn map of the widget. A threshold control, 1, 3, 5 or 10 percent, decides which products count as cut. That splits the products into cut, held and raised groups, 29, 54 and 16 at 3 percent. The split feeds a monthly table from 2017-07 to 2018-01, which feeds four rungs: whole panel, cut group alone, cut minus held, and December against the held group.">
+        <defs>
+          <filter id="a4dSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="73" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a4dHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a4dAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a4dH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .a4dL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .a4dS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .a4dA { font: 700 11px Inter, sans-serif; fill: #7C1428; }
+          .a4dW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .a4dN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="a4dH" x="30" y="28">WHAT THE WIDGET DOES WITH ONE CONTROL</text>
+
+        <g filter="url(#a4dSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="56" width="170" height="64" rx="10" transform="rotate(-1 115 88)" fill="#FFFFFF"/>
+          <!-- doodle: a dropdown chevron -->
+          <path d="M174 80 L180 86 L186 80"/>
+          <path d="M206 88 L238 88" marker-end="url(#a4dAr)"/>
+          <rect x="246" y="56" width="180" height="64" rx="10" transform="rotate(0.8 336 88)" fill="#FCEFF1" stroke="#B4233C"/>
+          <path d="M432 88 L464 88" marker-end="url(#a4dAr)"/>
+          <rect x="472" y="56" width="170" height="64" rx="10" transform="rotate(-0.6 557 88)" fill="url(#a4dHc)"/>
+          <path d="M648 88 L680 88" marker-end="url(#a4dAr)"/>
+          <rect x="688" y="56" width="162" height="64" rx="10" transform="rotate(0.8 769 88)" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <path d="M769 126 L769 152" marker-end="url(#a4dAr)"/>
+          <rect x="30" y="160" width="820" height="44" rx="10" transform="rotate(-0.2 440 182)" fill="#FFFFFF"/>
+        </g>
+
+        <rect x="484" y="68" width="146" height="40" rx="6" fill="#FFFFFF"/>
+
+        <text class="a4dL" x="46" y="82">counts as a cut</text>
+        <text class="a4dS" x="46" y="100">1%, 3%, 5% or 10%</text>
+        <text class="a4dL" x="262" y="82">cut / held / raised</text>
+        <text class="a4dS" x="262" y="100">29 / 54 / 16 at 3%</text>
+        <text class="a4dL" x="492" y="84">monthly table</text>
+        <text class="a4dS" x="492" y="101">2017-07 to 2018-01</text>
+        <text class="a4dW" x="702" y="82">rungs 1 to 4</text>
+        <text class="a4dW" x="702" y="100">one line each</text>
+
+        <text class="a4dA" x="46" y="187">1 whole panel</text>
+        <text class="a4dA" x="246" y="187">2 cut group alone</text>
+        <text class="a4dA" x="446" y="187">3 cut minus held</text>
+        <text class="a4dA" x="626" y="187">4 December vs held</text>
+
+        <text class="a4dN" x="30" y="234">Move the threshold and every box to its right is recomputed from the real rows.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the threshold is a choice you make before you look; everything after it is subtraction</figcaption>
+    </figure>
+
+    <div class="steps">
+      <div class="step">
+        <p><strong>Step 1 · Read the verdict at 3%.</strong> Leave "Counts as a cut" at its default and copy the green line.</p>
+        <div class="prompt-box good"><span class="label">★ Step 1 · what the widget prints</span>Cut group +111.0% in November, held group +65.5%: the comparison leaves 141 of 344 extra units.</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 2 · Copy the month table.</strong> Seven months, three rows. Look at July to October before November: did the cut and held groups move together?</p>
+        <div class="prompt-box good"><span class="label">★ Step 2 · units, 2017-07 to 2018-01</span>month        2017-07  2017-08  2017-09  2017-10  2017-11  2017-12  2018-01
+cut              134      217      244      310      654      388      331
+held             300      251      250      310      513      365      445
+whole panel      669      681      681      877    1,532    1,092    1,443</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 3 · Read the four rungs.</strong> Each takes one more thing out of the answer. Say out loud what each one removes.</p>
+        <div class="prompt-box good"><span class="label">★ Step 3 · rungs 1 to 4</span>Rung 1, whole panel: November units +74.7% on October.
+Rung 2, cut group alone: 344 extra units (+111.0%).
+Rung 3, cut minus held: 141 extra units; the gap is +45.5 percentage points.
+Rung 4, December against the held group: +23 units, so 164 extra units over two months.</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 4 · Rebuild rungs 3 and 4 by hand.</strong> Use only the October, November and December columns from Step 2. If your numbers match the widget's, you can explain them to anyone.</p>
+        <div class="prompt-box good"><span class="label">★ Step 4 · the check</span>held growth:       513 / 310 = 1.655  (+65.5%)
+expected November: 310 x 1.655 = 513
+rung 3:            654 - 513 = 141 extra units
+rung 4:            388 - 365 = +23 (expected December = 310 x 365 / 310)
+two months:        141 + 23 = 164 extra units</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 5 · Move the threshold.</strong> Switch "Counts as a cut" to 1%, then to 5%, and watch the group sizes in the table labels. The rows did not change; your definition of a cut did. Pick the threshold before you look at the lift: moving it until the answer looks good is a choice made with the result in view.</p>
+        <div class="prompt-box good"><span class="label">★ Step 5 · who counts as cut</span>price down more than 1%:  cut 37 products, held 45
+price down more than 3%:  cut 29 products, held 54
+price down more than 5%:  cut 19 products, held 66</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 6 · Write the baseline sentence.</strong> One sentence under the number, naming the baseline, the window, the scope and the assumption. Fill it from your own steps.</p>
+        <div class="prompt-box good"><span class="label">★ Step 6 · the baseline sentence</span>Against products that held price in the same months (a comparison group sellers
+did not assign at random), the 29 products that cut price more than 3% in
+November 2017 sold 141 extra units in November and 164 over November and
+December, not the 344 a last-month baseline credits; monthly data, all
+products, no sibling links, so a first-week dip or cannibalisation would not show.</div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <p><strong>Keep the four rungs.</strong> Analyst session 6 adds the fifth, did the discount pay at an assumed cost ratio, and then tries to break the result: it counts the season as lift on purpose and shuffles which products count as cut. The baseline sentence you wrote in Step 6 is the one it checks.</p>
+    </div>
+  </section>
+
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before Analyst session 5</h2>
+      <span class="tag exercise">30 min</span>
+    </div>
+    <ol>
+      <li><strong>Find a past promotion report</strong> in your own business and write down the baseline it used. If it does not say, that is your first finding.</li>
+      <li><strong>Recompute its lift against a comparison group</strong>: products, stores or regions that did not get the discount in the same weeks. Note how much of the reported lift survives.</li>
+      <li><strong>Look at the month after</strong> against the same comparison. Write the net lift over the promotion and the following month, and the grain you had.</li>
+      <li><strong>List the siblings</strong> a buyer could have switched from, and check whether their sales fell during the promotion. If you cannot get their rows, write that down as the report's limit.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+    <p>Clear all three and Analyst session 4 gets stamped in your passport.</p>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1 · Why is last month a bad baseline for a November promotion?</p>
+      <button class="qopt" type="button">A · October has fewer days than November</button>
+      <button class="qopt" type="button">B · It counts the season as lift: November sales rise for products with no discount too, as the whole panel's +74.7% shows</button>
+      <button class="qopt" type="button">C · Last month always understates the lift</button>
+      <button class="qopt" type="button">D · Last month is fine as long as the discount was large</button>
+      <p class="qwhy">On the real rows the cut group's last-month lift was 344 extra units; against products that held price in the same month, 141. The difference is Black Friday and the run-up to Christmas, which every product felt.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <p class="qtext">2 · In a different scope, December comes in below the comparison group's expectation. What would that mean?</p>
+      <button class="qopt" type="button">A · The comparison group is broken</button>
+      <button class="qopt" type="button">B · The discount had no effect in November</button>
+      <button class="qopt" type="button">C · Nothing: only the promotion month counts</button>
+      <button class="qopt" type="button">D · Some of November's extra units were purchases pulled forward from December, so the net lift is smaller than November's gap</button>
+      <p class="qwhy">A dip after the promotion is the sign of pull-forward. In the Home and garden scope December came in at -16.6 units, leaving 30.5 extra units over the two months. For all products December was +23, no dip at monthly grain.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">3 · Why can the Olist panel not show cannibalisation?</p>
+      <button class="qopt" type="button">A · Products are anonymised and nothing links a product to its siblings, so you cannot see which product's sales a promoted one took</button>
+      <button class="qopt" type="button">B · Cannibalisation only happens in physical shops</button>
+      <button class="qopt" type="button">C · The panel has too few products</button>
+      <button class="qopt" type="button">D · Monthly data always hides cannibalisation</button>
+      <p class="qwhy">Cannibalisation is measured on siblings: the products a buyer would otherwise have bought. Without sibling links the panel can only report the promoted products' lift, which is why the limit belongs in the report.</p>
+    </div>
+
+    <p class="quiz-score"></p>
+  </section>
+
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What this session teaches, and where it came from</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Baseline and lift on real rows: whole panel +74.7%, cut group +111.0% (344 extra units), held group +65.5%, 141 extra units in November, +23 in December, 164 over two months; Home and garden -16.6 in December</span><span class="note">Olist, Brazilian E-Commerce Public Dataset by Olist, Kaggle, CC BY-NC-SA 4.0; computed in the browser by the widget on this page and the lab in Analyst session 6</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Black Friday 2017 on Friday 24 November, the main offers day</span><span class="note">Ebit report via Mercado e Consumo, 29 November 2017; read at source</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Difference-in-differences, parallel trends, randomised price tests and sizing them in advance</span><span class="note">Taught in Experimentation (b4, b9, a5), linked, not re-derived here</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Kettle &amp; Co's tin and caddy promotion: +400, -150, net +250 units; the November tin promotion story</span><span class="note">Constructed and labelled, arithmetic shown</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Pull-forward and carryover shapes; cannibalisation on real rows</span><span class="note">Schematic, no data; the panel has no sibling links, so cannibalisation is not measured</span></div>
+    </div>
+    <p class="mono" style="margin-top:14px">Every fact on this page, and its verification tier, is recorded in the course's source map.</p>
+  </section>
+
+  <section class="cheat" id="cheatsheet">
+    <h3>Analyst session 4 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Lift</b><span>Actual minus baseline. The baseline is never observed, so it is the argument.</span></div>
+      <div class="cheat-item"><b>Three baselines</b><span>Last month counts the season; last year counts the trend; a comparison group needs parallel trends.</span></div>
+      <div class="cheat-item"><b>Real rows</b><span>Cut +111.0%, held +65.5%: 141 of 344 extra units survive the comparison.</span></div>
+      <div class="cheat-item"><b>The month after</b><span>Net lift = promo month + every month after. A dip subtracts. All products: +23, so 164.</span></div>
+      <div class="cheat-item"><b>Siblings</b><span>Report the category's lift, not the promoted product's. Count in the unit the business sells.</span></div>
+      <div class="cheat-item"><b>Clean test</b><span>Random draw for who gets the price, a held-back group, size fixed in advance.</span></div>
+    </div>
+  </section>
+
+  <div class="callout next">
+    <span class="nx-pill">Next session</span>
+    <p>You can tell what a promotion added. Analyst session 5 asks how to charge different buyers different prices without a discount at all: good-better-best tiers, bundles, the fences that keep segments apart, and the price-volume-mix bridge on the same real October and November rows.</p>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Analyst session 4 of 6 · learn-pricing-analytics-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="a3-deciding-with-a-borrowed-elasticity.html">← Prev: Deciding with a borrowed elasticity</a> &nbsp;·&nbsp; <a href="a5-tiers-bundles-and-price-fences.html">Next: Tiers, bundles and price fences →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/pra-sample.js?v=1"></script>
+<script src="../assets/pra-live.js?v=1"></script>
+<script src="../assets/pra-bench.js?v=1"></script>
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>

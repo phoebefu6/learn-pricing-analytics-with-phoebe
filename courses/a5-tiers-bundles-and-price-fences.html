@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Analyst session 5 of 6. Tiers, bundles and price fences: a good-better-best ladder customers sort themselves on, fences that keep segments apart only when crossing costs more than the discount, pure and mixed bundles, and the price-volume-mix bridge on real Olist rows from October to November 2017. Kettle &amp; Co examples are constructed.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Tiers, bundles and price fences - learn pricing analytics with phoebe">
+<meta property="og:description" content="Analyst session 5 of 6. Three tiers, one fence, two kinds of bundle, and a price-volume-mix bridge built from 112 real products around Black Friday 2017.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-pricing-analytics-with-phoebe/courses/a5-tiers-bundles-and-price-fences.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-pricing-analytics-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tiers, bundles and price fences - learn pricing analytics with phoebe">
+<meta name="twitter:description" content="Analyst session 5 of 6. Tiers, fences, bundles and the price-volume-mix bridge on real rows.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-pricing-analytics-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Analyst session 5 · Tiers, bundles and price fences - learn pricing analytics with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-pricing-analytics-with-phoebe</a> / Analyst session 5 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Pricing Analytics with Phoebe · Analyst session 5 of 6</div>
+    <h1>Tiers, bundles and <span class="accent">price fences</span></h1>
+    <p class="sub">One price for everyone leaves money with the customers who would have paid more and loses the customers who would only pay less. Tiers, fences and bundles are how a business charges different people different prices without asking anyone what they would pay. Tonight builds a three-step ladder for Kettle &amp; Co's tea, draws the fence that keeps its segments apart, prices a bundle two ways, then breaks a real month of revenue growth into price, volume and mix on Olist marketplace rows from Black Friday 2017. Kettle numbers are constructed; the Olist rows are real.</p>
+    <div class="chip-row">
+      <span class="chip level">🟠 Analyst</span>
+      <span class="chip audience">Analysts who build pricing and margin reporting</span>
+      <span class="chip audience">Hands-on in the browser</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:4">3-18 · Tiers, fences, bundles, the bridge</span>
+      <span class="a3" style="flex:5">18-40 · Build-along: the bridge on real rows</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where we start</h2>
+    </div>
+    <p class="lede">Sessions 1 to 4 treated a product as one price. Real price lists are ladders: a small size, a big size, a subscription, a bundle, a student rate. Each rung is a guess about who will pick it. Tonight is about building those rungs so that the right people pick the right one, and about the analyst's half of the job afterwards: when revenue moves, saying how much came from prices, how much from more items sold, and how much from customers shifting between rungs. The theory of why versioning works lives in <a href="https://phoebefu6.github.io/learn-economics-with-phoebe/courses/p3-pricing-with-the-number.html">Economics, pricing with the number</a>; here we build and measure.</p>
+
+    <div class="legend">
+      <span class="pill">🎫 Clear all three quiz questions to stamp your passport</span>
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">★ Build-along = everyone builds it</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> A three-tier ladder with the price per 100 g and the margin on every step; a one-line test for whether a fence will hold; the arithmetic that tells you when a mixed bundle beats a pure one; and a price-volume-mix bridge you can rebuild on your own rows, with a check that the three effects add up to the revenue change.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers good-better-best</span>
+      <h2>Three versions, and customers sort themselves</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">Good-better-best puts three versions on the shelf at three prices and lets each customer pick. Nobody is asked what they would pay; the choice reveals it. The ladder works when every step is a fair deal for the people it is built for and a worse deal for everyone else. Kettle's ladder below is a constructed example: the 100 g tin, a 250 g caddy, and a subscription of three tins a month.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 336" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A three-step ladder for Kettle and Co's tea, constructed. Lowest step: the 100 gram tin at 1,800 yen, 1,800 yen per 100 grams, margin 1,080 per 100 grams. Middle step, highlighted as the step most customers should land on: the 250 gram caddy at 3,900 yen, 1,560 yen per 100 grams, 13 percent less per gram, margin 920 per 100 grams. Top step: three tins a month at 4,860 yen, 1,620 yen per 100 grams, 10 percent off, margin 900 per 100 grams.">
+        <defs>
+          <filter id="a5aSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="51" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a5aHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a5aAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a5aH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .a5aL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .a5aS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .a5aB { font: 800 11px Inter, sans-serif; fill: #08433A; }
+          .a5aV { font: 800 16px Inter, sans-serif; fill: #7C1428; }
+          .a5aW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .a5aN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="a5aH" x="30" y="28">THREE STEPS, PRICED SO CUSTOMERS SORT THEMSELVES</text>
+
+        <g filter="url(#a5aSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M40 290 L840 290"/>
+          <rect x="60" y="220" width="240" height="70" rx="8" transform="rotate(-0.6 180 255)" fill="#FFFFFF"/>
+          <rect x="320" y="164" width="240" height="126" rx="8" transform="rotate(0.5 440 227)" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <rect x="580" y="100" width="240" height="190" rx="8" transform="rotate(-0.4 700 195)" fill="#FCEFF1" stroke="#B4233C"/>
+          <!-- doodle: a tea tin -->
+          <rect x="262" y="186" width="24" height="28" rx="3"/>
+          <path d="M260 192 L288 192"/>
+        </g>
+
+        <text class="a5aL" x="76" y="240">100 g tin</text>
+        <text class="a5aV" x="76" y="262">1,800 yen</text>
+        <text class="a5aS" x="76" y="281">1,800 per 100 g · margin 1,080</text>
+
+        <text class="a5aB" x="330" y="152">most customers should land here</text>
+        <text class="a5aW" x="336" y="188">250 g caddy</text>
+        <text class="a5aW" x="336" y="210">3,900 yen</text>
+        <text class="a5aW" x="336" y="232">1,560 per 100 g, 13% less</text>
+        <text class="a5aW" x="336" y="254">margin 920 per 100 g</text>
+
+        <text class="a5aL" x="596" y="126">3 tins a month</text>
+        <text class="a5aV" x="596" y="150">4,860 yen</text>
+        <text class="a5aS" x="596" y="172">1,620 per 100 g, 10% off</text>
+        <text class="a5aS" x="596" y="190">margin 900 per 100 g</text>
+
+        <text class="a5aN" x="30" y="318">Cheapest per gram, biggest per sale: the caddy earns 2,300 yen to the tin's 1,080. Constructed Kettle example.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the middle step gives the lowest price per gram and still earns the most per sale</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>What each tier is for<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>The arithmetic first.</strong> Constructed Kettle &amp; Co example. The tin: 1,800 yen for 100 g, unit cost 720 yen, margin 1,080 yen (60%). The caddy: 3,900 yen for 250 g, so 3,900 / 2.5 = 1,560 yen per 100 g, which is 240 yen less than the tin: 240 / 1,800 = 13.3% cheaper per gram. Assume the caddy costs 1,600 yen to fill and pack: margin 3,900 - 1,600 = 2,300 yen a caddy, or 2,300 / 2.5 = 920 yen per 100 g (59.0% of price). The subscription: three tins for 4,860 yen, so 4,860 / 3 = 1,620 yen a tin, and 1,620 / 1,800 = 0.90, 10% off. Cost 3 x 720 = 2,160; margin 4,860 - 2,160 = 2,700 a month, 900 yen per 100 g.</p>
+        <p><strong>The tin is the reference.</strong> It sets the price per gram everyone compares against and serves the occasional drinker who would never finish 250 g while it is fresh.</p>
+        <p><strong>The caddy's job.</strong> It catches the customer who would have bought two tins: two tins cost 3,600 yen for 200 g, and for 300 yen more the caddy gives 250 g. Margin per gram falls from 1,080 to 920, but margin per sale rises from 1,080 (one tin) or 2,160 (two tins) to 2,300. Next to the tin, the caddy looks like the obvious deal; that comparison is the middle option doing its work. Whether a given middle option pulls choices on your customers is an empirical question, not a law: test it with <a href="https://phoebefu6.github.io/learn-experimentation-with-phoebe/courses/b4-run-an-ab-test.html">a proper A/B test</a>.</p>
+        <p><strong>The subscription's job.</strong> It is not the cheapest per gram (1,620 against the caddy's 1,560). It sells freshness and not having to remember, and it buys Kettle three months of predictable demand. Its value is retention, measured with <a href="https://phoebefu6.github.io/learn-customer-retention-with-phoebe/courses/a6-clv-buy-till-you-die.html">customer lifetime value</a>, not margin per gram.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Tiers and the value stack<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Each tier needs its own price to sit below its own economic value to the customer it is built for: the price of the next best alternative plus what makes this version better, minus what makes it worse. That stack is built in <a href="b2-value-cost-or-competitor.html">Business session 2, value, cost or competitor</a>. For the caddy buyer the next best alternative is two or three tins; for the subscriber it is remembering to reorder, or a supermarket tea that is always on the shelf. If a tier's price climbs above its own value stack, its customers drop down a step, and the ladder collapses into one rung.</p>
+        <p>Why charging different prices for versions works at all, and when it is price discrimination in the economist's sense, is taught in <a href="https://phoebefu6.github.io/learn-economics-with-phoebe/courses/p3-pricing-with-the-number.html">Economics, pricing with the number</a>. Read it there; the ladder above is the analyst's working version.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>The two-tin customers.</strong> Before the caddy, Kettle's order data showed a cluster of baskets with exactly two tins. Those customers were already telling the business they drank more than 100 g between orders. The caddy was priced for them: a little more than two tins, a lot more tea. The question for the next review was not "did caddy sales rise?" but "did two-tin baskets fall, and did margin per order rise?". Constructed Kettle &amp; Co example.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers price fences and bundles</span>
+      <h2>A fence must cost more to climb than it saves</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">A price fence is a rule that lets one segment get a lower price without letting everyone else cross over to it. Time is a fence (an off-peak rate), so is quantity (the caddy), channel (wholesale for cafes, online for homes), features (a plain tin and a gift tin) and customer type (a student rate with a student card). Every fence passes one test: for the customer who would pay full price, crossing it must cost more than the discount is worth. If it does not, the fence leaks and the full-price customers walk through it.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A quantity fence drawn as a wall, constructed Kettle example. On the left, customer A, a light drinker who buys one tin at a time and pays 1,800 yen per 100 grams. On the right, customer B, a heavy drinker who finishes 250 grams while fresh and pays 1,560 yen per 100 grams in the caddy. A dashed arrow asks whether A would climb the wall. Below, A's cost to climb is 3,900 yen up front and 250 grams going stale; A's gain from climbing is 240 yen per 100 grams. Because the cost is bigger than the gain, the fence holds.">
+        <defs>
+          <filter id="a5bSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="53" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a5bHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a5bAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a5bH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .a5bL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .a5bS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .a5bA { font: 700 11px Inter, sans-serif; fill: #7C1428; }
+          .a5bB { font: 800 11px Inter, sans-serif; fill: #08433A; }
+          .a5bW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .a5bN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="a5bH" x="30" y="24">A QUANTITY FENCE: WHO CROSSES, AT WHAT COST</text>
+
+        <g filter="url(#a5bSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="40" y="90" width="260" height="80" rx="10" transform="rotate(-1 170 130)" fill="#FFFFFF"/>
+          <rect x="580" y="90" width="260" height="80" rx="10" transform="rotate(1 710 130)" fill="#FCEFF1" stroke="#B4233C"/>
+          <rect x="390" y="76" width="100" height="204" rx="6" transform="rotate(0.5 440 178)" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <path d="M392 128 L488 128 M392 214 L488 214" stroke="#E5F3EF" stroke-width="1.4"/>
+          <!-- doodle: a price tag on the wall -->
+          <path d="M414 236 L452 236 L466 248 L452 260 L414 260 Z" stroke="#FFFFFF"/>
+          <circle cx="424" cy="248" r="3" stroke="#FFFFFF"/>
+          <path d="M302 92 Q440 -6 578 92" stroke-dasharray="6 5" marker-end="url(#a5bAr)"/>
+          <rect x="40" y="196" width="260" height="80" rx="10" transform="rotate(0.8 170 236)" fill="#FFFFFF" stroke="#7C1428"/>
+          <rect x="580" y="196" width="260" height="80" rx="10" transform="rotate(-0.8 710 236)" fill="#FFFFFF"/>
+        </g>
+
+        <text class="a5bA" x="440" y="62" text-anchor="middle">climb?</text>
+
+        <text class="a5bL" x="56" y="116">A · light drinker</text>
+        <text class="a5bS" x="56" y="136">one tin at a time</text>
+        <text class="a5bS" x="56" y="154">pays 1,800 yen per 100 g</text>
+
+        <text class="a5bL" x="596" y="116">B · heavy drinker</text>
+        <text class="a5bS" x="596" y="136">finishes 250 g while fresh</text>
+        <text class="a5bS" x="596" y="154">pays 1,560 yen per 100 g</text>
+
+        <text class="a5bW" x="408" y="160">quantity</text>
+        <text class="a5bW" x="408" y="180">fence</text>
+        <text class="a5bW" x="408" y="200">250 g</text>
+
+        <text class="a5bA" x="56" y="220">A's cost to climb</text>
+        <text class="a5bS" x="56" y="240">3,900 yen up front</text>
+        <text class="a5bS" x="56" y="258">250 g, stale before the end</text>
+
+        <text class="a5bB" x="596" y="220">A's gain if it climbs</text>
+        <text class="a5bS" x="596" y="240">1,800 - 1,560 = 240 yen</text>
+        <text class="a5bS" x="596" y="258">per 100 g of tea</text>
+
+        <text class="a5bN" x="30" y="308">Cost to climb bigger than the gain: A stays on its side and the fence holds. Constructed Kettle example.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - a fence works only while crossing it costs the full-price customer more than the discount is worth</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>A fence that leaks<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>The fence.</strong> Kettle's 1 kg catering bag lists at 9,600 yen for cafes, grocers and hotels: 9,600 / 10 = 960 yen per 100 g, against 1,800 yen per 100 g for the tin online. The fence is the channel: the bag is sold only to registered business accounts. Constructed Kettle &amp; Co example.</p>
+        <p><strong>The leak.</strong> One cafe starts weighing the bag into paper pouches for regulars. For a home drinker, crossing the fence used to mean opening a business account; now it means asking at the counter. The cost of climbing dropped to almost nothing, while the discount stayed at 840 yen per 100 g (1,800 - 960). Online tin sales near that cafe fall and nobody sees why, because the wholesale invoice looks normal.</p>
+        <p><strong>The analyst's check.</strong> Fences leak quietly, so watch for the symptom: one segment's volume rising while its neighbour's falls in the same place and the same weeks. The repair raises the cost of climbing again (a resale clause, a pack that only makes sense in a kitchen) rather than cutting the online price.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Pure vs mixed bundles<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>Two kinds.</strong> A pure bundle sells the items only together. A mixed bundle sells them separately and together, with the bundle a little cheaper than the sum. Constructed Kettle &amp; Co example: the tin at 1,800 yen (margin 1,080), a glass infuser at 1,200 yen (assume cost 400, margin 800), and a tin-plus-infuser bundle at 2,700 yen, which is 3,000 - 300, 10% off the pair. Bundle cost 720 + 400 = 1,120, margin 2,700 - 1,120 = 1,580.</p>
+        <p><strong>Three customers, constructed values.</strong> A values the tin at 2,000 and the infuser at 1,000. B values them at 1,600 and 1,300. C values the tin at 2,200 and has no use for an infuser. Each buys whatever leaves the biggest gap between value and price, if any gap is positive.</p>
+        <div class="prompt-box good"><span class="label">★ Three ways to sell, worked</span>separately only (1,800 and 1,200):
+  A tin (2,000 &gt; 1,800), B infuser (1,300 &gt; 1,200), C tin
+  revenue 1,800 + 1,200 + 1,800 = 4,800 · margin 1,080 + 800 + 1,080 = 2,960
+pure bundle only (2,700):
+  A buys (3,000), B buys (2,900), C does not (2,200)
+  revenue 2 x 2,700 = 5,400 · margin 2 x 1,580 = 3,160
+mixed (all three on sale):
+  A bundle (gap 300 beats tin's 200), B bundle (gap 200 beats infuser's 100), C tin
+  revenue 2,700 + 2,700 + 1,800 = 7,200 · margin 1,580 + 1,580 + 1,080 = 4,240</div>
+        <p><strong>The lesson.</strong> The pure bundle won A and B but lost C, who wanted only tea. The mixed bundle keeps C on the separate price and still moves A and B to the bundle. A pure bundle makes sense only when hardly anyone wants one item alone. With real data, the inputs are not three made-up values but the share of baskets that already hold both items; Kettle would read that from order lines before choosing.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>The student rate nobody checked.</strong> Kettle offered a student code at a university fair and printed it on the flyer. Within a month the code was on a coupon site, and the "student" segment was mostly regular customers. A customer-type fence with no card check is not a fence. The rate went back behind a student email sign-up, which put the cost of climbing back where it belonged. Constructed Kettle &amp; Co example.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers the price-volume-mix bridge</span>
+      <h2>Price, volume and mix: three effects that add up</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">When revenue moves, the first question from a commercial lead is "was it the prices?". The price-volume-mix bridge answers it by splitting the change into three effects: what price changes did, what selling more items did, and what the shift between cheaper and dearer products did. Here it runs on real Olist marketplace rows (Brazilian e-commerce, delivered orders, prices in BRL) for October to November 2017, the month that holds Black Friday. The same idea as a margin bridge in an FP&amp;A pack is taught in <a href="https://phoebefu6.github.io/learn-ship-platform-diagnosis-with-phoebe/courses/a2-follow-the-margin.html">Ship Platform Diagnosis, follow the margin</a>; tonight is the pricing version on product rows.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 404" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A stepped bridge for 112 real Olist products sold in both October and November 2017, in Brazilian reais, axis from zero. October revenue 90,798.12 on 832 items. Price effect minus 4,534.68. Volume effect plus 61,659.78, highlighted. Mix effect minus 12,904.74. November revenue 135,018.48 on 1,397 items.">
+        <defs>
+          <filter id="a5cSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="57" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a5cHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a5cAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a5cH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .a5cL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .a5cS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .a5cA { font: 700 11px Inter, sans-serif; fill: #7C1428; }
+          .a5cB { font: 800 11px Inter, sans-serif; fill: #08433A; }
+          .a5cV { font: 800 16px Inter, sans-serif; fill: #7C1428; }
+          .a5cN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="a5cH" x="30" y="24">REVENUE BRIDGE, OCTOBER TO NOVEMBER 2017 · 112 PRODUCTS IN BOTH MONTHS</text>
+
+        <g filter="url(#a5cSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M60 320 L820 320"/>
+          <rect x="80" y="175" width="100" height="145" rx="3" fill="#EBB8C1" stroke="#B4233C"/>
+          <rect x="230" y="175" width="100" height="7" rx="1" fill="url(#a5cHc)"/>
+          <rect x="380" y="83" width="100" height="99" rx="3" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <rect x="530" y="83" width="100" height="21" rx="2" fill="url(#a5cHc)"/>
+          <rect x="680" y="104" width="100" height="216" rx="3" fill="#EBB8C1" stroke="#B4233C"/>
+          <path d="M182 175 L228 175 M332 182 L378 182 M482 83 L528 83 M632 104 L678 104" stroke="#5F5154" stroke-width="1.4" stroke-dasharray="4 4"/>
+          <!-- doodle: a magnifier -->
+          <circle cx="826" cy="54" r="10"/>
+          <path d="M833 61 L844 72"/>
+        </g>
+
+        <text class="a5cV" x="130" y="164" text-anchor="middle">R$ 90,798.12</text>
+        <text class="a5cA" x="280" y="164" text-anchor="middle">-R$ 4,534.68</text>
+        <text class="a5cB" x="430" y="72" text-anchor="middle">+R$ 61,659.78</text>
+        <text class="a5cA" x="580" y="72" text-anchor="middle">-R$ 12,904.74</text>
+        <text class="a5cV" x="730" y="94" text-anchor="middle">R$ 135,018.48</text>
+
+        <text class="a5cL" x="130" y="300" text-anchor="middle">832 items</text>
+        <text class="a5cL" x="730" y="300" text-anchor="middle">1,397 items</text>
+
+        <text class="a5cL" x="130" y="340" text-anchor="middle">October</text>
+        <text class="a5cL" x="280" y="340" text-anchor="middle">price</text>
+        <text class="a5cB" x="430" y="340" text-anchor="middle">volume</text>
+        <text class="a5cL" x="580" y="340" text-anchor="middle">mix</text>
+        <text class="a5cL" x="730" y="340" text-anchor="middle">November</text>
+        <text class="a5cS" x="130" y="356" text-anchor="middle">revenue</text>
+        <text class="a5cS" x="280" y="356" text-anchor="middle">at Nov units</text>
+        <text class="a5cS" x="430" y="356" text-anchor="middle">at Oct avg price</text>
+        <text class="a5cS" x="580" y="356" text-anchor="middle">the rest</text>
+        <text class="a5cS" x="730" y="356" text-anchor="middle">revenue</text>
+
+        <text class="a5cN" x="30" y="392">Real Olist rows, BRL, axis from zero. Products sold in only one month sit outside the bridge.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - November grew on volume; prices and mix both pulled the other way</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Three effects that add up<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>The rows.</strong> 112 products sold in both October and November 2017: 832 items in October, 1,397 in November, so 1,397 - 832 = 565 more items.</p>
+        <p><strong>Price effect.</strong> For each product, (November price - October price) x November units, summed. It answers "what did the price changes cost or earn on what we actually sold?". Here: -R$ 4,534.68.</p>
+        <p><strong>Volume effect.</strong> (November items - October items) x October's average price, where October's average price is R$ 90,798.12 / 832 items. It answers "what would the extra items have earned at last month's average?". Here: +R$ 61,659.78.</p>
+        <p><strong>Mix effect.</strong> The rest: the revenue change minus price minus volume. It is what happened because the items sold shifted between cheaper and dearer products. Here: -R$ 12,904.74, so November's extra items leaned towards cheaper products.</p>
+        <div class="prompt-box good"><span class="label">★ The check, always</span>revenue change: 135,018.48 - 90,798.12 = 44,220.36
+effects:       -4,534.68 + 61,659.78 - 12,904.74 = 44,220.36</div>
+        <p><strong>The reading.</strong> November grew on volume. Prices fell slightly, which fits Black Friday falling on Friday 24 November 2017, and the mix shifted toward cheaper products. The panel is monthly, so Black Friday is one day inside the November row: the bridge cannot say which day the items sold.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Why order matters<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>When price and volume both move, part of the change belongs to both at once: the price change times the change in units. Whichever effect is computed first at the new quantities absorbs that piece. Change the order and the split moves; the total does not. Constructed Kettle &amp; Co example, one product:</p>
+        <div class="prompt-box good"><span class="label">★ One product, two orders, same total</span>tin: 1,800 yen x 100 tins = 180,000  -&gt;  1,620 yen x 150 tins = 243,000
+change: 243,000 - 180,000 = 63,000
+
+order 1, price at NEW units:  price  -180 x 150   = -27,000
+                              volume  +50 x 1,800 = +90,000   total 63,000
+order 2, price at OLD units:  price  -180 x 100   = -18,000
+                              volume  +50 x 1,620 = +81,000   total 63,000
+the 9,000 that moved: -180 x 50 = -9,000 (the shared piece)</div>
+        <p>With many products, the same thing happens to the mix effect, because it is defined as the remainder. Neither order is wrong. The rules: pick one order, write it beside the chart, keep it the same every month, and never compare a bridge built one way with a bridge built another way. The widget on this page computes price at November units and volume at October's average price.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>Black Friday on real rows.</strong> On the 112 Olist products sold in both months, revenue rose from R$ 90,798.12 to R$ 135,018.48. A headline of "Black Friday discounts drove growth" credits the prices; the bridge says the price changes themselves took R$ 4,534.68 away, and the growth came from selling 565 more items. Whether those extra items were caused by the price cuts or by the season is a different question, and the one Analyst session 4 answers with a comparison group. Source: Olist, Brazilian E-Commerce Public Dataset by Olist, Kaggle, CC BY-NC-SA 4.0.</p>
+    </div>
+  </section>
+
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Build-along</span>
+      <h2>Bridge a month of real revenue</h2>
+      <span class="tag demo">★ 22 min · everyone builds</span>
+    </div>
+    <p class="lede">The widget holds the real Olist product rows for October and November 2017 and computes the bridge in your browser. Copy what it prints, check the addition by hand, find what sits outside the bridge, and finish with one sentence a commercial lead can act on.</p>
+
+    <div class="pra-widget" data-mode="pvm"></div>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 232" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn map of the widget. 112 products sold in both October and November feed the price effect, computed as each product's price change times November units, then the volume effect, extra items times October's average price, then the mix effect, the remainder, highlighted. Below, products sold in only one month, plus 11,181.47 reais, sit outside the bridge; the whole panel runs from 94,404.67 in October to 149,806.50 in November.">
+        <defs>
+          <filter id="a5dSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="59" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a5dHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a5dAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a5dH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .a5dL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .a5dS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .a5dW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .a5dN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="a5dH" x="30" y="28">WHAT THE WIDGET DOES</text>
+
+        <g filter="url(#a5dSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="52" width="180" height="62" rx="10" transform="rotate(-1 120 83)" fill="url(#a5dHc)"/>
+          <path d="M214 83 L236 83" marker-end="url(#a5dAr)"/>
+          <rect x="242" y="52" width="180" height="62" rx="10" transform="rotate(0.8 332 83)" fill="#FFFFFF"/>
+          <path d="M426 83 L448 83" marker-end="url(#a5dAr)"/>
+          <rect x="454" y="52" width="180" height="62" rx="10" transform="rotate(-0.6 544 83)" fill="#FFFFFF"/>
+          <path d="M638 83 L660 83" marker-end="url(#a5dAr)"/>
+          <rect x="666" y="52" width="184" height="62" rx="10" transform="rotate(0.8 758 83)" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <rect x="30" y="142" width="390" height="50" rx="10" transform="rotate(-0.3 225 167)" fill="#FCEFF1" stroke="#B4233C" stroke-dasharray="6 5"/>
+          <rect x="460" y="142" width="390" height="50" rx="10" transform="rotate(0.3 655 167)" fill="#FFFFFF"/>
+          <!-- doodle: a magnifier -->
+          <circle cx="438" cy="160" r="6"/>
+          <path d="M442 165 L449 173"/>
+        </g>
+
+        <rect x="42" y="62" width="156" height="42" rx="6" fill="#FFFFFF"/>
+
+        <text class="a5dL" x="50" y="80">112 products</text>
+        <text class="a5dS" x="50" y="97">sold Oct and Nov</text>
+        <text class="a5dL" x="258" y="78">price effect</text>
+        <text class="a5dS" x="258" y="97">price change x Nov units</text>
+        <text class="a5dL" x="470" y="78">volume effect</text>
+        <text class="a5dS" x="470" y="97">extra items x Oct avg</text>
+        <text class="a5dW" x="682" y="78">mix effect</text>
+        <text class="a5dW" x="682" y="97">the remainder</text>
+
+        <text class="a5dL" x="46" y="162">outside the bridge</text>
+        <text class="a5dS" x="46" y="180">products sold in only one month: +R$ 11,181.47</text>
+        <text class="a5dL" x="476" y="162">whole panel</text>
+        <text class="a5dS" x="476" y="180">R$ 94,404.67 in October, R$ 149,806.50 in November</text>
+
+        <text class="a5dN" x="30" y="218">Real Olist marketplace rows, BRL, monthly grain. The order of the three boxes is fixed.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - price first at new units, volume at old prices, and mix is whatever is left</figcaption>
+    </figure>
+
+    <div class="steps">
+      <div class="step">
+        <p><strong>Step 1 · Read the verdict.</strong> Copy the line the widget prints.</p>
+        <div class="prompt-box good"><span class="label">★ Step 1 · what the widget prints</span>Revenue R$ 90,798.12 to R$ 135,018.48: price -R$ 4,534.68, volume +R$ 61,659.78, mix -R$ 12,904.74.</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 2 · Read the rows.</strong> Copy the two revenue rows and the item counts beside them.</p>
+        <div class="prompt-box good"><span class="label">★ Step 2 · the rows</span>October revenue, 112 products R$ 90,798.12 (832 items)
+November revenue, same products R$ 135,018.48 (1,397 items)</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 3 · Check the addition.</strong> The three effects must add up to the revenue change, to the centavo. If they do not, the bridge is wrong before anyone reads it.</p>
+        <div class="prompt-box good"><span class="label">★ Step 3 · the check</span>135,018.48 - 90,798.12 = 44,220.36
+-4,534.68 + 61,659.78 = 57,125.10
+57,125.10 - 12,904.74 = 44,220.36   (matches)</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 4 · Find what sits outside.</strong> Products sold in only one of the two months have no October price or no November price, so they cannot enter a price effect. Copy their line and the whole-panel line, then check the two reconcile.</p>
+        <div class="prompt-box good"><span class="label">★ Step 4 · outside the bridge</span>products sold in only one of the months +R$ 11,181.47
+Whole panel: R$ 94,404.67 in October, R$ 149,806.50 in November.
+check: 149,806.50 - 94,404.67 = 55,401.83 = 44,220.36 + 11,181.47</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 5 · Write the one sentence.</strong> A commercial lead needs the answer to "was it the prices?" in one line, with what it cannot say.</p>
+        <div class="prompt-box good"><span class="label">★ Step 5 · the sentence for a commercial lead</span>On the 112 products sold in both months, November revenue grew R$ 44,220.36 on 565 more items sold; price changes took R$ 4,534.68 away and a shift toward cheaper products took R$ 12,904.74, so the growth was volume, not price. Whether the extra volume was caused by the cuts or by the season is not in this bridge.</div>
+      </div>
+    </div>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>Revenue up after the caddy, and not for the reason on the slide.</strong> Constructed Kettle &amp; Co example. A month after the caddy settled in, sales moved from 900 tins and 100 caddies to 700 tins and 300 caddies, at unchanged prices. Revenue: 900 x 1,800 + 100 x 3,900 = 2,010,000 yen, then 700 x 1,800 + 300 x 3,900 = 2,430,000 yen, up 420,000. Items: 1,000 both months, so volume is zero, price is zero, and the whole rise is mix. Counted in grams instead, tea sold rose from 115,000 g to 145,000 g, about 26% more. The bridge depends on the unit you count: say which one you used.</p>
+    </div>
+  </section>
+
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before Analyst session 6</h2>
+      <span class="tag exercise">30 min</span>
+    </div>
+    <ol>
+      <li><strong>Draw your own ladder.</strong> For one product family, write each tier's price, price per unit of what customers actually consume, and margin per unit and per sale.</li>
+      <li><strong>List your fences</strong> by type (time, quantity, channel, features, customer type) and, for each, write what crossing it costs a full-price customer against the discount on the other side.</li>
+      <li><strong>Count the baskets</strong> that already hold two items you might bundle, and the baskets that hold only one of them. Decide pure or mixed from those counts.</li>
+      <li><strong>Build one month's bridge</strong> on your own rows: price at the new units, volume at the old average price, mix as the rest, products in only one month listed outside. Check the addition.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+    <p>Clear all three and Analyst session 5 gets stamped in your passport.</p>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1 · What must a price fence do to work?</p>
+      <button class="qopt" type="button">A · Be printed clearly on the price list</button>
+      <button class="qopt" type="button">B · Make crossing it cost the full-price customer more than the discount on the other side is worth</button>
+      <button class="qopt" type="button">C · Offer the biggest discount the margin allows</button>
+      <button class="qopt" type="button">D · Apply to every customer equally</button>
+      <p class="qwhy">A fence lets one segment pay less without letting the others follow. If crossing is cheaper than the discount, full-price customers walk through it, as the cafe reselling catering bags showed.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <p class="qtext">2 · In the bridge, what does the mix effect measure?</p>
+      <button class="qopt" type="button">A · The change in each product's price</button>
+      <button class="qopt" type="button">B · The revenue from products sold in only one month</button>
+      <button class="qopt" type="button">C · The extra items sold, valued at last month's average price</button>
+      <button class="qopt" type="button">D · What is left after price and volume: the effect of sales shifting between cheaper and dearer products</button>
+      <p class="qwhy">A is the price effect, C the volume effect, and B sits outside the bridge. On the Olist rows the mix was -R$ 12,904.74: November's extra items leaned toward cheaper products.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">3 · Why does the price-volume-mix split depend on the order you compute it in?</p>
+      <button class="qopt" type="button">A · When price and volume both move, the piece that belongs to both lands in whichever effect is computed first at the new quantities; the total stays the same</button>
+      <button class="qopt" type="button">B · Because the data changes between runs</button>
+      <button class="qopt" type="button">C · Because rounding errors grow with each step</button>
+      <button class="qopt" type="button">D · It does not: the split is unique</button>
+      <p class="qwhy">In the one-tin example, the shared piece of -9,000 yen moved between price and volume while the total stayed 63,000. Pick an order, write it down, and keep it.</p>
+    </div>
+
+    <p class="quiz-score"></p>
+  </section>
+
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What this session teaches, and where it came from</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Price-volume-mix bridge on 112 products, October to November 2017: R$ 90,798.12 to R$ 135,018.48; price -R$ 4,534.68, volume +R$ 61,659.78, mix -R$ 12,904.74; +R$ 11,181.47 outside; whole panel R$ 94,404.67 to R$ 149,806.50</span><span class="note">Real Olist marketplace rows: Olist, Brazilian E-Commerce Public Dataset by Olist, Kaggle, CC BY-NC-SA 4.0; computed by the widget on this page</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Black Friday 2017 fell on Friday 24 November</span><span class="note">Ebit report via Mercado e Consumo, 29 November 2017; read at source</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Versioning and price discrimination theory</span><span class="note">Linked, not re-taught: <a href="https://phoebefu6.github.io/learn-economics-with-phoebe/courses/p3-pricing-with-the-number.html">Economics, pricing with the number</a></span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">The FP&amp;A margin bridge</span><span class="note">Linked, not re-taught: <a href="https://phoebefu6.github.io/learn-ship-platform-diagnosis-with-phoebe/courses/a2-follow-the-margin.html">Ship Platform Diagnosis, follow the margin</a></span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Kettle &amp; Co's tin, caddy and subscription ladder, the fences, the tin-and-infuser bundle and the caddy mix story</span><span class="note">Constructed, with every step of arithmetic shown on this page</span></div>
+    </div>
+    <p class="mono" style="margin-top:14px">Every fact on this page, and its verification tier, is recorded in the course's source map.</p>
+  </section>
+
+  <section class="cheat" id="cheatsheet">
+    <h3>Analyst session 5 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Good-better-best</b><span>Three versions, three prices; customers reveal what they would pay by choosing.</span></div>
+      <div class="cheat-item"><b>The middle step</b><span>Lowest price per gram can still be the biggest margin per sale. Show both.</span></div>
+      <div class="cheat-item"><b>Fence test</b><span>Crossing must cost the full-price customer more than the discount is worth.</span></div>
+      <div class="cheat-item"><b>Pure vs mixed</b><span>Pure loses everyone who wants one item alone. Mixed keeps them at the separate price.</span></div>
+      <div class="cheat-item"><b>The bridge</b><span>Price at new units, volume at old average price, mix the rest. Always check the sum.</span></div>
+      <div class="cheat-item"><b>Order and unit</b><span>Both change the split, never the total. Write them beside the chart.</span></div>
+    </div>
+  </section>
+
+  <div class="callout next">
+    <span class="nx-pill">Next session</span>
+    <p>You can say where revenue growth came from. Analyst session 6, the promo and discount lab, asks the harder question: did the discounts cause it? Five rungs on the same real Black Friday rows, a comparison group, a break button, and the honest sentence at the end.</p>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Analyst session 5 of 6 · learn-pricing-analytics-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="a4-promo-lift-and-the-dip-after.html">← Prev: Promo lift and the dip after</a> &nbsp;·&nbsp; <a href="a6-the-promo-and-discount-lab.html">Next: The promo and discount lab →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/pra-sample.js?v=1"></script>
+<script src="../assets/pra-live.js?v=1"></script>
+<script src="../assets/pra-bench.js?v=1"></script>
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>

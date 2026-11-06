@@ -1,0 +1,1034 @@
+{
+ "selfTest": {
+  "ok": true,
+  "fails": []
+ },
+ "ladder_default": {
+  "n": {
+   "all": 195,
+   "three": 99,
+   "cut": 29,
+   "held": 54,
+   "raised": 16
+  },
+  "ok": true,
+  "panel": [
+   877,
+   1532,
+   1092
+  ],
+  "rung1": {
+   "lift": 74.7,
+   "incr": 655
+  },
+  "cutU": [
+   310,
+   654,
+   388
+  ],
+  "heldU": [
+   310,
+   513,
+   365
+  ],
+  "rung2": {
+   "lift": 111,
+   "incr": 344
+  },
+  "rung3": {
+   "liftCut": 111,
+   "liftHeld": 65.5,
+   "diff": 45.5,
+   "expN": 513,
+   "incr": 141
+  },
+  "rung4": {
+   "expD": 365,
+   "decGap": 23,
+   "incr": 164
+  },
+  "rung5": {
+   "depth": 7.9,
+   "margin": 40,
+   "breakEven": 24.6,
+   "volRise": 20.4,
+   "actual": 30484.23,
+   "counter": 31542.33,
+   "delta": -1058.1,
+   "paid": false
+  },
+  "crowd": {
+   "incr": 422,
+   "overstated": 258,
+   "ratio": 2.57,
+   "volRise": 70.5,
+   "delta": 8210.6,
+   "paid": true
+  }
+ },
+ "ladder_cost40": {
+  "n": {
+   "all": 195,
+   "three": 99,
+   "cut": 29,
+   "held": 54,
+   "raised": 16
+  },
+  "ok": true,
+  "panel": [
+   877,
+   1532,
+   1092
+  ],
+  "rung1": {
+   "lift": 74.7,
+   "incr": 655
+  },
+  "cutU": [
+   310,
+   654,
+   388
+  ],
+  "heldU": [
+   310,
+   513,
+   365
+  ],
+  "rung2": {
+   "lift": 111,
+   "incr": 344
+  },
+  "rung3": {
+   "liftCut": 111,
+   "liftHeld": 65.5,
+   "diff": 45.5,
+   "expN": 513,
+   "incr": 141
+  },
+  "rung4": {
+   "expD": 365,
+   "decGap": 23,
+   "incr": 164
+  },
+  "rung5": {
+   "depth": 7.9,
+   "margin": 60,
+   "breakEven": 15.1,
+   "volRise": 20.4,
+   "actual": 49473.14,
+   "counter": 47313.49,
+   "delta": 2159.66,
+   "paid": true
+  },
+  "crowd": {
+   "incr": 422,
+   "overstated": 258,
+   "ratio": 2.57,
+   "volRise": 70.5,
+   "delta": 16062.71,
+   "paid": true
+  }
+ },
+ "ladder_cost50": {
+  "n": {
+   "all": 195,
+   "three": 99,
+   "cut": 29,
+   "held": 54,
+   "raised": 16
+  },
+  "ok": true,
+  "panel": [
+   877,
+   1532,
+   1092
+  ],
+  "rung1": {
+   "lift": 74.7,
+   "incr": 655
+  },
+  "cutU": [
+   310,
+   654,
+   388
+  ],
+  "heldU": [
+   310,
+   513,
+   365
+  ],
+  "rung2": {
+   "lift": 111,
+   "incr": 344
+  },
+  "rung3": {
+   "liftCut": 111,
+   "liftHeld": 65.5,
+   "diff": 45.5,
+   "expN": 513,
+   "incr": 141
+  },
+  "rung4": {
+   "expD": 365,
+   "decGap": 23,
+   "incr": 164
+  },
+  "rung5": {
+   "depth": 7.9,
+   "margin": 50,
+   "breakEven": 18.7,
+   "volRise": 20.4,
+   "actual": 39978.69,
+   "counter": 39427.91,
+   "delta": 550.78,
+   "paid": true
+  },
+  "crowd": {
+   "incr": 422,
+   "overstated": 258,
+   "ratio": 2.57,
+   "volRise": 70.5,
+   "delta": 12136.66,
+   "paid": true
+  }
+ },
+ "ladder_cost70": {
+  "n": {
+   "all": 195,
+   "three": 99,
+   "cut": 29,
+   "held": 54,
+   "raised": 16
+  },
+  "ok": true,
+  "panel": [
+   877,
+   1532,
+   1092
+  ],
+  "rung1": {
+   "lift": 74.7,
+   "incr": 655
+  },
+  "cutU": [
+   310,
+   654,
+   388
+  ],
+  "heldU": [
+   310,
+   513,
+   365
+  ],
+  "rung2": {
+   "lift": 111,
+   "incr": 344
+  },
+  "rung3": {
+   "liftCut": 111,
+   "liftHeld": 65.5,
+   "diff": 45.5,
+   "expN": 513,
+   "incr": 141
+  },
+  "rung4": {
+   "expD": 365,
+   "decGap": 23,
+   "incr": 164
+  },
+  "rung5": {
+   "depth": 7.9,
+   "margin": 30,
+   "breakEven": 35.7,
+   "volRise": 20.4,
+   "actual": 20989.77,
+   "counter": 23656.74,
+   "delta": -2666.98,
+   "paid": false
+  },
+  "crowd": {
+   "incr": 422,
+   "overstated": 258,
+   "ratio": 2.57,
+   "volRise": 70.5,
+   "delta": 4284.55,
+   "paid": true
+  }
+ },
+ "ladder_thr1": {
+  "n": {
+   "all": 195,
+   "three": 99,
+   "cut": 37,
+   "held": 45,
+   "raised": 17
+  },
+  "ok": true,
+  "panel": [
+   877,
+   1532,
+   1092
+  ],
+  "rung1": {
+   "lift": 74.7,
+   "incr": 655
+  },
+  "cutU": [
+   357,
+   748,
+   441
+  ],
+  "heldU": [
+   262,
+   412,
+   311
+  ],
+  "rung2": {
+   "lift": 109.5,
+   "incr": 391
+  },
+  "rung3": {
+   "liftCut": 109.5,
+   "liftHeld": 57.3,
+   "diff": 52.3,
+   "expN": 561.4,
+   "incr": 186.6
+  },
+  "rung4": {
+   "expD": 423.8,
+   "decGap": 17.2,
+   "incr": 203.8
+  },
+  "rung5": {
+   "depth": 6.8,
+   "margin": 40,
+   "breakEven": 20.3,
+   "volRise": 23.5,
+   "actual": 36856.4,
+   "counter": 35913.54,
+   "delta": 942.86,
+   "paid": true
+  },
+  "crowd": {
+   "incr": 475,
+   "overstated": 271.2,
+   "ratio": 2.33,
+   "volRise": 70.4,
+   "delta": 10827.78,
+   "paid": true
+  }
+ },
+ "ladder_thr5": {
+  "n": {
+   "all": 195,
+   "three": 99,
+   "cut": 19,
+   "held": 66,
+   "raised": 14
+  },
+  "ok": true,
+  "panel": [
+   877,
+   1532,
+   1092
+  ],
+  "rung1": {
+   "lift": 74.7,
+   "incr": 655
+  },
+  "cutU": [
+   236,
+   545,
+   298
+  ],
+  "heldU": [
+   401,
+   634,
+   470
+  ],
+  "rung2": {
+   "lift": 130.9,
+   "incr": 309
+  },
+  "rung3": {
+   "liftCut": 130.9,
+   "liftHeld": 58.1,
+   "diff": 72.8,
+   "expN": 373.1,
+   "incr": 171.9
+  },
+  "rung4": {
+   "expD": 276.6,
+   "decGap": 21.4,
+   "incr": 193.3
+  },
+  "rung5": {
+   "depth": 8.9,
+   "margin": 40,
+   "breakEven": 28.8,
+   "volRise": 27.5,
+   "actual": 23768.58,
+   "counter": 23998.64,
+   "delta": -230.06,
+   "paid": false
+  },
+  "crowd": {
+   "incr": 371,
+   "overstated": 177.7,
+   "ratio": 1.92,
+   "volRise": 75.6,
+   "delta": 6334.79,
+   "paid": true
+  }
+ },
+ "ladder_thr10": {
+  "n": {
+   "all": 195,
+   "three": 99,
+   "cut": 11,
+   "held": 84,
+   "raised": 4
+  },
+  "ok": true,
+  "panel": [
+   877,
+   1532,
+   1092
+  ],
+  "rung1": {
+   "lift": 74.7,
+   "incr": 655
+  },
+  "cutU": [
+   127,
+   354,
+   182
+  ],
+  "heldU": [
+   567,
+   888,
+   679
+  ],
+  "rung2": {
+   "lift": 178.7,
+   "incr": 227
+  },
+  "rung3": {
+   "liftCut": 178.7,
+   "liftHeld": 56.6,
+   "diff": 122.1,
+   "expN": 198.9,
+   "incr": 155.1
+  },
+  "rung4": {
+   "expD": 152.1,
+   "decGap": 29.9,
+   "incr": 185
+  },
+  "rung5": {
+   "depth": 12.6,
+   "margin": 40,
+   "breakEven": 45.8,
+   "volRise": 60.9,
+   "actual": 10572.24,
+   "counter": 9575.77,
+   "delta": 996.47,
+   "paid": true
+  },
+  "crowd": {
+   "incr": 282,
+   "overstated": 97,
+   "ratio": 1.52,
+   "volRise": 122.4,
+   "delta": 3642.49,
+   "paid": true
+  }
+ },
+ "ladder_home": {
+  "n": {
+   "all": 66,
+   "three": 37,
+   "cut": 16,
+   "held": 20,
+   "raised": 1
+  },
+  "ok": true,
+  "panel": [
+   413,
+   911,
+   438
+  ],
+  "rung1": {
+   "lift": 120.6,
+   "incr": 498
+  },
+  "cutU": [
+   218,
+   511,
+   244
+  ],
+  "heldU": [
+   133,
+   283,
+   159
+  ],
+  "rung2": {
+   "lift": 134.4,
+   "incr": 293
+  },
+  "rung3": {
+   "liftCut": 134.4,
+   "liftHeld": 112.8,
+   "diff": 21.6,
+   "expN": 463.9,
+   "incr": 47.1
+  },
+  "rung4": {
+   "expD": 260.6,
+   "decGap": -16.6,
+   "incr": 30.5
+  },
+  "rung5": {
+   "depth": 8.1,
+   "margin": 40,
+   "breakEven": 25.6,
+   "volRise": 4.4,
+   "actual": 14820.62,
+   "counter": 17823.66,
+   "delta": -3003.04,
+   "paid": false
+  },
+  "crowd": {
+   "incr": 319,
+   "overstated": 288.5,
+   "ratio": 10.45,
+   "volRise": 73.5,
+   "delta": 4094.17,
+   "paid": true
+  }
+ },
+ "ladder_other": {
+  "n": {
+   "all": 129,
+   "three": 62,
+   "cut": 13,
+   "held": 34,
+   "raised": 15
+  },
+  "ok": true,
+  "panel": [
+   464,
+   621,
+   654
+  ],
+  "rung1": {
+   "lift": 33.8,
+   "incr": 157
+  },
+  "cutU": [
+   92,
+   143,
+   144
+  ],
+  "heldU": [
+   177,
+   230,
+   206
+  ],
+  "rung2": {
+   "lift": 55.4,
+   "incr": 51
+  },
+  "rung3": {
+   "liftCut": 55.4,
+   "liftHeld": 29.9,
+   "diff": 25.5,
+   "expN": 119.5,
+   "incr": 23.5
+  },
+  "rung4": {
+   "expD": 107.1,
+   "decGap": 36.9,
+   "incr": 60.4
+  },
+  "rung5": {
+   "depth": 7.6,
+   "margin": 40,
+   "breakEven": 23.6,
+   "volRise": 36.2,
+   "actual": 15663.6,
+   "counter": 14221.94,
+   "delta": 1441.67,
+   "paid": true
+  },
+  "crowd": {
+   "incr": 103,
+   "overstated": 42.6,
+   "ratio": 1.71,
+   "volRise": 67.7,
+   "delta": 4116.43,
+   "paid": true
+  }
+ },
+ "ladder_garden": {
+  "n": {
+   "all": 13,
+   "three": 11,
+   "cut": 7,
+   "held": 4,
+   "raised": 0
+  },
+  "ok": false,
+  "panel": [
+   205,
+   441,
+   247
+  ],
+  "rung1": {
+   "lift": 115.1,
+   "incr": 236
+  }
+ },
+ "placebo_default": {
+  "real": 45.5,
+  "above": 14,
+  "below": 186,
+  "mean": 0.2,
+  "p5": -53.9,
+  "p95": 50.2,
+  "min": -76.7,
+  "max": 90.5
+ },
+ "placebo_thr5": {
+  "real": 72.8,
+  "above": 2,
+  "below": 198,
+  "mean": -2.6,
+  "p5": -57.9,
+  "p95": 52.5,
+  "min": -95,
+  "max": 99.5
+ },
+ "series": {
+  "cut": [
+   134,
+   217,
+   244,
+   310,
+   654,
+   388,
+   331
+  ],
+  "held": [
+   300,
+   251,
+   250,
+   310,
+   513,
+   365,
+   445
+  ],
+  "panel": [
+   669,
+   681,
+   681,
+   877,
+   1532,
+   1092,
+   1443
+  ],
+  "nCut": 29,
+  "nHeld": 54
+ },
+ "pvm": {
+  "products": 112,
+  "Q0": 832,
+  "Q1": 1397,
+  "R0": 90798.12,
+  "R1": 135018.48,
+  "price": -4534.68,
+  "volume": 61659.78,
+  "mix": -12904.74,
+  "newLost": 11181.47,
+  "all0": 94404.67,
+  "all1": 149806.5
+ },
+ "waterfall": {
+  "units": 3812,
+  "rows": 240,
+  "accounts": 40,
+  "invoice": 8874,
+  "pocket": 7665,
+  "onInvoice": 726,
+  "offInvoice": 1209,
+  "realisation": 79.8,
+  "per": {
+   "onv": 629,
+   "promo": 97,
+   "rebate": 116,
+   "terms": 104,
+   "coop": 275,
+   "freight": 714
+  },
+  "band": {
+   "lo": 6371,
+   "hi": 8986
+  },
+  "invBand": {
+   "lo": 8498,
+   "hi": 9600
+  },
+  "top5": 7402,
+  "bottom5": 8328
+ },
+ "wtp_original": {
+  "n": 200,
+  "opp": 1600,
+  "ipp": 1624,
+  "pmc": 1117,
+  "pme": 2330
+ },
+ "wtp_narrow": {
+  "opp": 1600,
+  "ipp": 1624,
+  "pmc": 1360,
+  "pme": 1900
+ },
+ "gabor": {
+  "cost": 640,
+  "rows": [
+   [
+    1200,
+    191,
+    95.5
+   ],
+   [
+    1400,
+    179,
+    89.5
+   ],
+   [
+    1600,
+    157,
+    78.5
+   ],
+   [
+    1800,
+    130,
+    65
+   ],
+   [
+    2000,
+    103,
+    51.5
+   ],
+   [
+    2200,
+    72,
+    36
+   ]
+  ],
+  "revMax": 1600,
+  "contribMax": 1800
+ },
+ "range_kettle": {
+  "margin": 60,
+  "base": 10800000,
+  "es": [
+   -1.2,
+   -1.8,
+   -2.4
+  ],
+  "moves": [
+   {
+    "move": -10,
+    "breakEven": -1.73,
+    "verdict": "depends on the point estimate",
+    "profit": [
+     -587043,
+     79426,
+     789388
+    ],
+    "revenue": [
+     383322,
+     1582967,
+     2860898
+    ],
+    "units": [
+     11347.7,
+     12088.3,
+     12877.1
+    ]
+   },
+   {
+    "move": -5,
+    "breakEven": -1.7,
+    "verdict": "depends on the point estimate",
+    "profit": [
+     -271491,
+     57572,
+     396919
+    ],
+    "revenue": [
+     185606,
+     753987,
+     1340133
+    ],
+    "units": [
+     10634.9,
+     10967.2,
+     11310
+    ]
+   },
+   {
+    "move": 5,
+    "breakEven": -1.64,
+    "verdict": "depends on the point estimate",
+    "profit": [
+     234654,
+     -83694,
+     -392856
+    ],
+    "revenue": [
+     -174790,
+     -689043,
+     -1188460
+    ],
+    "units": [
+     9431.3,
+     9159.2,
+     8895
+    ]
+   },
+   {
+    "move": 10,
+    "breakEven": -1.62,
+    "verdict": "depends on the point estimate",
+    "profit": [
+     438266,
+     -186376,
+     -776299
+    ],
+    "revenue": [
+     -339867,
+     -1321447,
+     -2248470
+    ],
+    "units": [
+     8919.3,
+     8423.5,
+     7955.3
+    ]
+   }
+  ]
+ },
+ "range_narrow": {
+  "margin": 60,
+  "base": 10800000,
+  "es": [
+   -1.2,
+   -1.35,
+   -1.5
+  ],
+  "moves": [
+   {
+    "move": -10,
+    "breakEven": -1.73,
+    "verdict": "loses across the range",
+    "profit": [
+     -587043,
+     -424355,
+     -259074
+    ],
+    "revenue": [
+     383322,
+     676162,
+     973666
+    ],
+    "units": [
+     11347.7,
+     11528.5,
+     11712.1
+    ]
+   },
+   {
+    "move": -5,
+    "breakEven": -1.7,
+    "verdict": "loses across the range",
+    "profit": [
+     -271491,
+     -190172,
+     -108226
+    ],
+    "revenue": [
+     185606,
+     326066,
+     467610
+    ],
+    "units": [
+     10634.9,
+     10717,
+     10799.8
+    ]
+   },
+   {
+    "move": 5,
+    "breakEven": -1.64,
+    "verdict": "wins across the range",
+    "profit": [
+     234654,
+     154191,
+     74315
+    ],
+    "revenue": [
+     -174790,
+     -304768,
+     -433799
+    ],
+    "units": [
+     9431.3,
+     9362.6,
+     9294.3
+    ]
+   },
+   {
+    "move": 10,
+    "breakEven": -1.62,
+    "verdict": "wins across the range",
+    "profit": [
+     438266,
+     278741,
+     121481
+    ],
+    "revenue": [
+     -339867,
+     -590549,
+     -837673
+    ],
+    "units": [
+     8919.3,
+     8792.7,
+     8667.8
+    ]
+   }
+  ]
+ },
+ "range_olist": {
+  "margin": 60,
+  "base": 10800000,
+  "es": [
+   -1.554,
+   -1.854,
+   -2.154
+  ],
+  "moves": [
+   {
+    "move": -10,
+    "breakEven": -1.73,
+    "verdict": "depends on the point estimate",
+    "profit": [
+     -198931,
+     141501,
+     492865
+    ],
+    "revenue": [
+     1081924,
+     1694701,
+     2327157
+    ],
+    "units": [
+     11779,
+     12157.2,
+     12547.6
+    ]
+   },
+   {
+    "move": -5,
+    "breakEven": -1.7,
+    "verdict": "depends on the point estimate",
+    "profit": [
+     -78570,
+     87687,
+     256522
+    ],
+    "revenue": [
+     518834,
+     806005,
+     1097630
+    ],
+    "units": [
+     10829.7,
+     10997.7,
+     11168.2
+    ]
+   },
+   {
+    "move": 5,
+    "breakEven": -1.64,
+    "verdict": "depends on the point estimate",
+    "profit": [
+     45703,
+     -111890,
+     -267193
+    ],
+    "revenue": [
+     -480019,
+     -734592,
+     -985466
+    ],
+    "units": [
+     9269.8,
+     9135.1,
+     9002.4
+    ]
+   },
+   {
+    "move": 10,
+    "breakEven": -1.62,
+    "verdict": "depends on the point estimate",
+    "profit": [
+     65415,
+     -240861,
+     -538504
+    ],
+    "revenue": [
+     -925777,
+     -1407067,
+     -1874791
+    ],
+    "units": [
+     8623.3,
+     8380.3,
+     8144
+    ]
+   }
+  ]
+ },
+ "b1_breakEven": [
+  [
+   5,
+   40,
+   14.3
+  ],
+  [
+   10,
+   40,
+   33.3
+  ],
+  [
+   10,
+   30,
+   50
+  ],
+  [
+   10,
+   60,
+   20
+  ],
+  [
+   20,
+   40,
+   100
+  ]
+ ]
+}

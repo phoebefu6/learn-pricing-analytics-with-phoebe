@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Analyst session 3 of 6. Deciding with a borrowed elasticity: the elasticity arrives as a range from the people who estimate it, constant-elasticity arithmetic turns each price move into a profit change, the break-even elasticity says where each move flips, and the decision that survives the whole range is the only one that does not need the point estimate. Kettle &amp; Co's tin is constructed.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Deciding with a borrowed elasticity - learn pricing analytics with phoebe">
+<meta property="og:description" content="Analyst session 3 of 6. Take the elasticity as a range, find each move's break-even, and keep only the decision that survives the whole range.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-pricing-analytics-with-phoebe/courses/a3-deciding-with-a-borrowed-elasticity.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-pricing-analytics-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Deciding with a borrowed elasticity - learn pricing analytics with phoebe">
+<meta name="twitter:description" content="Analyst session 3 of 6. Break-even elasticities and the decision that survives a range.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-pricing-analytics-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Analyst session 3 · Deciding with a borrowed elasticity - learn pricing analytics with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-pricing-analytics-with-phoebe</a> / Analyst session 3 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Pricing Analytics with Phoebe · Analyst session 3 of 6</div>
+    <h1>Deciding with a <span class="accent">borrowed elasticity</span></h1>
+    <p class="sub">Someone else estimated the elasticity. Your job is to decide with it, and to know when you cannot. Tonight takes the number as an input that arrives as a range, turns each price move into a profit change with constant-elasticity arithmetic, finds the elasticity at which each move stops paying, and asks the one question that matters: is there a decision that holds wherever in the range the truth sits? Nothing on this page is estimated or refitted. Kettle &amp; Co's 100 g tin is constructed.</p>
+    <div class="chip-row">
+      <span class="chip level">🟡 Analyst</span>
+      <span class="chip audience">Analysts who build pricing and margin reporting</span>
+      <span class="chip audience">Hands-on in the browser</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:4">3-18 · The range, the break-even, the verdict</span>
+      <span class="a3" style="flex:5">18-40 · Build-along: three ranges</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where we start</h2>
+    </div>
+    <p class="lede">Analyst session 2 asked people what they would pay. Tonight starts from a different input: an elasticity, handed over by whoever estimated it from sales data. Pricing teams rarely estimate it themselves, and they should not quietly re-estimate it to get a friendlier number. What they own is the arithmetic that turns it into a decision, and the discipline to notice when the uncertainty in the number is wider than the margin for error in the decision.</p>
+
+    <div class="legend">
+      <span class="pill">🎫 Clear all three quiz questions to stamp your passport</span>
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">★ Build-along = everyone builds it</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> Two formulas you can type into a spreadsheet: units after a price move under constant elasticity, and the break-even elasticity for any move at any margin. Four break-evens for Kettle's tin. And a one-sentence decision rule: act on the move that wins across the whole range; if none does, the next step is to buy information, not to pick the most convenient point.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the elasticity as an input that arrives as a range</span>
+      <h2>The number you are handed is a range</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">Price elasticity of demand, in one line: the percent change in units sold for a 1% change in price. An elasticity of -1.8 says a 1% price rise loses about 1.8% of units. Estimating it from sales data is Economics' job, and it is harder than it looks, because prices and demand move together for reasons that are not the price. See <a href="https://phoebefu6.github.io/learn-economics-with-phoebe/courses/p2-why-the-naive-number-lies.html">why the naive number lies</a> and <a href="https://phoebefu6.github.io/learn-economics-with-phoebe/courses/p10-the-elasticity-bench.html">the elasticity bench</a>. An honest estimate comes with a standard error, so what reaches the pricing team is a range.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 362" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A number line of elasticity from -1.0 on the left, less elastic, to -2.6 on the right, more elastic. A teal-green bar covers -1.554 to -2.154, plus or minus two standard errors around Economics' two-way estimate of -1.854 (se 0.150), marked with a crimson dot. A hollow dot marks the within-product estimate of -1.788 (se 0.149). Both were estimated on Olist marketplace products, not Kettle's tin. Below, a box asks which decision does not care where in the range we are.">
+        <defs>
+          <filter id="a3aSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="41" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a3aHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a3aAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a3aH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .a3aL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .a3aS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .a3aB { font: 800 11px Inter, sans-serif; fill: #08433A; }
+          .a3aA { font: 700 11px Inter, sans-serif; fill: #7C1428; }
+          .a3aN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="a3aH" x="30" y="28">ELASTICITY ARRIVES AS A RANGE, NOT A POINT</text>
+        <text class="a3aS" x="30" y="48">Economics' estimates on Olist marketplace products, quoted from its source map, not refitted</text>
+
+        <g filter="url(#a3aSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M80 190 L800 190"/>
+          <path d="M80 184 L80 196 M260 184 L260 196 M440 184 L440 196 M620 184 L620 196 M800 184 L800 196"/>
+          <rect x="329" y="140" width="270" height="20" rx="5" transform="rotate(-0.4 464 150)" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <path d="M329 162 L329 188 M599 162 L599 188" stroke="#0E6B5B" stroke-dasharray="4 4"/>
+          <circle cx="464" cy="150" r="6" fill="#B4233C" stroke="#7C1428"/>
+          <circle cx="435" cy="150" r="5" fill="#FFFFFF" stroke="#26191B"/>
+          <rect x="110" y="282" width="660" height="40" rx="10" transform="rotate(-0.5 440 302)" fill="#FCEFF1" stroke="#B4233C"/>
+          <!-- doodle: a magnifier -->
+          <circle cx="66" cy="298" r="12" stroke="#7C1428"/>
+          <path d="M75 307 L88 320" stroke="#7C1428" stroke-width="3"/>
+        </g>
+
+        <text class="a3aS" x="432" y="124" text-anchor="end">within-product -1.788 (se 0.149)</text>
+        <text class="a3aB" x="468" y="124">two-way -1.854 (se 0.150)</text>
+
+        <text class="a3aS" x="80" y="210" text-anchor="middle">-1.0</text>
+        <text class="a3aS" x="260" y="210" text-anchor="middle">-1.4</text>
+        <text class="a3aS" x="440" y="210" text-anchor="middle">-1.8</text>
+        <text class="a3aS" x="620" y="210" text-anchor="middle">-2.2</text>
+        <text class="a3aS" x="800" y="210" text-anchor="middle">-2.6</text>
+        <text class="a3aB" x="329" y="230" text-anchor="middle">-1.554</text>
+        <text class="a3aB" x="599" y="230" text-anchor="middle">-2.154</text>
+        <text class="a3aB" x="464" y="252" text-anchor="middle">plus or minus two standard errors: -1.554 to -2.154</text>
+        <text class="a3aA" x="80" y="266">less elastic</text>
+        <text class="a3aA" x="800" y="266" text-anchor="end">more elastic</text>
+
+        <text class="a3aL" x="440" y="307" text-anchor="middle">Which decision does not care where in the range we are?</text>
+
+        <text class="a3aN" x="30" y="350">Marketplace products, not Kettle's tin: borrow the method of reading a range, not the number itself.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the teal bar, not the dot, is what Economics actually knows; a good decision has to hold across all of it</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>Ask for the range, not the point<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>What to request.</strong> The estimate, its standard error, and the method. Economics reports two estimates on real Olist rows: a within-product estimate of -1.788 (se 0.149) and a two-way estimate of -1.854 (se 0.150). Plus or minus two standard errors around -1.854 gives -1.554 to -2.154. That bracket is the honest input.</p>
+        <p><strong>Why the point is not enough.</strong> A point estimate of -1.854 invites the question "what does a 5% rise do at -1.854?", which has one answer. The better question is "what does a 5% rise do anywhere from -1.554 to -2.154?", which may have two answers with opposite signs. If it does, the point estimate is carrying the decision, and the point is the least reliable thing you were given.</p>
+        <p><strong>What you do not do.</strong> Re-run the regression with a different control until the number suits the plan. Estimation belongs to the people who own the method; if you doubt the range, take that to them with the reason.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Whose elasticity is it?<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>Whose products.</strong> The Olist estimates come from marketplace products sold in Brazil, many sellers, many categories. Kettle's tin is one brand's product with its own loyal buyers. A borrowed elasticity is a starting range, not a measurement of your product; say so in the deck.</p>
+        <p><strong>What horizon.</strong> Monthly data says how units moved within months. A customer who stocks up before a rise, or drifts away over a year, is a different elasticity. Ask which horizon the estimate speaks to.</p>
+        <p><strong>Over what price range.</strong> An elasticity is estimated over the price moves that actually happened in the data. If those moves were mostly a few percent, a 10% move asks the number to travel further than its evidence. Read <a href="https://phoebefu6.github.io/learn-economics-with-phoebe/courses/p10-the-elasticity-bench.html">the elasticity bench</a> for how the estimate was built before you lean on it.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>Two honest numbers, one bracket.</strong> On real Olist marketplace rows (Brazilian e-commerce, delivered orders, prices in BRL), Economics' within-product and two-way estimates land 0.066 apart: -1.788 and -1.854, each with a standard error near 0.15. The two methods agree far more closely than either is precise, which is why the pricing question has to be asked of the whole bracket, not of whichever number is quoted.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers constant-elasticity arithmetic and the break-even elasticity</span>
+      <h2>Where each move stops paying</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">With the elasticity as an input, a price move becomes three lines of arithmetic. Under constant elasticity, new units = units x (1 + move) ^ elasticity. Profit change = (new price - cost) x new units - (price - cost) x units. Solve for the elasticity where the profit change is zero and you get the break-even elasticity for that move: at contribution margin m and move x, it is ln(m / (m + x)) / ln(1 + x). A price rise pays while demand is less elastic than its break-even.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 370" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Profit change a month for a 5 percent price rise on Kettle's constructed tin, plotted against elasticity from -1.0 to -2.5. The curve falls from left to right: plus 234,654 yen at -1.2, crossing zero at -1.64, minus 83,694 yen at -1.8 and minus 392,856 yen at -2.4. Left of the crossing the rise pays; right of it the rise loses.">
+        <defs>
+          <filter id="a3bSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="43" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a3bHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a3bAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a3bH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .a3bS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .a3bB { font: 800 11px Inter, sans-serif; fill: #08433A; }
+          .a3bA { font: 700 11px Inter, sans-serif; fill: #7C1428; }
+          .a3bV { font: 800 16px Inter, sans-serif; fill: #7C1428; }
+          .a3bN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="a3bH" x="30" y="28">PROFIT CHANGE A MONTH FOR A +5% PRICE MOVE, KETTLE TIN</text>
+
+        <g filter="url(#a3bSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M110 40 L110 305 L790 305"/>
+          <path d="M110 150 L790 150" stroke="#D8CACC" stroke-dasharray="5 4"/>
+          <path d="M110 47.1 L152.5 63.4 L195 79.6 L237.5 95.7 L280 111.7 L322.5 127.7 L365 143.6 L407.5 159.4 L450 175.1 L492.5 190.8 L535 206.3 L577.5 221.8 L620 237.2 L662.5 252.6 L705 267.9 L747.5 283.1" stroke="#7C1428" stroke-width="2.4"/>
+          <circle cx="195" cy="79.6" r="5" fill="#B4233C" stroke="#B4233C"/>
+          <circle cx="450" cy="175.1" r="5" fill="#B4233C" stroke="#B4233C"/>
+          <circle cx="705" cy="267.9" r="5" fill="#B4233C" stroke="#B4233C"/>
+          <circle cx="382" cy="150" r="7" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <!-- doodle: a price tag -->
+          <rect x="700" y="46" width="64" height="28" rx="5" transform="rotate(-4 732 60)" fill="#FFFFFF"/>
+          <circle cx="710" cy="60" r="3"/>
+        </g>
+
+        <text class="a3bV" x="742" y="66" text-anchor="middle">+5%</text>
+
+        <text class="a3bS" x="100" y="94" text-anchor="end">+200,000</text>
+        <text class="a3bS" x="100" y="154" text-anchor="end">0</text>
+        <text class="a3bS" x="100" y="214" text-anchor="end">-200,000</text>
+        <text class="a3bS" x="100" y="274" text-anchor="end">-400,000</text>
+        <text class="a3bA" x="24" y="250" transform="rotate(-90 24 250)">profit change a month, yen</text>
+
+        <text class="a3bS" x="110" y="321" text-anchor="middle">-1.0</text>
+        <text class="a3bS" x="280" y="321" text-anchor="middle">-1.4</text>
+        <text class="a3bS" x="450" y="321" text-anchor="middle">-1.8</text>
+        <text class="a3bS" x="620" y="321" text-anchor="middle">-2.2</text>
+        <text class="a3bA" x="790" y="337" text-anchor="end">elasticity, more elastic to the right</text>
+
+        <text class="a3bA" x="205" y="72">+234,654 at -1.2</text>
+        <text class="a3bB" x="394" y="138">break-even -1.64</text>
+        <text class="a3bA" x="462" y="166">-83,694 at -1.8</text>
+        <text class="a3bA" x="693" y="284" text-anchor="end">-392,856 at -2.4</text>
+        <text class="a3bS" x="140" y="128">the rise pays here</text>
+        <text class="a3bS" x="590" y="196">the rise loses here</text>
+
+        <text class="a3bN" x="30" y="358">Three points printed by the widget; the zero crossing is the break-even formula. Constructed Kettle tin.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - one number decides the sign: whether the true elasticity sits left or right of -1.64</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The break-even elasticity<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>Kettle's tin.</strong> Price 1,800 yen, unit cost 720 yen, contribution margin (1,800 - 720) / 1,800 = 60%, and 10,000 tins a month, so contribution before any move is 1,080 x 10,000 = 10,800,000 yen a month. Constructed Kettle &amp; Co example.</p>
+        <p><strong>One move, worked.</strong> A +5% rise takes the price to 1,890 yen. At an elasticity of -1.2, units = 10,000 x 1.05 ^ -1.2 = 9,431.33 tins (rounded). Profit = (1,890 - 720) x 9,431.33 = 11,034,656 yen, against 10,800,000 before: about +234,656. The widget, unrounded, prints +234,654.</p>
+        <div class="prompt-box good"><span class="label">★ Break-even elasticities, m = 60%</span>move   break-even   reading
+-10%   -1.73        a cut pays only if demand is MORE elastic than -1.73
+ -5%   -1.70        a cut pays only if demand is MORE elastic than -1.70
+ +5%   -1.64        a rise pays while demand is LESS elastic than -1.64
++10%   -1.62        a rise pays while demand is LESS elastic than -1.62</div>
+        <p><strong>Reading it.</strong> All four break-evens sit in a narrow band, -1.62 to -1.73. For a 60% margin product, the question "raise or cut?" turns on whether demand is more or less elastic than about -1.6 to -1.7. Any range that crosses that band cannot settle it.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Why the formula is a log<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Write price p, cost c, margin m = (p - c) / p. After a move x, profit per unit is p(1 + x) - c = p(m + x), and units are q(1 + x) ^ e. Profit is unchanged when p(m + x) x q(1 + x) ^ e = p m q, which simplifies to (1 + x) ^ e = m / (m + x). Take logs of both sides: e = ln(m / (m + x)) / ln(1 + x). The log appears because the elasticity sits in an exponent.</p>
+        <div class="prompt-box good"><span class="label">★ One worked check, +5% at m = 60%</span>break-even e = ln(0.60 / 0.65) / ln(1.05) = -1.64
+check: 1.05 ^ -1.64 x 0.65 / 0.60
+     = 0.92310 x 1.08333
+     = 1.00003, about 1: profit unchanged</div>
+        <p>The tiny gap from exactly 1 is the rounding of -1.6406 to -1.64. The same formula at a 40% margin gives a different set of break-evens: margin is half the answer, which is why Business session 1 kept asking "at what margin?"</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>The cut that needed 12,000 tins.</strong> Kettle's promotions lead proposed a permanent 10% cut on the tin "because tea buyers are price sensitive". The analyst replied with one number: the break-even for -10% is -1.73. Check: 0.9 ^ -1.73 = 1.20, so the tin would need about 12,000 tins a month at 1,620 yen just to earn the same 10,800,000 yen, the same 20.0% rise Business session 1 derived from d / (m - d). The question changed from "are buyers price sensitive?" to "is there evidence they are more elastic than -1.73?" Constructed Kettle &amp; Co example.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers the decision that survives the range vs the one that needs the point</span>
+      <h2>The verdict that holds across the range</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">Put the range next to the break-evens. If a move's break-even sits outside the range, the move either wins or loses wherever the truth is: that decision survives the range. If the break-even sits inside, the sign of the profit change depends on where in the range the truth sits, and the decision rests on the point estimate. A narrower range helps only if it does not straddle a break-even.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 322" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three elasticity ranges drawn as bars on one axis from -1.1 to -2.5, with four break-even ticks at -1.62 for plus 10 percent, -1.64 for plus 5 percent, -1.70 for minus 5 percent and -1.73 for minus 10 percent. The handed range -1.2 to -2.4 crosses all four ticks: every move depends on the point. The narrower range -1.2 to -1.5, in teal-green, ends before the first tick: plus 5 and plus 10 percent win across it. The Olist range -1.554 to -2.154 also crosses all four ticks: every move depends on the point.">
+        <defs>
+          <filter id="a3cSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="47" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a3cHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a3cAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a3cH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .a3cL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .a3cS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .a3cB { font: 800 11px Inter, sans-serif; fill: #08433A; }
+          .a3cA { font: 700 11px Inter, sans-serif; fill: #7C1428; }
+          .a3cN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="a3cH" x="30" y="28">THREE RANGES AGAINST FOUR BREAK-EVENS</text>
+
+        <text class="a3cA" x="446" y="58" text-anchor="end">+10% at -1.62</text>
+        <text class="a3cA" x="455" y="74" text-anchor="end">+5% at -1.64</text>
+        <text class="a3cA" x="487" y="58">-5% at -1.70</text>
+        <text class="a3cA" x="500" y="74">-10% at -1.73</text>
+
+        <g filter="url(#a3cSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M220 250 L836 250"/>
+          <path d="M264 244 L264 256 M440 244 L440 256 M616 244 L616 256 M792 244 L792 256"/>
+          <rect x="264" y="100" width="528" height="22" rx="6" transform="rotate(-0.3 528 111)" fill="#FCEFF1" stroke="#B4233C"/>
+          <rect x="264" y="150" width="132" height="22" rx="6" transform="rotate(0.5 330 161)" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <rect x="420" y="200" width="264" height="22" rx="6" transform="rotate(-0.4 552 211)" fill="url(#a3cHc)" stroke="#7C1428"/>
+          <path d="M448.8 84 L448.8 244 M457.6 84 L457.6 244 M484 84 L484 244 M497.2 84 L497.2 244" stroke="#B4233C" stroke-width="1.6" stroke-dasharray="3 4"/>
+        </g>
+
+        <text class="a3cL" x="30" y="108">Handed -1.2 to -2.4</text>
+        <text class="a3cS" x="30" y="124">straddles all four: depends</text>
+        <text class="a3cB" x="30" y="158">Narrower -1.2 to -1.5</text>
+        <text class="a3cS" x="30" y="174">+5% and +10% win</text>
+        <text class="a3cL" x="30" y="208">Olist -1.554 to -2.154</text>
+        <text class="a3cS" x="30" y="224">straddles all four: depends</text>
+
+        <text class="a3cS" x="264" y="268" text-anchor="middle">-1.2</text>
+        <text class="a3cS" x="440" y="268" text-anchor="middle">-1.6</text>
+        <text class="a3cS" x="616" y="268" text-anchor="middle">-2.0</text>
+        <text class="a3cS" x="792" y="268" text-anchor="middle">-2.4</text>
+        <text class="a3cA" x="528" y="286" text-anchor="middle">elasticity, more elastic to the right</text>
+
+        <text class="a3cN" x="30" y="310">A bar that crosses a tick straddles that move's break-even: the sign of the profit change is unknown.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the Olist range is half as wide as the handed one and still decides nothing, because it sits right on top of the break-evens</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Three ranges, three answers<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>Handed range, -1.2 to -2.4.</strong> Every break-even, -1.62 to -1.73, sits inside. A +5% rise makes +234,654 yen a month at -1.2 and loses 392,856 at -2.4. Every move depends on the point estimate.</p>
+        <p><strong>Narrower range, -1.2 to -1.5.</strong> The whole range is less elastic than -1.62. Both rises win at every elasticity in it; both cuts lose at every elasticity in it. This is the only range of the three that supports a decision on its own.</p>
+        <p><strong>Economics' Olist range, -1.554 to -2.154.</strong> Narrower than the handed range, built on real rows, and still useless for this decision: it straddles all four break-evens. A +5% rise is positive at the low end and negative at the middle and the high end. Precision is not the same as decisiveness.</p>
+        <p><strong>The rule.</strong> Compare the range to the break-evens, not to zero and not to the point estimate. If no break-even falls inside, act. If one does, the decision is not yet made.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>When no move survives<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>Buy information.</strong> When the range straddles a break-even, the most valuable next step is evidence about your own product near your own price. A controlled price test does that: a share of customers or stores sees the new price, the rest see the old one, and the difference in units is your elasticity, measured where you will use it.</p>
+        <p><strong>Design it properly.</strong> How many customers, for how long, and how to read the result belong to the people who own test method. Use <a href="https://phoebefu6.github.io/learn-experimentation-with-phoebe/courses/b4-run-an-ab-test.html">Experimentation's A/B test session</a> for the design. What the pricing team brings is the target: the test only has to tell you which side of -1.64 the tin sits on, which is a much smaller question than "what is the elasticity?"</p>
+        <p><strong>Or choose the smaller bet.</strong> If a test is not possible, size the downside. At -2.4, the far end of the handed range, a +10% move loses 776,299 yen a month and a +5% move 392,856. The smaller move is the cheaper way to be wrong while you watch the units.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>The "raise 10%" deck.</strong> Kettle's planning team brought a proposal to raise the tin 10%, with a projected gain built on a single elasticity in a footnote. The analyst asked for the range behind it and got -1.2 to -2.4. The break-even for +10% is -1.62, inside the range. At -1.2 the move earns +438,266 yen a month; at -2.4 it loses 776,299. The deck's gain was real only if the footnote's point was right, and nothing in the deck said why it should be. The decision became "run a price test on a share of the web shop first". Constructed Kettle &amp; Co example; profit figures are printed by the widget below.</p>
+    </div>
+  </section>
+
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Build-along</span>
+      <h2>Three ranges in the widget</h2>
+      <span class="tag demo">★ 22 min · everyone builds</span>
+    </div>
+    <p class="lede">The widget takes Kettle's constructed tin (1,800 yen, cost 720, 10,000 tins a month) and an elasticity range you select. It computes units and profit change for four moves at the low end, the middle and the high end of the range, prints each move's break-even, and gives a verdict. Nothing is estimated: the range is an input. Work the five steps and copy what it prints.</p>
+
+    <div class="pra-widget" data-mode="range"></div>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 178" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn map of the widget. A range select feeds three elasticities: low, middle and high. Each goes through constant-elasticity units, units times one plus the move to the power of the elasticity. That gives a profit change for each of four moves at three elasticities, which produces the verdict: win, lose or depends on the point estimate.">
+        <defs>
+          <filter id="a3dSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="53" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a3dHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a3dAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a3dH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .a3dL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .a3dS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .a3dW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .a3dN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="a3dH" x="30" y="28">WHAT THE WIDGET DOES</text>
+
+        <g filter="url(#a3dSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="24" y="60" width="148" height="60" rx="10" transform="rotate(-1 98 90)" fill="#FCEFF1" stroke="#B4233C"/>
+          <path d="M174 90 L190 90" marker-end="url(#a3dAr)"/>
+          <rect x="194" y="60" width="148" height="60" rx="10" transform="rotate(0.8 268 90)" fill="#FFFFFF"/>
+          <path d="M344 90 L360 90" marker-end="url(#a3dAr)"/>
+          <rect x="364" y="60" width="148" height="60" rx="10" transform="rotate(-0.6 438 90)" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <path d="M514 90 L530 90" marker-end="url(#a3dAr)"/>
+          <rect x="534" y="60" width="148" height="60" rx="10" transform="rotate(0.7 608 90)" fill="#FFFFFF"/>
+          <path d="M684 90 L700 90" marker-end="url(#a3dAr)"/>
+          <rect x="704" y="60" width="148" height="60" rx="10" transform="rotate(-0.8 778 90)" fill="#FFFFFF"/>
+          <!-- doodle: a dropdown chevron -->
+          <path d="M146 78 L152 84 L158 78" stroke="#7C1428"/>
+        </g>
+
+        <text class="a3dL" x="38" y="86">range select</text>
+        <text class="a3dS" x="38" y="104">3 ranges, typed in</text>
+        <text class="a3dL" x="208" y="86">3 elasticities</text>
+        <text class="a3dS" x="208" y="104">low, middle, high</text>
+        <text class="a3dW" x="378" y="86">units x (1+x)^e</text>
+        <text class="a3dW" x="378" y="104">per move, per e</text>
+        <text class="a3dL" x="548" y="86">profit change</text>
+        <text class="a3dS" x="548" y="104">4 moves x 3 values</text>
+        <text class="a3dL" x="718" y="86">verdict</text>
+        <text class="a3dS" x="718" y="104">win, lose, depends</text>
+
+        <text class="a3dN" x="30" y="150">Constructed Kettle tin. No estimation anywhere in the chain: the elasticity only ever enters as an input.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the green box is the whole model: one exponent, applied to each move at each end of the range</figcaption>
+    </figure>
+
+    <div class="steps">
+      <div class="step">
+        <p><strong>Step 1 · Read the default verdict.</strong> The widget opens on the handed range, -1.2 to -2.4. Copy the verdict and the profit change row for each move.</p>
+        <div class="prompt-box good"><span class="label">★ Step 1 · handed range -1.2 to -2.4</span>No price move wins across the whole range: every move depends on the point estimate.
+profit change at -1.2 / -1.8 / -2.4 (yen a month)
+-10%   -587,043 / +79,426 / +789,388
+ -5%   -271,491 / +57,572 / +396,919
+ +5%   +234,654 / -83,694 / -392,856
++10%   +438,266 / -186,376 / -776,299</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 2 · Switch to the narrower range.</strong> Select "Narrower range -1.2 to -1.5 (constructed)". Note which moves survive and the values for the two rises.</p>
+        <div class="prompt-box good"><span class="label">★ Step 2 · narrower range -1.2 to -1.5</span>Survives the whole range: +5% price, +10% price.
++5%  at -1.2 / -1.35 / -1.5:  +234,654 / +154,191 / +74,315
++10% at -1.2 / -1.35 / -1.5:  +438,266 / +278,741 / +121,481
+both cuts lose across the range</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 3 · Switch to the Olist range.</strong> Select "Olist two-way estimate -1.854, plus or minus two standard errors". It covers -1.554 to -2.154. Read the verdict and the +5% row.</p>
+        <div class="prompt-box good"><span class="label">★ Step 3 · Olist range -1.554 to -2.154</span>No price move wins across the whole range: every move depends on the point estimate.
++5% at -1.554 / -1.854 / -2.154:  +45,703 / -111,890 / -267,193</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 4 · Check the base.</strong> Under the table the widget prints the margin and the monthly contribution every profit change is measured against. Confirm it by hand: (1,800 - 720) / 1,800 and 1,080 x 10,000.</p>
+        <div class="prompt-box good"><span class="label">★ Step 4 · the base line</span>Contribution margin 60.0%; monthly contribution before any move 10,800,000 yen.</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 5 · Write the decision sentence.</strong> One sentence per range, in this shape: the range, the break-even it does or does not straddle, the decision, and the next step. This is what goes on the slide, not the table.</p>
+        <div class="prompt-box good"><span class="label">★ Step 5 · the decision sentence</span>Handed range -1.2 to -2.4 straddles every break-even (-1.62 to -1.73),
+so no price move is safe on this evidence; next step: a price test
+that tells us which side of -1.64 the tin sits on.
+
+If the range were -1.2 to -1.5, +5% and +10% would win across all of it
+and both cuts would lose; we would raise, starting with +5%.</div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <p><strong>Keep the sentence shape.</strong> Range, break-even, decision, next step. It works for any borrowed number, not only elasticity: a churn rate, a conversion lift, a cost estimate. Analyst session 4 applies the same honesty to promotions, where the number is measured on real rows instead of borrowed.</p>
+    </div>
+  </section>
+
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before Analyst session 4</h2>
+      <span class="tag exercise">30 min</span>
+    </div>
+    <ol>
+      <li><strong>Compute four break-evens</strong> for one of your own products: -10%, -5%, +5%, +10%, using ln(m / (m + x)) / ln(1 + x) at its contribution margin.</li>
+      <li><strong>Find the elasticity range</strong> someone has given your team, with its standard error and method. If all you have is a point, write down who to ask for the range.</li>
+      <li><strong>Place the range against the break-evens</strong> and write the decision sentence: range, break-even, decision, next step.</li>
+      <li><strong>Answer the three "whose elasticity" questions</strong> for that range: whose products it was estimated on, over what horizon, and over what price moves.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+    <p>Clear all three and Analyst session 3 gets stamped in your passport.</p>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1 · Kettle's break-even elasticity for a +5% rise is -1.64. What does that mean?</p>
+      <button class="qopt" type="button">A · Units fall by 1.64% after a 5% rise</button>
+      <button class="qopt" type="button">B · At an elasticity of -1.64 the rise leaves profit unchanged; less elastic than that, it pays; more elastic, it loses</button>
+      <button class="qopt" type="button">C · The tin's true elasticity is -1.64</button>
+      <button class="qopt" type="button">D · A rise always pays if the elasticity is negative</button>
+      <p class="qwhy">The break-even is a threshold computed from the margin and the move, not an estimate of demand. It tells you which side of the line the true elasticity has to be on for the move to pay.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <p class="qtext">2 · Which range lets a +5% rise survive the whole range, and why?</p>
+      <button class="qopt" type="button">A · The Olist range, -1.554 to -2.154, because it was estimated on real rows</button>
+      <button class="qopt" type="button">B · The handed range, -1.2 to -2.4, because its middle is -1.8</button>
+      <button class="qopt" type="button">C · Any range narrower than 0.6, because narrow ranges are precise</button>
+      <button class="qopt" type="button">D · The narrower range, -1.2 to -1.5, because all of it is less elastic than the -1.64 break-even</button>
+      <p class="qwhy">What matters is whether the range straddles the break-even. The Olist range is narrower than the handed one and real, yet it still crosses -1.64, so the sign of the profit change depends on the point.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">3 · Why is the elasticity never re-estimated before the decision?</p>
+      <button class="qopt" type="button">A · Estimation is its own discipline with its own method; the pricing decision takes the range as an input, and re-fitting until the number suits the plan is how bad prices get approved</button>
+      <button class="qopt" type="button">B · Elasticity cannot be estimated from sales data</button>
+      <button class="qopt" type="button">C · The widget is too slow to run a regression</button>
+      <button class="qopt" type="button">D · Any elasticity gives the same decision</button>
+      <p class="qwhy">Economics owns the estimate and its standard error. The pricing analyst owns the arithmetic from range to decision, and takes doubts about the range back to the people who built it.</p>
+    </div>
+
+    <p class="quiz-score"></p>
+  </section>
+
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What this session teaches, and where it came from</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Elasticity estimates on Olist marketplace products: within-product -1.788 (se 0.149), two-way -1.854 (se 0.150)</span><span class="note">Quoted from learn-economics-with-phoebe's source map, not refitted here; estimation taught in its <a href="https://phoebefu6.github.io/learn-economics-with-phoebe/courses/p10-the-elasticity-bench.html">elasticity bench</a></span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Constant-elasticity units, profit change, and the break-even elasticity ln(m / (m + x)) / ln(1 + x)</span><span class="note">Standard arithmetic, derived on this page and computed by the widget</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Kettle &amp; Co's tin: 1,800 yen, cost 720, 60% margin, 10,000 tins a month; break-evens -1.73, -1.70, -1.64, -1.62; the handed and narrower ranges</span><span class="note">Constructed and labelled; printed by the widget</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Designing a price test when no move survives the range</span><span class="note">Pointer only; method in <a href="https://phoebefu6.github.io/learn-experimentation-with-phoebe/courses/b4-run-an-ab-test.html">Experimentation</a></span></div>
+    </div>
+    <p class="mono" style="margin-top:14px">Every fact on this page, and its verification tier, is recorded in the course's source map.</p>
+  </section>
+
+  <section class="cheat" id="cheatsheet">
+    <h3>Analyst session 3 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Elasticity</b><span>Percent change in units for a 1% price change. An input, never refitted here.</span></div>
+      <div class="cheat-item"><b>Ask for the range</b><span>Estimate, standard error, method. Plus or minus two se is the honest input.</span></div>
+      <div class="cheat-item"><b>New units</b><span>units x (1 + move) ^ elasticity.</span></div>
+      <div class="cheat-item"><b>Break-even</b><span>ln(m / (m + x)) / ln(1 + x). Kettle at 60%: -1.73, -1.70, -1.64, -1.62.</span></div>
+      <div class="cheat-item"><b>The verdict</b><span>Range clear of the break-even: act. Range straddles it: the point is deciding.</span></div>
+      <div class="cheat-item"><b>When nothing survives</b><span>Buy information with a price test, or take the smaller bet.</span></div>
+    </div>
+  </section>
+
+  <div class="callout next">
+    <span class="nx-pill">Next session</span>
+    <p>You can decide with a number someone else measured. Analyst session 4 measures one yourself, on real Olist rows around Black Friday 2017: the lift a price cut seems to buy, how much of it was the season, and whether the month after shows a dip.</p>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Analyst session 3 of 6 · learn-pricing-analytics-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="a2-measuring-willingness-to-pay.html">← Prev: Measuring willingness to pay</a> &nbsp;·&nbsp; <a href="a4-promo-lift-and-the-dip-after.html">Next: Promo lift and the dip after →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/pra-sample.js?v=1"></script>
+<script src="../assets/pra-live.js?v=1"></script>
+<script src="../assets/pra-bench.js?v=1"></script>
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>

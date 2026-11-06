@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Business session 1 of 4. Why price is the biggest profit lever: where a 1% price change lands on the profit line, why the famous 1% = 11% claim depends on the margin base, and the break-even volume a discount has to buy back. Kettle &amp; Co, a constructed tea brand, prices its 100 g tin.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="Price is the biggest lever - learn pricing analytics with phoebe">
+<meta property="og:description" content="Business session 1 of 4. A 1% price change lands whole on profit. How much depends on your margin, and a discount has to buy its volume back.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-pricing-analytics-with-phoebe/courses/b1-price-is-the-biggest-lever.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-pricing-analytics-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Price is the biggest lever - learn pricing analytics with phoebe">
+<meta name="twitter:description" content="Business session 1 of 4. The profit line, the 1% claim and its margin base, and the discount break-even.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-pricing-analytics-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Business session 1 · Price is the biggest lever - learn pricing analytics with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-pricing-analytics-with-phoebe</a> / Business session 1 of 4</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Pricing Analytics with Phoebe · Business session 1 of 4</div>
+    <h1>Price is the <span class="accent">biggest lever</span></h1>
+    <p class="sub">A price change is the one move that lands on profit whole: no extra tea to brew, no extra box to ship. That is why a small price slip hurts so much and why a discount has to buy back a surprising amount of volume. Tonight puts the profit line on one page, checks the famous "1% of price is 11% of profit" claim against its own source, and works out what a discount must deliver before it pays. Kettle &amp; Co, a direct-to-consumer tea brand, is constructed; the Black Friday rows at the end are real.</p>
+    <div class="chip-row">
+      <span class="chip level">🟢 Business</span>
+      <span class="chip audience">Commercial leads who set prices, and the analysts who model them</span>
+      <span class="chip audience">No code</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:4">3-18 · Profit line, the 1% claim, break-even</span>
+      <span class="a3" style="flex:5">18-40 · Build-along: the discount worksheet</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where we start</h2>
+    </div>
+    <p class="lede">The Business track is for the people who sign off a price and the people who have to defend it: the commercial lead, the category manager, the founder, the finance partner asked "will this discount pay?". Four sessions: tonight, why price is the biggest lever; then three ways to set a price and why value beats cost-plus; then where the money leaks between the list price and the bank; then how to read a pricing recommendation without being steered. No code. The Analyst track builds the same numbers from rows. Kettle &amp; Co, a tea brand selling online in Japan with a wholesale arm, is constructed: its prices, costs and customers are invented and labelled. The promotion rows in the last story are real: Olist, a Brazilian marketplace, around Black Friday 2017.</p>
+
+    <div class="legend">
+      <span class="pill">🎫 Clear all three quiz questions to stamp your passport</span>
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">★ Build-along = everyone works it through</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> Your own profit line per 100 yen (or dollars, or reais) of revenue, the profit effect of a 1% move on each of the four levers, and a one-line test for any discount on the table: the volume rise it must buy, d / (m - d), next to the rise anyone has actually measured.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the profit line and the four levers</span>
+      <h2>A price change lands on profit whole</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">Profit is what is left of revenue after variable costs (the tea, the tin, the shipping) and fixed costs (the team, the rent). Move volume and costs move with it. Move price and nothing else moves: every extra yen goes straight to the thin layer at the top. That asymmetry is the whole reason pricing deserves its own analytics.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kettle's constructed profit line per 100 yen of revenue: variable costs 40, fixed costs 50, operating profit 10. A second column after a 1% price rise: the same costs and profit 11. On the right, the profit effect of a 1% move on each lever: price plus 10%, volume plus 6%, variable cost cut plus 4%, fixed cost cut plus 5%. The price row is highlighted.">
+        <defs>
+          <filter id="b1aSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b1aHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b1aAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b1aH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .b1aL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .b1aS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .b1aV { font: 800 16px Inter, sans-serif; fill: #7C1428; }
+          .b1aW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .b1aA { font: 700 11px Inter, sans-serif; fill: #7C1428; }
+          .b1aN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="b1aH" x="30" y="28">KETTLE'S PROFIT LINE, PER 100 YEN OF REVENUE</text>
+        <text class="b1aS" x="380" y="28">constructed · what a 1% move on each lever does to profit</text>
+
+        <g filter="url(#b1aSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="50" y="82" width="140" height="22" rx="4" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <rect x="50" y="104" width="140" height="80" rx="4" fill="#FFFFFF"/>
+          <rect x="50" y="184" width="140" height="80" rx="4" fill="#FCEFF1" stroke="#B4233C"/>
+          <rect x="230" y="78" width="140" height="26" rx="4" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <rect x="230" y="104" width="140" height="80" rx="4" fill="#FFFFFF"/>
+          <rect x="230" y="184" width="140" height="80" rx="4" fill="#FCEFF1" stroke="#B4233C"/>
+          <rect x="450" y="60" width="390" height="44" rx="10" transform="rotate(-0.4 645 82)" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <rect x="450" y="114" width="390" height="44" rx="10" transform="rotate(0.4 645 136)" fill="#FFFFFF"/>
+          <rect x="450" y="168" width="390" height="44" rx="10" transform="rotate(-0.3 645 190)" fill="#FFFFFF"/>
+          <rect x="450" y="222" width="390" height="44" rx="10" transform="rotate(0.3 645 244)" fill="#FFFFFF"/>
+          <path d="M384 91 L436 82" marker-end="url(#b1aAr)"/>
+          <!-- doodle: a price tag on the price row -->
+          <path d="M800 72 L824 72 L832 82 L824 92 L800 92 Z" stroke="#FFFFFF"/>
+          <circle cx="806" cy="82" r="2.5" stroke="#FFFFFF"/>
+        </g>
+
+        <text class="b1aS" x="50" y="70">today</text>
+        <text class="b1aS" x="230" y="70">price +1%, nothing else</text>
+        <text class="b1aW" x="60" y="98">profit 10</text>
+        <text class="b1aL" x="60" y="148">fixed cost 50</text>
+        <text class="b1aL" x="60" y="228">variable cost 40</text>
+        <text class="b1aW" x="240" y="96">profit 11</text>
+        <text class="b1aL" x="240" y="148">fixed cost 50</text>
+        <text class="b1aL" x="240" y="228">variable cost 40</text>
+        <text class="b1aS" x="50" y="284">revenue 100</text>
+        <text class="b1aS" x="230" y="284">revenue 101</text>
+
+        <text class="b1aW" x="468" y="87">price +1%</text>
+        <text class="b1aW" x="640" y="87">profit +10%</text>
+        <text class="b1aL" x="468" y="141">volume +1%</text>
+        <text class="b1aV" x="640" y="142">+6%</text>
+        <text class="b1aS" x="690" y="141">costs rise too</text>
+        <text class="b1aL" x="468" y="195">variable cost -1%</text>
+        <text class="b1aV" x="640" y="196">+4%</text>
+        <text class="b1aL" x="468" y="249">fixed cost -1%</text>
+        <text class="b1aV" x="640" y="250">+5%</text>
+
+        <text class="b1aA" x="450" y="290">profit gain from 1% of price = 1 / operating margin = 1 / 10%</text>
+        <text class="b1aN" x="30" y="318">Constructed Kettle &amp; Co P&amp;L. Your four numbers will differ; the price row wins whenever margin is thin.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the extra yen from a price rise has nowhere to go but the thin profit layer, so a small move is a big share of it</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>The four levers, worked on Kettle<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>The line.</strong> For every 100 yen Kettle takes, 40 go on variable costs (tea, tin, packing, delivery), 50 on fixed costs (people, warehouse, software), and 10 is operating profit. Constructed, but a shape many consumer brands will recognise.</p>
+        <p><strong>Price +1%, volume held.</strong> Revenue becomes 101 and no cost moves, so profit goes from 10 to 11: up 10%.</p>
+        <p><strong>Volume +1%.</strong> Revenue rises by 1 but variable costs rise by 0.4, so profit gains 0.6: up 6%.</p>
+        <p><strong>Costs down 1%.</strong> Variable costs 40 to 39.6 adds 0.4 (4%); fixed costs 50 to 49.5 adds 0.5 (5%).</p>
+        <p>The ranking is arithmetic, not a law of nature: it depends on the shape of your own line. That is the point of Part 2.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Why "volume held" is doing the heavy lifting<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Every lever above assumes the others stay still. Price is the one lever where that assumption is shakiest: raise the price and some customers buy less or leave. How many is the price elasticity. Here it is an input, never estimated; Economics estimates it on real Olist rows and shows why the naive number lies: <a href="https://phoebefu6.github.io/learn-economics-with-phoebe/courses/p2-why-the-naive-number-lies.html">Economics, why the naive number lies ↗</a>. Analyst session 3 takes the number it produces, as a range, and asks which price move survives the whole range.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>The 2% that funded a hire.</strong> Kettle's finance partner asked the commercial lead what a 2% list price rise on the 100 g tin would do if no customer noticed. On a 10% operating margin the answer is a 20% rise in operating profit, roughly the cost of the analyst they wanted to hire. The question that followed was the right one: how many customers would notice, and who has a number for that? Constructed Kettle &amp; Co example.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers the 1% claim and its margin base</span>
+      <h2>"1% of price is 11% of profit", checked at source</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">The most quoted number in pricing comes from Marn and Rosiello's 1992 Harvard Business Review article: for the average of 2,463 companies, a 1% price improvement, with no loss of volume, raised operating profit by 11.1%. It is true, and it is arithmetic. The same authors printed 8% in 2003 and 14% for a case company, because the answer is one divided by the operating margin.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three hand-drawn cards, one per source. Marn and Rosiello 1992, average of 2,463 Compustat companies: operating margin about 9 percent, implied, gives 11.1 percent more operating profit from 1 percent of price. Marn, Roegner and Zawada 2003, S and P 1500 average: margin 12.5 percent gives 8 percent. The Castle Battery case in the 1992 article: return on sales about 7 percent gives 14 percent. A banner underneath: profit gain equals 1 divided by operating margin, with volume held.">
+        <defs>
+          <filter id="b1bSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="13" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b1bHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b1bAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b1bH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .b1bL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .b1bS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .b1bV { font: 800 20px Inter, sans-serif; fill: #7C1428; }
+          .b1bW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .b1bX { font: 800 20px Inter, sans-serif; fill: #FFFFFF; }
+          .b1bN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="b1bH" x="30" y="28">THE SAME 1% OF PRICE, THREE MARGIN BASES</text>
+        <text class="b1bS" x="360" y="28">volume held in every case · the margins are the sources' own economics</text>
+
+        <g filter="url(#b1bSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="48" width="260" height="150" rx="12" transform="rotate(-0.8 160 123)" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <rect x="310" y="48" width="260" height="150" rx="12" transform="rotate(0.6 440 123)" fill="#FFFFFF"/>
+          <rect x="590" y="48" width="260" height="150" rx="12" transform="rotate(-0.5 720 123)" fill="#FFFFFF"/>
+          <rect x="30" y="216" width="820" height="40" rx="10" transform="rotate(0.2 440 236)" fill="#FCEFF1" stroke="#B4233C"/>
+          <!-- doodle: a magnifier over the source card -->
+          <circle cx="258" cy="168" r="11" stroke="#FFFFFF"/>
+          <path d="M266 176 L276 186" stroke="#FFFFFF"/>
+        </g>
+
+        <text class="b1bW" x="48" y="74">HBR 1992 · 2,463 COMPANIES</text>
+        <text class="b1bX" x="48" y="110">+11.1% profit</text>
+        <text class="b1bW" x="48" y="138">margin about 9%</text>
+        <text class="b1bW" x="48" y="158">implied, not printed</text>
+
+        <text class="b1bH" x="328" y="74">MCKINSEY 2003 · S&amp;P 1500</text>
+        <text class="b1bV" x="328" y="110">+8.0% profit</text>
+        <text class="b1bL" x="328" y="138">operating margin 12.5%</text>
+        <text class="b1bS" x="328" y="158">printed in the exhibit</text>
+
+        <text class="b1bH" x="608" y="74">CASTLE BATTERY CASE, 1992</text>
+        <text class="b1bV" x="608" y="110">+14% profit</text>
+        <text class="b1bL" x="608" y="138">return on sales about 7%</text>
+        <text class="b1bS" x="608" y="158">a thinner margin, a bigger lever</text>
+
+        <text class="b1bL" x="48" y="241">profit gain from 1% of price = 1 / operating margin, if no customer buys less</text>
+        <text class="b1bN" x="30" y="286">Read at source in the 1992 article and the 2003 Quarterly; "about 9%" is our arithmetic from 11.1.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - three true numbers from the same authors: the margin underneath decides which one is yours</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>What the 1992 article actually says<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>The exhibit.</strong> Marn and Rosiello compared four levers on the average economics of 2,463 companies in the Compustat database: a 1% improvement in price raised operating profit 11.1%, variable cost 7.8%, volume 3.3%, fixed cost 2.3%. Same ranking as Kettle's line, different sizes.</p>
+        <p><strong>The condition.</strong> The text says it plainly: the 11.1% assumes no loss of volume. The same exhibit read backwards is the warning: a 1% price slip destroys 11.1% of operating profit.</p>
+        <p><strong>The margin.</strong> The article does not print the operating margin behind 11.1%. Divide 1% by 11.1% and you get about 9%: that is our arithmetic, not their claim. Their own Castle Battery case runs at about 7% return on sales and gets 14%; the 2003 McKinsey update uses an S&amp;P 1500 average with a 12.5% margin and gets 8%.</p>
+        <p><strong>How to quote it.</strong> "On an average company with about a 9% operating margin, 1% of price was worth about 11% of operating profit, if volume held." Then say your own margin and your own number.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Is the claim contested?<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>No peer-reviewed critique of the figure turned up in the research for this session; the critique lives in the sources themselves. The arithmetic is not in dispute. What is disputed, deal by deal, is the condition: whether volume holds. Retellings often drop the margin and the condition and keep the 11, sometimes attributing it to other studies. The verifiable origin is the 1992 exhibit. When someone quotes the number at you, ask two questions: whose margin, and what happens to volume?</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>Three slides, three numbers, one source.</strong> A pricing vendor's slide said 11%, a consultant's said 8%, a textbook case said 14%. All three trace to Marn and colleagues, and all three are right for their margin. Kettle's 10% operating margin gives 10%. The useful slide is the one that shows the margin it used.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers the discount break-even identity</span>
+      <h2>What a discount has to buy back</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">A discount runs the lever in reverse. Cut the price by d and every unit earns less: the contribution margin m (price minus variable cost, as a share of price) shrinks to m - d. To earn the same contribution you need more units, and the rise needed is d / (m - d). On a thin margin the number explodes.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 350" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three hand-drawn curves of volume rise needed against discount depth, for contribution margins of 60, 40 and 30 percent. The thinner the margin, the steeper the curve: at 30 percent a 15 percent discount needs volume to double. Kettle's tin, at a 60 percent margin, needs 20 percent more volume for a 10 percent discount, marked with a dot. A panel on the right lists five worked cases.">
+        <defs>
+          <filter id="b1cSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="19" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b1cHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b1cAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b1cH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .b1cL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .b1cS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .b1cA { font: 700 11px Inter, sans-serif; fill: #7C1428; }
+          .b1cB { font: 800 11px Inter, sans-serif; fill: #08433A; }
+          .b1cW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .b1cN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="b1cH" x="30" y="24">VOLUME RISE NEEDED = d / (m - d)</text>
+
+        <g filter="url(#b1cSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M90 50 L90 290 L560 290"/>
+          <path d="M90 290 L106 286 L121 282 L137 277 L153 273 L168 268 L184 263 L200 258 L215 253 L231 248 L247 242 L262 236 L278 230 L294 224 L309 217 L325 210 L341 203 L356 195 L372 187 L388 179 L403 170 L419 161 L435 151 L450 141 L466 130 L482 119 L497 106 L513 94 L529 80 L544 65 L560 50" stroke="#0E6B5B" stroke-width="2.6"/>
+          <path d="M90 290 L106 284 L121 277 L137 271 L153 263 L168 256 L184 248 L200 239 L215 230 L231 220 L247 210 L262 199 L278 187 L294 174 L309 161 L325 146 L341 130 L356 113 L372 94 L388 73 L403 50" stroke="#B4233C"/>
+          <path d="M90 290 L106 282 L121 273 L137 263 L153 253 L168 242 L184 230 L200 217 L215 203 L231 187 L247 170 L262 151 L278 130 L294 106 L309 80 L325 50" stroke="#7C1428" stroke-dasharray="6 4"/>
+          <circle cx="247" cy="242" r="6" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <rect x="600" y="50" width="250" height="232" rx="12" transform="rotate(0.5 725 166)" fill="#FFFFFF"/>
+          <rect x="612" y="114" width="226" height="34" rx="8" fill="#0E6B5B" stroke="#0E6B5B"/>
+        </g>
+
+        <text class="b1cA" x="325" y="42" text-anchor="middle">m 30%</text>
+        <text class="b1cA" x="403" y="42" text-anchor="middle">m 40%</text>
+        <text class="b1cB" x="560" y="42" text-anchor="middle">m 60%</text>
+        <text class="b1cS" x="80" y="294" text-anchor="end">0</text>
+        <text class="b1cS" x="80" y="174" text-anchor="end">+50%</text>
+        <text class="b1cS" x="80" y="54" text-anchor="end">+100%</text>
+        <text class="b1cS" x="90" y="308" text-anchor="middle">0%</text>
+        <text class="b1cS" x="247" y="308" text-anchor="middle">10%</text>
+        <text class="b1cS" x="403" y="308" text-anchor="middle">20%</text>
+        <text class="b1cS" x="560" y="308" text-anchor="middle">30%</text>
+        <text class="b1cA" x="325" y="326" text-anchor="middle">discount depth d</text>
+        <text class="b1cA" x="30" y="232" transform="rotate(-90 30 232)">volume rise needed</text>
+        <text class="b1cB" x="262" y="268">Kettle tin: 10% off needs +20%</text>
+
+        <text class="b1cH" x="618" y="76">WORKED CASES</text>
+        <text class="b1cS" x="618" y="98">5% off at m 40%: +14.3%</text>
+        <text class="b1cW" x="622" y="136">10% off at m 60%: +20.0%</text>
+        <text class="b1cS" x="618" y="174">10% off at m 40%: +33.3%</text>
+        <text class="b1cS" x="618" y="204">10% off at m 30%: +50.0%</text>
+        <text class="b1cS" x="618" y="234">20% off at m 40%: +100.0%</text>
+        <text class="b1cS" x="618" y="264">McKinsey 2003: 5% off, +18.7%</text>
+
+        <text class="b1cN" x="30" y="344">m = contribution margin before the discount. Constructed cases; the 18.7% is printed in the 2003 article.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the thinner the margin, the steeper the curve: at 30% a 15% discount has to double volume just to stand still</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The identity in three lines<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>Before.</strong> Kettle's 100 g tin sells at 1,800 yen and costs 720 yen to make and ship: contribution 1,080 yen, margin m = 60%.</p>
+        <p><strong>After a 10% discount.</strong> The tin sells at 1,620 yen and still costs 720: contribution 900 yen. Each tin now earns 900 / 1,080 = 83.3% of what it did.</p>
+        <p><strong>Break-even.</strong> To earn the same total, sell 1,080 / 900 = 1.2 times as many tins: 20% more. In general, d / (m - d) = 0.10 / 0.50 = 20%. The McKinsey 2003 article prints the same arithmetic for its average company: a 5% cut needs 18.7% more volume just to offset it.</p>
+        <p>Break-even is the floor, not the goal: it says the discount gave nothing back, it does not say it was worth doing.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Which margin goes in the formula<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Use contribution margin (price minus the costs that move with each unit), not gross margin from the accounts and not operating margin. Operating margin answers Part 2's question (what a price move does to the bottom line); contribution margin answers this one (how many more units a cut needs). If shipping is free above a basket size, or a promotion brings a payment fee, those belong in the unit cost for the period of the promotion. The bigger the share of cost that is truly fixed, the higher m and the gentler the curve.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>Black Friday 2017, measured.</strong> On real Olist rows, 29 products cut their November price more than 3% against October. Compared with the 54 that held price, and counting December, the promo lab in Analyst session 6 prints: "Rung 5: discount depth 7.9% at an assumed 60.0% cost ratio needs 24.6% more volume; measured 20.4%. It did not pay: -R$ 1,058.10." Olist publishes no costs, so the 60% is an assumption you can move; at 50% the same rows say it paid. Same identity, real rows.</p>
+    </div>
+  </section>
+
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Build-along</span>
+      <h2>The discount worksheet</h2>
+      <span class="tag demo">★ 22 min · everyone works it through</span>
+    </div>
+    <p class="lede">No code, one page. Use your own product, or Kettle's tin (1,800 yen, 720 yen unit cost, 10% operating margin across the business). Five steps take a discount proposal from "it will drive volume" to a number someone can check. Do step 1 together, steps 2 to 4 in pairs, then read your step 5 sentence aloud.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn worksheet with five rows: the profit line, the 1% levers, the proposed discount and its break-even volume, the volume anyone has measured, and the decision. Kettle's row is filled in: a 15 percent discount at a 60 percent contribution margin needs 33.3 percent more volume; the marketing plan expects 25 percent, so the discount does not pay on its own plan. The decision row is highlighted.">
+        <defs>
+          <filter id="b1dSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="29" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="b1dHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="b1dAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .b1dH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .b1dL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .b1dS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .b1dA { font: 700 11px Inter, sans-serif; fill: #7C1428; }
+          .b1dW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .b1dN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="b1dH" x="30" y="28">THE DISCOUNT WORKSHEET</text>
+        <text class="b1dS" x="210" y="28">one row per step · Kettle's 15% proposal filled in · constructed</text>
+
+        <g filter="url(#b1dSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="44" width="740" height="226" rx="10" transform="rotate(-0.3 400 157)" fill="#FFFFFF"/>
+          <path d="M40 88 L760 88 M40 132 L760 132 M40 176 L760 176 M40 220 L760 220" stroke="#D8CACC"/>
+          <path d="M260 52 L260 262" stroke="#D8CACC"/>
+          <rect x="44" y="226" width="712" height="38" rx="8" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <!-- doodle: a pencil -->
+          <path d="M800 70 L836 220 L826 226 L790 76 Z" stroke="#B4233C"/>
+          <path d="M826 226 L834 240 L836 220" stroke="#B4233C"/>
+        </g>
+
+        <text class="b1dL" x="52" y="72">1 · profit line</text>
+        <text class="b1dA" x="274" y="72">per 100 yen: variable 40 · fixed 50 · profit 10</text>
+        <text class="b1dL" x="52" y="116">2 · 1% levers</text>
+        <text class="b1dA" x="274" y="116">price +10% · volume +6% · variable -1% +4% · fixed -1% +5%</text>
+        <text class="b1dL" x="52" y="160">3 · break-even</text>
+        <text class="b1dA" x="274" y="160">15% off at m 60%: 0.15 / 0.45 = +33.3% volume needed</text>
+        <text class="b1dL" x="52" y="204">4 · measured lift</text>
+        <text class="b1dA" x="274" y="204">marketing plan says +25%; nobody has measured it yet</text>
+        <text class="b1dW" x="52" y="250">5 · decision</text>
+        <text class="b1dW" x="274" y="250">on its own plan the discount loses: test it before rollout</text>
+
+        <text class="b1dN" x="30" y="292">Step 4 is where most proposals have a forecast and no measurement. Analyst session 4 shows how to measure one.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the worksheet turns "it will drive volume" into two numbers side by side: the rise needed and the rise anyone has measured</figcaption>
+    </figure>
+
+    <div class="steps">
+      <div class="step">
+        <p><strong>Step 1 · Write your profit line.</strong> Per 100 of revenue: variable costs, fixed costs, operating profit. Last year's accounts are close enough; round to whole numbers.</p>
+        <div class="prompt-box good"><span class="label">★ Step 1 · the line</span>per 100 of revenue:
+variable costs ____   fixed costs ____   operating profit ____
+Kettle (constructed): variable 40 · fixed 50 · profit 10</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 2 · Price the four levers.</strong> For a 1% move on each, write the change in profit and divide by profit. Rank them. If price is not first, your margin is unusually fat; say so.</p>
+        <div class="prompt-box good"><span class="label">★ Step 2 · the levers</span>price +1%:          profit +____ = ____%
+volume +1%:         profit +____ = ____%   (revenue +1, variable costs +__)
+variable cost -1%:  profit +____ = ____%
+fixed cost -1%:     profit +____ = ____%
+Kettle: +10% · +6% · +4% · +5%</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 3 · Break-even for the discount on the table.</strong> Take the product's contribution margin m (price minus unit cost, over price) and the proposed discount d. Volume rise needed = d / (m - d).</p>
+        <div class="prompt-box good"><span class="label">★ Step 3 · break-even</span>price ____  unit cost ____  m = (price - cost) / price = ____
+discount d = ____
+volume rise needed = d / (m - d) = ____
+Kettle tin: 1,800 yen, 720 yen, m = 60%; d = 15%: 0.15 / 0.45 = +33.3%</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 4 · Write down the lift anyone has measured.</strong> Not the plan, the measurement: a past promotion compared with products or weeks that did not get it. If there is none, write "none" and the plan's number next to it.</p>
+        <div class="prompt-box good"><span class="label">★ Step 4 · evidence</span>measured lift from a comparable past promotion: ____ (source: ____)
+planned lift in the proposal: ____
+Kettle: none measured; plan says +25%</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 5 · One sentence.</strong> Put break-even and evidence side by side and say what you would do. Read it aloud.</p>
+        <div class="prompt-box good"><span class="label">★ Step 5 · the sentence</span>"A ___% discount needs ___% more volume to pay. The best evidence we have is ___. So we will ___."
+Kettle: "A 15% discount needs 33% more volume. The plan expects 25% and nobody has measured it. So we test it on one channel for four weeks against a holdout before any rollout."</div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <p><strong>Keep the worksheet.</strong> Business session 3 adds a line between price and profit that this sheet has assumed away: the money that leaves after the invoice. A discount that looks like 10% on the price list is often more by the time it reaches the bank.</p>
+    </div>
+  </section>
+
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before Business session 2</h2>
+      <span class="tag exercise">30 min</span>
+    </div>
+    <ol>
+      <li><strong>Find your operating margin</strong> in last year's accounts and compute 1 / margin. That is your version of the 11%.</li>
+      <li><strong>Find one product's contribution margin.</strong> Ask finance for the unit cost, including shipping and payment fees, and compute m.</li>
+      <li><strong>List the discounts running today</strong> and the depth of each. For the biggest, compute d / (m - d).</li>
+      <li><strong>Ask who measured the last promotion,</strong> and how. Bring the answer, even if it is "nobody".</li>
+    </ol>
+  </section>
+
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+    <p>Clear all three and Business session 1 gets stamped in your passport.</p>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1 · Kettle's operating margin is 10%. A 1% price rise with no change in volume raises operating profit by how much?</p>
+      <button class="qopt" type="button">A · 1%</button>
+      <button class="qopt" type="button">B · 10%, because the whole extra yen lands on a profit layer one tenth the size of revenue</button>
+      <button class="qopt" type="button">C · 11.1%, the published figure</button>
+      <button class="qopt" type="button">D · 6%, the same as volume</button>
+      <p class="qwhy">The gain is 1 / operating margin. 11.1% belongs to a company with about a 9% margin; Kettle's 10% gives 10%.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <p class="qtext">2 · What does Marn and Rosiello's 1992 article say about its 11.1%?</p>
+      <button class="qopt" type="button">A · It holds for every company</button>
+      <button class="qopt" type="button">B · It was measured in a price experiment</button>
+      <button class="qopt" type="button">C · It is the median of 2,463 price changes</button>
+      <button class="qopt" type="button">D · It is the average economics of 2,463 companies, assuming no loss of volume</button>
+      <p class="qwhy">It is arithmetic on an average income statement, with volume held. The same authors printed 8% (2003) and 14% (Castle Battery) for other margins.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">3 · A 10% discount on a product with a 40% contribution margin needs how much more volume just to break even?</p>
+      <button class="qopt" type="button">A · 33.3%: d / (m - d) = 0.10 / 0.30</button>
+      <button class="qopt" type="button">B · 10%</button>
+      <button class="qopt" type="button">C · 25%</button>
+      <button class="qopt" type="button">D · 4%</button>
+      <p class="qwhy">Each unit now earns 30 instead of 40, so you need 40 / 30 = 1.333 times the units. Thinner margins make the curve steeper.</p>
+    </div>
+
+    <p class="quiz-score"></p>
+  </section>
+
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What this session teaches, and where it came from</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">1% of price = 11.1% of operating profit; volume 3.3%, variable cost 7.8%, fixed cost 2.3%; 2,463 companies; no loss of volume; Castle Battery 14%</span><span class="note">Marn and Rosiello, "Managing Price, Gaining Profit", Harvard Business Review, Sept-Oct 1992; read at source in a full-text reproduction</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">1% of price = 8% of operating profit at a 12.5% margin; a 5% cut needs 18.7% more volume</span><span class="note">Marn, Roegner and Zawada, "The power of pricing", The McKinsey Quarterly 2003 Number 1; read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Black Friday 2017 promo, rung 5 of the lab</span><span class="note">Olist, Brazilian E-Commerce Public Dataset, Kaggle, CC BY-NC-SA 4.0; computed by the lab in Analyst session 6</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">The 1992 margin "about 9%"</span><span class="note">Our arithmetic from 11.1%; the article does not print it</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Kettle &amp; Co profit line, tin price and cost, the 15% proposal</span><span class="note">Constructed and labelled</span></div>
+    </div>
+    <p class="mono" style="margin-top:14px">Every fact on this page, and its verification tier, is recorded in the course's source map.</p>
+  </section>
+
+  <section class="cheat" id="cheatsheet">
+    <h3>Business session 1 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Price lands whole</b><span>A price move changes no cost, so it all falls to profit.</span></div>
+      <div class="cheat-item"><b>1% of price</b><span>= 1 / operating margin of profit, if volume holds.</span></div>
+      <div class="cheat-item"><b>Quote the 11% with its margin</b><span>About 9%, 2,463 companies, 1992, no volume loss.</span></div>
+      <div class="cheat-item"><b>Discount break-even</b><span>Volume rise needed = d / (m - d), m = contribution margin.</span></div>
+      <div class="cheat-item"><b>Thin margin, steep curve</b><span>At m 30%, 10% off needs +50%; at m 60%, +20%.</span></div>
+      <div class="cheat-item"><b>Plan is not evidence</b><span>Put the measured lift next to the needed lift, or test first.</span></div>
+    </div>
+  </section>
+
+  <div class="callout next">
+    <span class="nx-pill">Next session</span>
+    <p>You can say what a price move does to profit and what a discount has to buy back. Business session 2 asks where the price should come from in the first place: cost, competitors, or the value the customer gets, and why cost-plus leaves money on the table.</p>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Business session 1 of 4 · learn-pricing-analytics-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="../index.html">← Course home</a> &nbsp;·&nbsp; <a href="b2-value-cost-or-competitor.html">Next: Value, cost or competitor →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>

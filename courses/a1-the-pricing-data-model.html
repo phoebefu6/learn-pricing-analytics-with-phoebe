@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Analyst session 1 of 6. The pricing data model: one row per order line carrying list, invoice and pocket price and unit cost, the systems each column lives in, the unit-weighted waterfall built from rows, price realisation and the pocket price band. Kettle &amp; Co's wholesale rows are constructed.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="The pricing data model - learn pricing analytics with phoebe">
+<meta property="og:description" content="Analyst session 1 of 6. List, invoice and pocket price on one row, the waterfall built from 240 orders, and the band that invoice reports hide.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-pricing-analytics-with-phoebe/courses/a1-the-pricing-data-model.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-pricing-analytics-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The pricing data model - learn pricing analytics with phoebe">
+<meta name="twitter:description" content="Analyst session 1 of 6. From order rows to a pocket price waterfall and band.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-pricing-analytics-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Analyst session 1 · The pricing data model - learn pricing analytics with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-pricing-analytics-with-phoebe</a> / Analyst session 1 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Pricing Analytics with Phoebe · Analyst session 1 of 6</div>
+    <h1>The pricing data model: <span class="accent">list to pocket</span></h1>
+    <p class="sub">Ask the order system what a customer paid and it answers with the invoice. The invoice is not what the company kept: rebates, early-payment discounts, marketing money and absorbed freight leave later, from other systems. Tonight builds the one table every pricing number needs, an order line carrying list, invoice and pocket price with the unit cost beside them, then turns 240 rows into a waterfall and a band. Kettle &amp; Co's wholesale rows are constructed, seeded so that every learner sees the same numbers.</p>
+    <div class="chip-row">
+      <span class="chip level">🟢 Analyst</span>
+      <span class="chip audience">Analysts who build pricing and margin reporting</span>
+      <span class="chip audience">Hands-on in the browser</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:4">3-18 · The row, the waterfall, the band</span>
+      <span class="a3" style="flex:5">18-40 · Build-along: waterfall from rows</span>
+      <span class="a4" style="flex:1">40-45 · Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where we start</h2>
+    </div>
+    <p class="lede">The Analyst track is for the people who build the numbers the Business track reads. Six sessions: tonight, the pricing data model; then measuring willingness to pay; deciding with an elasticity somebody else estimated; promo lift and the dip after; tiers, bundles, fences and the price-volume-mix bridge; and the promo and discount lab, where real Black Friday rows meet every rung of the argument. Every widget computes in your browser. Kettle &amp; Co's wholesale rows and survey answers are constructed and labelled; the promotion rows in sessions 4 to 6 are real Olist marketplace data.</p>
+
+    <div class="legend">
+      <span class="pill">🎫 Clear all three quiz questions to stamp your passport</span>
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">★ Build-along = everyone builds it</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> A one-row price table you can draw on a whiteboard, with the system each column comes from; the unit-weighted query that turns order rows into a pocket price waterfall; and two numbers for your own business: price realisation (pocket over list) and the width of the pocket price band.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers the order-line grain and where each price lives</span>
+      <h2>One row per order line, five prices on it</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">The grain is the order line: one product, one customer, one order. On that row sit the list price, the on-invoice discounts that turn it into the invoice price, the off-invoice items that turn the invoice into the pocket price, and the unit cost. The order system holds only the first half. The rest lives in a rebate ledger, finance, the marketing budget and logistics, and has to be joined or allocated back to the line.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Five source systems drawn as boxes along the top: the order system holds list price, units and on-invoice discounts; the rebate ledger holds volume rebates; finance holds early-payment discounts; the marketing budget holds co-op money; logistics holds freight. Arrows run down into one wide order-line row with columns list, on-invoice, invoice, off-invoice, pocket and unit cost. The pocket price column is highlighted. Only the order system is joined by order id; the other four are allocated per bag.">
+        <defs>
+          <filter id="a1aSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="11" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a1aHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a1aAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a1aH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .a1aL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .a1aS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .a1aA { font: 700 11px Inter, sans-serif; fill: #7C1428; }
+          .a1aW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .a1aN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="a1aH" x="30" y="28">WHERE EACH PRICE ON THE ORDER LINE COMES FROM</text>
+
+        <g filter="url(#a1aSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="48" width="200" height="62" rx="10" transform="rotate(-0.8 130 79)" fill="#FCEFF1" stroke="#B4233C"/>
+          <rect x="250" y="48" width="140" height="62" rx="10" transform="rotate(0.8 320 79)" fill="#FFFFFF"/>
+          <rect x="410" y="48" width="140" height="62" rx="10" transform="rotate(-0.6 480 79)" fill="#FFFFFF"/>
+          <rect x="570" y="48" width="140" height="62" rx="10" transform="rotate(0.6 640 79)" fill="#FFFFFF"/>
+          <rect x="730" y="48" width="120" height="62" rx="10" transform="rotate(-0.8 790 79)" fill="#FFFFFF"/>
+          <path d="M130 116 L130 170" marker-end="url(#a1aAr)"/>
+          <path d="M320 116 L520 170" marker-end="url(#a1aAr)" stroke-dasharray="5 4"/>
+          <path d="M480 116 L540 170" marker-end="url(#a1aAr)" stroke-dasharray="5 4"/>
+          <path d="M640 116 L560 170" marker-end="url(#a1aAr)" stroke-dasharray="5 4"/>
+          <path d="M790 116 L580 170" marker-end="url(#a1aAr)" stroke-dasharray="5 4"/>
+          <rect x="30" y="178" width="820" height="66" rx="10" transform="rotate(0.2 440 211)" fill="#FFFFFF"/>
+          <rect x="590" y="186" width="120" height="50" rx="8" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <path d="M160 186 L160 236 M300 186 L300 236 M440 186 L440 236 M580 186 L580 236 M720 186 L720 236" stroke="#D8CACC"/>
+        </g>
+
+        <text class="a1aL" x="46" y="74">order system</text>
+        <text class="a1aS" x="46" y="94">list, units, on-invoice</text>
+        <text class="a1aL" x="266" y="74">rebate ledger</text>
+        <text class="a1aS" x="266" y="94">volume rebate</text>
+        <text class="a1aL" x="426" y="74">finance</text>
+        <text class="a1aS" x="426" y="94">early payment</text>
+        <text class="a1aL" x="586" y="74">marketing</text>
+        <text class="a1aS" x="586" y="94">co-op money</text>
+        <text class="a1aL" x="744" y="74">logistics</text>
+        <text class="a1aS" x="744" y="94">freight</text>
+
+        <text class="a1aS" x="140" y="150">join on order id</text>
+        <text class="a1aA" x="706" y="164">allocate per bag</text>
+
+        <text class="a1aL" x="44" y="208">list</text>
+        <text class="a1aS" x="44" y="226">9,600 yen</text>
+        <text class="a1aL" x="174" y="208">on-invoice</text>
+        <text class="a1aS" x="174" y="226">volume, promo</text>
+        <text class="a1aL" x="314" y="208">invoice</text>
+        <text class="a1aS" x="314" y="226">what the bill says</text>
+        <text class="a1aL" x="454" y="208">off-invoice</text>
+        <text class="a1aS" x="454" y="226">four leaks</text>
+        <text class="a1aW" x="604" y="208">pocket</text>
+        <text class="a1aW" x="604" y="226">what you keep</text>
+        <text class="a1aL" x="734" y="208">unit cost</text>
+        <text class="a1aS" x="734" y="226">for margin</text>
+
+        <text class="a1aN" x="30" y="284">Dashed arrows: no order id in the source, so the amount is spread over the bags it covers. Constructed Kettle example.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - only one of five sources shares the order id; the pocket price exists only after the other four are allocated back to the line</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>The columns, and the rule for each<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>list_price.</strong> The price on the price list on the order date, per unit. Store the list version, not today's list: a list that changed mid-year makes every old row look discounted.</p>
+        <p><strong>on_invoice_*.</strong> One column per discount type that prints on the invoice: volume tier, promotional allowance, any one-off exception. invoice_price = list_price minus their sum.</p>
+        <p><strong>off_invoice_*.</strong> One column per item that leaves after the invoice: rebate, early-payment discount, co-op marketing, freight the company absorbs. Each comes from its own system, usually per account per period, so it is allocated to lines by units. pocket_price = invoice_price minus their sum.</p>
+        <p><strong>unit_cost.</strong> Cost to make and deliver one unit, from the cost system, for contribution margin. Freight already counted as off-invoice must not be counted again here.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Allocation choices change the answer<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A quarterly rebate paid to an account has no order id. Spread it by units and every line from that account loses the same yen per bag; spread it by revenue and the cheaper lines lose less. Neither is wrong, but they give different pocket prices per product. Write the rule down next to the table, keep it the same quarter to quarter, and say which one you used when you show a band. Marn and Rosiello's 1992 article calls the full cascade the pocket price waterfall; Business session 3 reads it for decisions.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>The freight nobody owned.</strong> Kettle's wholesale team quoted "list less our usual 5%" and the invoice agreed. Logistics paid for delivery on small hotel orders out of its own budget, and nobody joined that cost back to the order. Allocated per bag, freight turned out to be the biggest single off-invoice item in the waterfall: 714 yen a bag on average. Constructed Kettle &amp; Co example; the widget below prints the number.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers the unit-weighted waterfall</span>
+      <h2>Rows to a waterfall: weight by units</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">The waterfall is a set of averages, one per step, and every average is per unit. Sum each discount times the units on its line, divide by total units, and the steps add up exactly from list to pocket. Average the per-order prices without weights and a one-bag order counts as much as a 40-bag order, and the steps stop adding up.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A waterfall chart for Kettle's 1 kilogram catering bag, per bag, unit-weighted over 3,812 bags in 240 constructed orders. List 9,600 yen. On-invoice: volume discount 629, promotional allowance 97, giving invoice 8,874. Off-invoice: volume rebate 116, early-payment discount 104, co-op marketing 275, freight absorbed 714, giving pocket 7,665 yen, 79.8 percent of list. The axis starts at 7,000 yen.">
+        <defs>
+          <filter id="a1bSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="17" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a1bHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a1bAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a1bH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .a1bL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .a1bS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .a1bA { font: 700 11px Inter, sans-serif; fill: #7C1428; }
+          .a1bV { font: 800 12px Inter, sans-serif; fill: #7C1428; }
+          .a1bB { font: 800 12px Inter, sans-serif; fill: #08433A; }
+          .a1bN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="a1bH" x="30" y="24">PER BAG, UNIT-WEIGHTED · 3,812 BAGS IN 240 ORDERS</text>
+        <text class="a1bA" x="219" y="48" text-anchor="middle">on invoice: -726</text>
+        <text class="a1bA" x="563" y="48" text-anchor="middle">off invoice: -1,209</text>
+
+        <g filter="url(#a1bSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M50 290 L830 290"/>
+          <rect x="60" y="76" width="60" height="214" rx="3" fill="#B4233C" stroke="#B4233C"/>
+          <rect x="146" y="76" width="60" height="52" rx="3" fill="url(#a1bHc)"/>
+          <rect x="232" y="128" width="60" height="8" rx="2" fill="url(#a1bHc)"/>
+          <rect x="318" y="136" width="60" height="154" rx="3" fill="#EBB8C1" stroke="#B4233C"/>
+          <rect x="404" y="136" width="60" height="10" rx="2" fill="url(#a1bHc)"/>
+          <rect x="490" y="146" width="60" height="8" rx="2" fill="url(#a1bHc)"/>
+          <rect x="576" y="154" width="60" height="23" rx="2" fill="url(#a1bHc)"/>
+          <rect x="662" y="177" width="60" height="58" rx="3" fill="url(#a1bHc)"/>
+          <rect x="748" y="235" width="60" height="55" rx="3" fill="#0E6B5B" stroke="#0E6B5B"/>
+        </g>
+
+        <text class="a1bV" x="90" y="68" text-anchor="middle">9,600</text>
+        <text class="a1bS" x="176" y="144" text-anchor="middle">-629</text>
+        <text class="a1bS" x="262" y="152" text-anchor="middle">-97</text>
+        <text class="a1bV" x="348" y="128" text-anchor="middle">8,874</text>
+        <text class="a1bS" x="434" y="162" text-anchor="middle">-116</text>
+        <text class="a1bS" x="520" y="170" text-anchor="middle">-104</text>
+        <text class="a1bS" x="606" y="193" text-anchor="middle">-275</text>
+        <text class="a1bS" x="692" y="251" text-anchor="middle">-714</text>
+        <text class="a1bB" x="778" y="227" text-anchor="middle">7,665</text>
+
+        <text class="a1bL" x="90" y="308" text-anchor="middle">list</text>
+        <text class="a1bS" x="176" y="308" text-anchor="middle">volume</text>
+        <text class="a1bS" x="262" y="308" text-anchor="middle">promo</text>
+        <text class="a1bL" x="348" y="308" text-anchor="middle">invoice</text>
+        <text class="a1bS" x="434" y="308" text-anchor="middle">rebate</text>
+        <text class="a1bS" x="520" y="308" text-anchor="middle">early pay</text>
+        <text class="a1bS" x="606" y="308" text-anchor="middle">co-op</text>
+        <text class="a1bS" x="692" y="308" text-anchor="middle">freight</text>
+        <text class="a1bB" x="778" y="308" text-anchor="middle">pocket</text>
+
+        <text class="a1bN" x="30" y="332">Axis starts at 7,000 yen so the small steps show. Pocket is 79.8% of list. Constructed Kettle rows.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - two thirds of the leak happens after the invoice, where an invoice report cannot see it</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>The query, in words and in SQL<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>In words.</strong> For each column, sum (amount per bag x bags) over all lines, divide by total bags. List minus the two on-invoice averages is the invoice price; minus the four off-invoice averages is the pocket price. Because every average shares the same denominator, the steps add up exactly.</p>
+        <div class="prompt-box good"><span class="label">★ The waterfall, unit-weighted</span>SELECT
+  SUM(units * list_price)            / SUM(units) AS list_avg,
+  SUM(units * on_inv_volume)         / SUM(units) AS volume_disc,
+  SUM(units * on_inv_promo)          / SUM(units) AS promo_allow,
+  SUM(units * off_inv_rebate)        / SUM(units) AS rebate,
+  SUM(units * off_inv_terms)         / SUM(units) AS early_pay,
+  SUM(units * off_inv_coop)          / SUM(units) AS coop,
+  SUM(units * off_inv_freight)       / SUM(units) AS freight,
+  SUM(units * pocket_price)          / SUM(units) AS pocket_avg,
+  SUM(units * pocket_price) / SUM(units * list_price) AS realisation
+FROM order_lines
+WHERE product = 'catering_bag_1kg'
+  AND order_date &gt;= '2026-04-01' AND order_date &lt; '2026-10-01';</div>
+        <p><strong>Realisation.</strong> Pocket over list, unit-weighted: 7,665 / 9,600 = 79.8% for Kettle. It is the single number that tells a commercial lead how much of the price list survives.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Why the unweighted version drifts<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Freight is a fixed cost per delivery spread over the bags in it: small orders carry more freight per bag. An unweighted average of per-order freight treats a 3-bag hotel order like a 40-bag cafe order and overstates freight per bag; the pocket price it implies is lower than the money actually kept per bag. The rule: every step of the waterfall is SUM(units x amount) / SUM(units) over the same rows and the same period. Check it by confirming list minus all steps equals the pocket average to the yen.</p>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers price realisation and the pocket price band</span>
+      <h2>The band, and the volume trap</h2>
+      <span class="tag concept">5 min live</span>
+    </div>
+    <p class="lede">An average pocket price hides the spread. Compute the pocket price per account and line them up: the range from lowest to highest is the pocket price band. Invoice prices sit in a tight band because the price list is visible; pocket prices spread out because the off-invoice items are not. And the cheapest pocket prices do not always go to the biggest customers.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 362" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A scatter of 40 constructed Kettle wholesale accounts: bags bought on the horizontal axis, pocket price per bag on the vertical, from 6,000 to 9,700 yen. Prices scatter from 6,371 to 8,986 yen with no clean slope: a 164-bag cafe has the lowest pocket price and a 49-bag cafe is nearly as low, while a 47-bag grocer has the highest. On the right, two bars compare the invoice band, 8,498 to 9,600, 1,102 yen wide, with the pocket band, 6,371 to 8,986, 2,615 yen wide.">
+        <defs>
+          <filter id="a1cSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="23" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a1cHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a1cAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a1cH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .a1cL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .a1cS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .a1cA { font: 700 11px Inter, sans-serif; fill: #7C1428; }
+          .a1cB { font: 800 11px Inter, sans-serif; fill: #08433A; }
+          .a1cN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="a1cH" x="30" y="24">POCKET PRICE PER BAG, 40 ACCOUNTS</text>
+        <text class="a1cS" x="320" y="24">each dot is one account over six orders · constructed</text>
+
+        <g filter="url(#a1cSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M90 50 L90 300 L560 300"/>
+          <g fill="#EBB8C1" stroke="#7C1428" stroke-width="1.4">
+            <circle cx="532" cy="201" r="4.5"/> <circle cx="496" cy="150" r="4.5"/> <circle cx="434" cy="254" r="4.5"/> <circle cx="425" cy="183" r="4.5"/> <circle cx="413" cy="274" r="4.5"/> <circle cx="408" cy="221" r="4.5"/> <circle cx="398" cy="148" r="4.5"/> <circle cx="385" cy="219" r="4.5"/> <circle cx="376" cy="156" r="4.5"/> <circle cx="346" cy="164" r="4.5"/> <circle cx="340" cy="157" r="4.5"/> <circle cx="321" cy="157" r="4.5"/> <circle cx="295" cy="186" r="4.5"/> <circle cx="295" cy="173" r="4.5"/> <circle cx="284" cy="243" r="4.5"/> <circle cx="280" cy="251" r="4.5"/> <circle cx="269" cy="237" r="4.5"/> <circle cx="254" cy="150" r="4.5"/> <circle cx="254" cy="153" r="4.5"/> <circle cx="246" cy="194" r="4.5"/> <circle cx="237" cy="243" r="4.5"/> <circle cx="229" cy="155" r="4.5"/> <circle cx="210" cy="165" r="4.5"/> <circle cx="208" cy="193" r="4.5"/> <circle cx="205" cy="162" r="4.5"/> <circle cx="203" cy="173" r="4.5"/> <circle cx="199" cy="117" r="4.5"/> <circle cx="182" cy="141" r="4.5"/> <circle cx="182" cy="121" r="4.5"/> <circle cx="154" cy="183" r="4.5"/> <circle cx="150" cy="187" r="4.5"/> <circle cx="146" cy="171" r="4.5"/> <circle cx="143" cy="175" r="4.5"/> <circle cx="131" cy="148" r="4.5"/> <circle cx="129" cy="128" r="4.5"/> <circle cx="128" cy="134" r="4.5"/> <circle cx="122" cy="151" r="4.5"/>
+          </g>
+          <circle cx="398" cy="276" r="6" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <circle cx="182" cy="259" r="6" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <circle cx="178" cy="106" r="6" fill="#B4233C" stroke="#B4233C"/>
+          <rect x="626" y="66" width="18" height="72" rx="4" fill="#EBB8C1" stroke="#B4233C"/>
+          <rect x="626" y="106" width="18" height="170" rx="4" transform="translate(54 0)" fill="#0E6B5B" stroke="#0E6B5B"/>
+        </g>
+
+        <text class="a1cS" x="80" y="304" text-anchor="end">6,000</text>
+        <text class="a1cS" x="80" y="239" text-anchor="end">7,000</text>
+        <text class="a1cS" x="80" y="174" text-anchor="end">8,000</text>
+        <text class="a1cS" x="80" y="109" text-anchor="end">9,000</text>
+        <text class="a1cS" x="90" y="318" text-anchor="middle">0</text>
+        <text class="a1cS" x="278" y="318" text-anchor="middle">100</text>
+        <text class="a1cS" x="466" y="318" text-anchor="middle">200</text>
+        <text class="a1cA" x="325" y="336" text-anchor="middle">bags bought over six orders</text>
+        <text class="a1cA" x="24" y="250" transform="rotate(-90 24 250)">pocket price per bag, yen</text>
+
+        <text class="a1cA" x="192" y="96">8,986 yen, 47 bags</text>
+        <text class="a1cB" x="100" y="284">6,626 yen, 49 bags</text>
+        <text class="a1cB" x="414" y="294">6,371 yen, 164 bags</text>
+
+        <text class="a1cA" x="600" y="54">invoice</text>
+        <text class="a1cS" x="652" y="78">band 1,102 yen wide</text>
+        <text class="a1cS" x="652" y="94">8,498 to 9,600</text>
+        <text class="a1cB" x="710" y="140">pocket</text>
+        <text class="a1cS" x="710" y="158">band 2,615 yen wide</text>
+        <text class="a1cS" x="710" y="174">6,371 to 8,986</text>
+        <text class="a1cS" x="710" y="252">5 largest: 7,402 avg</text>
+        <text class="a1cS" x="710" y="268">5 smallest: 8,328 avg</text>
+
+        <text class="a1cN" x="30" y="354">Same y scale for dots and bars. The pocket band is more than twice the invoice band.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - on the invoice every account pays roughly the list; in the pocket a small cafe can be as cheap as a big one</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Reading a band<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>Width.</strong> Kettle's pocket band runs from 6,371 to 8,986 yen a bag, 2,615 yen wide, against an invoice band 1,102 yen wide. Marn and Rosiello report bands from 35% to 500% of the lowest price across the industries they studied; any band you find is worth reading account by account.</p>
+        <p><strong>The volume trap.</strong> On average the five largest accounts pay a lower pocket price (7,402 yen) than the five smallest (8,328). That is the pattern volume discounts are meant to produce. The dots say something else as well: a 49-bag cafe sits at 6,626 yen, almost as low as the 164-bag cafe at the bottom. Its leak is co-op money and freight on small drops, not volume.</p>
+        <p><strong>Next question.</strong> For each outlier, which step of the waterfall made it an outlier? That is a per-account waterfall: the same query grouped by account.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Bands on real data need care<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Compare like with like: one product, one pack size, one period, one currency. Mixing pack sizes makes a band out of nothing; mixing periods turns a list price change into a fake spread. Exclude free samples and returns, or report them as their own step. When the band is wide, the first question for the commercial team is not "who is cheapest?" but "was that price agreed by someone who could see the pocket number?"</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>The cafe that looked loyal.</strong> Kettle's account review praised a small cafe as a full-price customer: its invoice sat near list. Its pocket price was one of the lowest on the sheet, because it received co-op money for a window display and twice-weekly deliveries of three bags each. The fix was a minimum drop size, not a price change. Constructed Kettle &amp; Co example.</p>
+    </div>
+  </section>
+
+  <section class="section" id="demo-1">
+    <div class="section-kicker">
+      <span class="klabel">Build-along</span>
+      <h2>Build the waterfall from 240 rows</h2>
+      <span class="tag demo">★ 22 min · everyone builds</span>
+    </div>
+    <p class="lede">The widget holds Kettle's 240 constructed wholesale orders and runs the unit-weighted waterfall in your browser. Work the five steps, write down what it prints, then switch on the anti-lever to see what an invoice-only report would have told the commercial lead.</p>
+
+    <div class="pra-widget" data-mode="waterfall"></div>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn map of the widget. 240 order rows feed a unit-weighted sum, which writes the per-bag steps from list to pocket and the per-account band. A checkbox, the anti-lever, cuts the chain at the invoice price, hiding the four off-invoice steps.">
+        <defs>
+          <filter id="a1dSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="31" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a1dHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a1dAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a1dH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .a1dL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .a1dS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .a1dW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .a1dR { font: 700 11px Inter, sans-serif; fill: #991B1B; }
+          .a1dN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="a1dH" x="30" y="28">WHAT THE WIDGET DOES</text>
+
+        <g filter="url(#a1dSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="60" width="160" height="60" rx="10" transform="rotate(-1 110 90)" fill="url(#a1dHc)"/>
+          <path d="M196 90 L236 90" marker-end="url(#a1dAr)"/>
+          <rect x="244" y="60" width="180" height="60" rx="10" transform="rotate(0.8 334 90)" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <path d="M430 90 L470 90" marker-end="url(#a1dAr)"/>
+          <rect x="478" y="60" width="170" height="60" rx="10" transform="rotate(-0.6 563 90)" fill="#FCEFF1" stroke="#B4233C"/>
+          <path d="M654 90 L694 90" marker-end="url(#a1dAr)"/>
+          <rect x="702" y="60" width="150" height="60" rx="10" transform="rotate(0.8 777 90)" fill="#FFFFFF"/>
+          <rect x="478" y="150" width="374" height="46" rx="10" transform="rotate(-0.3 665 173)" fill="#FEF2F2" stroke="#FCA5A5"/>
+          <!-- doodle: a checkbox -->
+          <rect x="494" y="164" width="16" height="16" rx="3" stroke="#991B1B"/>
+          <path d="M497 172 L501 177 L508 167" stroke="#991B1B"/>
+        </g>
+
+        <rect x="42" y="72" width="136" height="36" rx="6" fill="#FFFFFF"/>
+
+        <text class="a1dL" x="50" y="88">240 order rows</text>
+        <text class="a1dS" x="50" y="103">40 accounts</text>
+        <text class="a1dW" x="258" y="86">SUM(units x amount)</text>
+        <text class="a1dW" x="258" y="104">/ SUM(units)</text>
+        <text class="a1dL" x="492" y="86">per-bag steps</text>
+        <text class="a1dS" x="492" y="104">list to pocket</text>
+        <text class="a1dL" x="716" y="86">band per account</text>
+        <text class="a1dS" x="716" y="104">lowest to highest</text>
+        <text class="a1dR" x="520" y="177">anti-lever: stop at the invoice</text>
+
+        <text class="a1dN" x="30" y="226">Constructed rows, seeded: every learner sees the same 7,665 yen.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the green box is the whole technique: one weighted sum per column, the same denominator everywhere</figcaption>
+    </figure>
+
+    <div class="steps">
+      <div class="step">
+        <p><strong>Step 1 · Read the verdict.</strong> Copy the green line and the four tiles.</p>
+        <div class="prompt-box good"><span class="label">★ Step 1 · what the widget prints</span>Pocket price 7,665 yen a bag: 79.8% of list. Off-invoice leakage 1,209 yen, on-invoice 726 yen.
+tiles: 7,665 yen average pocket · 6,371 yen to 8,986 pocket band
+       7,402 yen 5 largest accounts · 8,328 yen 5 smallest accounts</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 2 · Check the steps add up.</strong> List minus every step should equal the pocket price to the yen. Do it by hand from the step rows.</p>
+        <div class="prompt-box good"><span class="label">★ Step 2 · the check</span>9,600 - 629 - 97 = 8,874 (invoice)
+8,874 - 116 - 104 - 275 - 714 = 7,665 (pocket)
+realisation = 7,665 / 9,600 = 79.8%</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 3 · Find the biggest leak.</strong> Rank the six discount steps. Which one would you ask about first, and which system owns it?</p>
+        <div class="prompt-box good"><span class="label">★ Step 3 · ranked</span>freight 714 · volume discount 629 · co-op 275 · rebate 116 · early pay 104 · promo 97
+biggest off-invoice item: freight, owned by logistics, invisible on the invoice</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 4 · Switch on the anti-lever.</strong> Tick "Judge accounts by invoice price only". Read what disappears.</p>
+        <div class="prompt-box good"><span class="label">★ Step 4 · the invoice view</span>Invoice view: price realisation 92.4%. The 1,209 yen a bag that leaves after the invoice is invisible here.
+invoice band 8,498 yen to 9,600 yen (1,102 yen wide) vs pocket band 2,615 yen wide</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 5 · Write the per-account query for your own data.</strong> Group the Part 2 query by account, order by pocket price, and keep the lowest and highest five. That list is the agenda for Business session 3.</p>
+        <div class="prompt-box good"><span class="label">★ Step 5 · band per account</span>SELECT account_id,
+  SUM(units)                                  AS bags,
+  SUM(units * invoice_price) / SUM(units)     AS invoice_avg,
+  SUM(units * pocket_price)  / SUM(units)     AS pocket_avg
+FROM order_lines
+WHERE product = 'catering_bag_1kg'
+GROUP BY account_id
+ORDER BY pocket_avg;</div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <p><strong>Keep the table.</strong> Every later session reads prices from this shape. Analyst session 5's price-volume-mix bridge needs the same unit-weighted discipline, and Business session 3 turns the per-account band into a conversation with the commercial team.</p>
+    </div>
+  </section>
+
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before Analyst session 2</h2>
+      <span class="tag exercise">30 min</span>
+    </div>
+    <ol>
+      <li><strong>List your off-invoice items</strong> and the system each lives in. Mark which ones carry an order id.</li>
+      <li><strong>Write the allocation rule</strong> for each item without an order id: by units, by revenue, or something else, and why.</li>
+      <li><strong>Compute realisation</strong> for one product over one quarter: pocket over list, unit-weighted.</li>
+      <li><strong>Pull the five lowest pocket prices</strong> by account and, for each, name the waterfall step that put it there.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+    <p>Clear all three and Analyst session 1 gets stamped in your passport.</p>
+
+    <div class="quiz-q" data-answer="2">
+      <p class="qtext">1 · What is the pocket price?</p>
+      <button class="qopt" type="button">A · The list price minus on-invoice discounts</button>
+      <button class="qopt" type="button">B · The price on the customer's receipt</button>
+      <button class="qopt" type="button">C · The invoice price minus every off-invoice item: rebates, early-payment discounts, co-op money, absorbed freight</button>
+      <button class="qopt" type="button">D · The lowest price in the band</button>
+      <p class="qwhy">A is the invoice price. The pocket price is what the company keeps after everything that leaves later, which is why it needs data from systems beyond the order system.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">2 · Why weight every waterfall step by units?</p>
+      <button class="qopt" type="button">A · So the steps share one denominator and add up exactly from list to pocket, and a 3-bag order does not count as much as a 40-bag one</button>
+      <button class="qopt" type="button">B · Because SQL cannot average without weights</button>
+      <button class="qopt" type="button">C · To make the pocket price higher</button>
+      <button class="qopt" type="button">D · It makes no difference</button>
+      <p class="qwhy">Unweighted, per-order averages over-count small orders, where freight per bag is largest, and the steps stop reconciling.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <p class="qtext">3 · Kettle's invoice band is 1,102 yen wide and its pocket band 2,615. What does that tell you?</p>
+      <button class="qopt" type="button">A · The price list is wrong</button>
+      <button class="qopt" type="button">B · The biggest accounts always pay least</button>
+      <button class="qopt" type="button">C · Nothing: bands are always wider in the pocket</button>
+      <button class="qopt" type="button">D · Most of the variation in what accounts really pay is created after the invoice, where an invoice report cannot see it</button>
+      <p class="qwhy">The invoice band is the visible part. The off-invoice items more than double the spread, and they are not tied cleanly to volume: a 49-bag cafe sits near the bottom.</p>
+    </div>
+
+    <p class="quiz-score"></p>
+  </section>
+
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What this session teaches, and where it came from</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">List, invoice and pocket price; the pocket price waterfall; on- and off-invoice items; the pocket price band, 35% to 500% across industries</span><span class="note">Marn and Rosiello, "Managing Price, Gaining Profit", Harvard Business Review, Sept-Oct 1992; read at source in a full-text reproduction</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">The unit-weighted waterfall query and realisation</span><span class="note">Standard SQL; computed by the widget on this page</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Kettle &amp; Co's 240 wholesale orders, 7,665 yen pocket, 79.8% realisation, bands 6,371 to 8,986 and 8,498 to 9,600</span><span class="note">Constructed, seeded and labelled; printed by the widget</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Allocation rules for items without an order id</span><span class="note">Practice, not a standard; write your rule down</span></div>
+    </div>
+    <p class="mono" style="margin-top:14px">Every fact on this page, and its verification tier, is recorded in the course's source map.</p>
+  </section>
+
+  <section class="cheat" id="cheatsheet">
+    <h3>Analyst session 1 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Grain</b><span>One row per order line: list, on-invoice, invoice, off-invoice, pocket, unit cost.</span></div>
+      <div class="cheat-item"><b>Five sources</b><span>Orders, rebates, finance, marketing, logistics. Only orders share the id.</span></div>
+      <div class="cheat-item"><b>Weight by units</b><span>SUM(units x amount) / SUM(units) for every step, same rows, same period.</span></div>
+      <div class="cheat-item"><b>Realisation</b><span>Pocket over list. Kettle: 79.8%.</span></div>
+      <div class="cheat-item"><b>The band</b><span>Pocket price per account, lowest to highest. Wider than the invoice band.</span></div>
+      <div class="cheat-item"><b>Ask why</b><span>For each outlier, name the waterfall step that put it there.</span></div>
+    </div>
+  </section>
+
+  <div class="callout next">
+    <span class="nx-pill">Next session</span>
+    <p>You can say what a customer really paid. Analyst session 2 asks what they would have paid: Van Westendorp's four questions, Gabor-Granger's yes-or-no ladder, and why two published definitions of the same chart give two different acceptable ranges.</p>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Analyst session 1 of 6 · learn-pricing-analytics-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="b4-reading-a-pricing-recommendation.html">← Prev: Reading a pricing recommendation</a> &nbsp;·&nbsp; <a href="a2-measuring-willingness-to-pay.html">Next: Measuring willingness to pay →</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/pra-sample.js?v=1"></script>
+<script src="../assets/pra-live.js?v=1"></script>
+<script src="../assets/pra-bench.js?v=1"></script>
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>

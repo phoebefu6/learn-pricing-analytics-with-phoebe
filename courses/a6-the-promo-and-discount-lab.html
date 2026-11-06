@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- social:start -->
+<meta name="description" content="Analyst session 6 of 6. The promo and discount lab: real Olist rows around Black Friday 2017, five rungs from the naive lift to whether the discount paid, an anti-lever that counts the seasonal crowd as discount lift, and a break button that shuffles which products were cut.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Learn with Phoebe">
+<meta property="og:title" content="The promo and discount lab - learn pricing analytics with phoebe">
+<meta property="og:description" content="Analyst session 6 of 6. Black Friday 2017 on real rows: from a 74.7% naive lift to 164 honest extra units, and whether the discount paid.">
+<meta property="og:url" content="https://phoebefu6.github.io/learn-pricing-analytics-with-phoebe/courses/a6-the-promo-and-discount-lab.html">
+<meta property="og:image" content="https://phoebefu6.github.io/learn-pricing-analytics-with-phoebe/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The promo and discount lab - learn pricing analytics with phoebe">
+<meta name="twitter:description" content="Analyst session 6 of 6. Five rungs, an anti-lever and a break button on real Black Friday rows.">
+<meta name="twitter:image" content="https://phoebefu6.github.io/learn-pricing-analytics-with-phoebe/assets/og-cover.png">
+<!-- social:end -->
+<title>Analyst session 6 · The promo and discount lab - learn pricing analytics with phoebe</title>
+<link rel="stylesheet" href="../assets/style.css?v=1">
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="wrap">
+    <span class="crumb"><a href="../index.html">learn-pricing-analytics-with-phoebe</a> / Analyst session 6 of 6</span>
+    <button class="btn" id="toggle-all" type="button">Expand all</button>
+    <button class="btn primary" id="zoom-toggle" type="button">Projector zoom: off</button>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Learn Pricing Analytics with Phoebe · Analyst session 6 of 6</div>
+    <h1>The promo and <span class="accent">discount lab</span></h1>
+    <p class="sub">In November 2017 everything on Olist sold more: Black Friday fell on the 24th. Some sellers had cut their prices and some had not. A promo report that credits the whole November jump to the discounts says the cuts lifted sales by three quarters. Tonight climbs five rungs on the real rows, from that naive number to a comparison group, the month after, and the question that matters: did the discount pay? Then it counts the crowd as discount lift on purpose, and tries to break the result by shuffling which products were cut.</p>
+    <div class="chip-row">
+      <span class="chip level">🔴 Bench</span>
+      <span class="chip audience">Analysts who measure promotions, and the leads who sign them off</span>
+      <span class="chip audience">Hands-on in the browser</span>
+      <span class="chip time">45 min</span>
+    </div>
+    <div class="agenda">
+      <span class="a1" style="flex:1">0-3 · Welcome</span>
+      <span class="a2" style="flex:3">3-12 · What the lab scores</span>
+      <span class="a3" style="flex:5">12-34 · The lab: five rungs, two traps</span>
+      <span class="a4" style="flex:2">34-45 · Crowd, shuffle, Q&amp;A</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section" id="intro">
+    <div class="section-kicker">
+      <span class="klabel">Part 0</span>
+      <h2>Where we start</h2>
+    </div>
+    <p class="lede">Analyst sessions 1 to 5 built the parts: the price table, willingness to pay, a decision across an elasticity range, promo lift with its baseline and the month after, and the price-volume-mix bridge. Tonight they meet on one lab. What is real: monthly units and mean item prices for every Olist product in the panel built by the Economics course, July 2017 to January 2018, delivered orders, in Brazilian reais. What is assumed: the cost ratio, because Olist publishes no costs; you set it with a slider. What it is not: a randomised test. Sellers chose which products to cut.</p>
+
+    <div class="legend">
+      <span class="pill">🎫 Clear all three quiz questions to stamp your passport</span>
+      <span class="pill">Live = presented in the 45 minutes</span>
+      <span class="pill">Self-study = the full depth, after class</span>
+      <span class="pill">★ Build-along = everyone builds it</span>
+    </div>
+
+    <div class="callout win">
+      <p><strong>★ What you walk out with tonight.</strong> A five-rung ladder you can run on any past promotion, the size of the error when the season is counted as discount lift, a placebo check that says whether your comparison is more than chance, and one honest sentence about whether the discount paid, with its assumptions named.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-1">
+    <div class="section-kicker">
+      <span class="klabel">Part 1 · covers what the lab scores</span>
+      <h2>Five rungs, one question: what did the discount do?</h2>
+      <span class="tag concept">7 min live</span>
+    </div>
+    <p class="lede">Every rung asks the same question with one more thing taken out of the answer. Rung 1 takes nothing out. Rung 2 looks only at products that cut price. Rung 3 subtracts what products that held price did in the same month. Rung 4 adds December, where pull-forward would show as a dip. Rung 5 turns units into money at a cost ratio you choose.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The lab drawn as a flow. 195 real Olist products with a row between July 2017 and January 2018 narrow to 99 sold in all of October, November and December. Those 99 split by their November price against October: 29 cut more than 3 percent, 54 held within 3 percent, 16 raised. On the right, the five rungs: whole panel, cut group alone, cut minus held, plus December, and did it pay at an assumed cost.">
+        <defs>
+          <filter id="a6aSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="41" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a6aHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a6aAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a6aH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .a6aL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .a6aS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .a6aA { font: 700 11px Inter, sans-serif; fill: #7C1428; }
+          .a6aW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .a6aN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="a6aH" x="30" y="28">FROM REAL ROWS TO FIVE RUNGS</text>
+        <text class="a6aS" x="260" y="28">units and mean prices by product and month · Olist, CC BY-NC-SA 4.0</text>
+
+        <g filter="url(#a6aSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="92" width="170" height="76" rx="10" transform="rotate(-1 115 130)" fill="url(#a6aHc)"/>
+          <path d="M206 130 L238 130" marker-end="url(#a6aAr)"/>
+          <rect x="246" y="92" width="160" height="76" rx="10" transform="rotate(0.8 326 130)" fill="#FFFFFF"/>
+          <path d="M412 118 L446 76" marker-end="url(#a6aAr)"/>
+          <path d="M412 130 L446 130" marker-end="url(#a6aAr)"/>
+          <path d="M412 142 L446 184" marker-end="url(#a6aAr)"/>
+          <rect x="454" y="48" width="160" height="52" rx="10" transform="rotate(-0.8 534 74)" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <rect x="454" y="106" width="160" height="52" rx="10" transform="rotate(0.6 534 132)" fill="#FCEFF1" stroke="#B4233C"/>
+          <rect x="454" y="164" width="160" height="52" rx="10" transform="rotate(-0.5 534 190)" fill="#FFFFFF" stroke="#D8CACC"/>
+          <rect x="650" y="48" width="200" height="190" rx="12" transform="rotate(0.5 750 143)" fill="#FFFFFF"/>
+          <!-- doodle: a sale sticker on the cut box -->
+          <circle cx="592" cy="74" r="12" stroke="#FFFFFF"/>
+          <path d="M586 80 L598 68" stroke="#FFFFFF"/>
+        </g>
+
+        <rect x="42" y="104" width="146" height="52" rx="6" fill="#FFFFFF"/>
+
+        <text class="a6aL" x="50" y="124">195 products</text>
+        <text class="a6aS" x="50" y="142">Jul 2017 to Jan 2018</text>
+        <text class="a6aL" x="262" y="124">99 products</text>
+        <text class="a6aS" x="262" y="142">sold Oct, Nov and Dec</text>
+
+        <text class="a6aW" x="468" y="72">29 cut</text>
+        <text class="a6aW" x="468" y="88">price down &gt; 3%</text>
+        <text class="a6aL" x="468" y="130">54 held</text>
+        <text class="a6aS" x="468" y="146">within 3% of October</text>
+        <text class="a6aL" x="468" y="188">16 raised</text>
+        <text class="a6aS" x="468" y="204">left out of the ladder</text>
+
+        <text class="a6aH" x="666" y="74">THE RUNGS</text>
+        <text class="a6aA" x="666" y="100">1 whole panel</text>
+        <text class="a6aA" x="666" y="126">2 cut group alone</text>
+        <text class="a6aA" x="666" y="152">3 cut minus held</text>
+        <text class="a6aA" x="666" y="178">4 plus December</text>
+        <text class="a6aA" x="666" y="204">5 did it pay?</text>
+
+        <text class="a6aN" x="30" y="274">Rung 1 uses all 195 products; rungs 2 to 5 use the 29 cut and 54 held. The 3% threshold is a control.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the split into cut and held is the whole design; everything after it is subtraction</figcaption>
+    </figure>
+
+    <details class="card" open>
+      <summary><span class="mode live">Live</span>The five rungs, defined once<span class="mini">4 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>Rung 1, whole panel.</strong> November units over October units for every product, minus one. What a promo report that ignores the calendar would print.</p>
+        <p><strong>Rung 2, cut group alone.</strong> The same for the 29 products whose November mean price was more than 3% below October's. Closer to the discount, still riding the season.</p>
+        <p><strong>Rung 3, minus the held group.</strong> The 54 products that held price within 3% show what the season did without a cut. Their growth, applied to the cut group's October, is the cut group's expected November; anything above it is credited to the cut. This is a difference-in-differences comparison: <a href="https://phoebefu6.github.io/learn-experimentation-with-phoebe/courses/b9-difference-in-differences.html">Experimentation, difference-in-differences ↗</a> teaches the method and its parallel-trends assumption.</p>
+        <p><strong>Rung 4, the month after.</strong> The same comparison for December. If the discount only pulled purchases forward, December shows a dip below expected. Add the two months.</p>
+        <p><strong>Rung 5, did it pay?</strong> Value the extra units at October prices, compare with the break-even rise d / (m - d) from Business session 1, and print profit against no discount at the assumed cost ratio.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Why these rows, and what they cannot say<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Public promotion data with prices, units and a comparison group is rare. The Olist panel (Brazilian E-Commerce Public Dataset by Olist, Kaggle, CC BY-NC-SA 4.0) was built by the Economics course to estimate elasticity; this lab reuses the same file and never refits elasticity. Three limits are printed on the widget. The grain is monthly, so Black Friday itself is one day inside a month row. Sellers chose which products to cut, so the comparison is a design, not a randomised test (<a href="https://phoebefu6.github.io/learn-experimentation-with-phoebe/courses/a5-when-you-cant-randomize.html">Experimentation, when you can't randomize ↗</a>). And there are no costs, so every margin is at an assumed cost ratio.</p>
+      </div>
+    </details>
+  </section>
+
+  <section class="section" id="bench">
+    <div class="section-kicker">
+      <span class="klabel">Build-along · the lab</span>
+      <h2>Run the promo and discount lab</h2>
+      <span class="tag demo">★ 22 min · everyone builds</span>
+    </div>
+    <p class="lede">Work the rungs in order and say out loud what changed. Then move the cost ratio, try a narrower scope, switch on the anti-lever, and press the break button. Every number below is recomputed from the rows in your browser.</p>
+
+    <div class="pra-widget" data-mode="bench"></div>
+
+    <div class="callout tip">
+      <p><strong>Read it in this order.</strong> The n line first: how many products sit behind the number. Then the verdict. Then the tiles. A lift with 8 products behind it and a lift with 80 are not the same claim, which is why the lab refuses to compute under its floor.</p>
+    </div>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hand-drawn map of the lab. Three controls, threshold, scope and assumed cost ratio, feed the engine, which splits products into cut and held and computes the five rungs. Its output is the verdict and tiles. Two red panels sit underneath: the anti-lever, which removes the comparison group, and the break button, which shuffles which products count as cut 200 times.">
+        <defs>
+          <filter id="a6bSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="43" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a6bHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a6bAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a6bH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .a6bL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .a6bS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .a6bW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .a6bR { font: 700 11px Inter, sans-serif; fill: #991B1B; }
+          .a6bN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="a6bH" x="30" y="28">WHAT THE LAB DOES WHEN YOU MOVE A CONTROL</text>
+
+        <g filter="url(#a6bSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="30" y="50" width="190" height="80" rx="10" transform="rotate(-1 125 90)" fill="#FFFFFF"/>
+          <path d="M226 90 L266 90" marker-end="url(#a6bAr)"/>
+          <rect x="274" y="50" width="240" height="80" rx="10" transform="rotate(0.8 394 90)" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <path d="M520 90 L560 90" marker-end="url(#a6bAr)"/>
+          <rect x="568" y="50" width="282" height="80" rx="10" transform="rotate(-0.6 709 90)" fill="#FCEFF1" stroke="#B4233C"/>
+          <rect x="274" y="156" width="270" height="52" rx="10" transform="rotate(-0.4 409 182)" fill="#FEF2F2" stroke="#FCA5A5"/>
+          <rect x="568" y="156" width="282" height="52" rx="10" transform="rotate(0.4 709 182)" fill="#FEF2F2" stroke="#FCA5A5"/>
+          <path d="M394 136 L394 150" marker-end="url(#a6bAr)"/>
+          <!-- doodle: a slider knob -->
+          <path d="M44 150 L190 150" stroke="#B4233C"/>
+          <circle cx="132" cy="150" r="7" stroke="#B4233C"/>
+        </g>
+
+        <text class="a6bL" x="46" y="76">threshold for "cut"</text>
+        <text class="a6bL" x="46" y="96">scope (floor: 8 and 8)</text>
+        <text class="a6bL" x="46" y="116">assumed cost ratio</text>
+        <text class="a6bW" x="290" y="80">split cut and held, then</text>
+        <text class="a6bW" x="290" y="100">five rungs from the rows</text>
+        <text class="a6bL" x="584" y="80">verdict, tiles and n line</text>
+        <text class="a6bS" x="584" y="100">every number recomputed</text>
+        <text class="a6bR" x="290" y="187">anti-lever: drop the held group</text>
+        <text class="a6bR" x="584" y="187">break: shuffle who was cut, 200 times</text>
+
+        <text class="a6bN" x="30" y="238">The red panels are there to make the number worse on purpose. A lab that cannot get worse measures nothing.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the green box is the method; the two red panels are the tests of it</figcaption>
+    </figure>
+
+    <div class="steps">
+      <div class="step">
+        <p><strong>Step 1 · Rung 1, the whole panel.</strong> Select it and read the verdict. This is the number a promo report that credits everything to the discount would print.</p>
+        <div class="prompt-box good"><span class="label">★ Step 1 · what the lab prints</span>Rung 1: November units +74.7% on October across the panel (877 to 1,532). Every product rode the season.</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 2 · Rungs 2 and 3.</strong> The cut group alone rose more than the panel. Then subtract the held group.</p>
+        <div class="prompt-box good"><span class="label">★ Step 2 · cut alone, then minus held</span>Rung 2: the cut group rose +111.0% (310 to 654 units): 344 extra units, but held products rose too.
+Rung 3: cut +111.0% minus held +65.5% leaves +45.5 points: 141 extra units in November.</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 3 · Rung 4, the month after.</strong> A dip in December would be pull-forward. Read the sign.</p>
+        <div class="prompt-box good"><span class="label">★ Step 3 · December</span>Rung 4: December +23 units against the held group, so 164 extra units over November and December.
+no dip at monthly grain for the whole panel; now set Scope to "Home and garden (grouped)":
+Rung 4: December -16.6 units against the held group, so 30.5 extra units over November and December.</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 4 · Rung 5, did it pay?</strong> Set Scope back to All products. Read rung 5 at the default 60% cost ratio, then slide to 50%.</p>
+        <div class="prompt-box good"><span class="label">★ Step 4 · money, at an assumed cost</span>Rung 5: discount depth 7.9% at an assumed 60.0% cost ratio needs 24.6% more volume; measured 20.4%. It did not pay: -R$ 1,058.10.
+at 50%: ... needs 18.7% more volume; measured 20.4%. It paid: +R$ 550.78.</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 5 · The anti-lever, then the floor.</strong> Select "Count the Black Friday crowd as discount lift". Then set Scope to garden_tools only.</p>
+        <div class="prompt-box good"><span class="label">★ Step 5 · two ways to fool yourself</span>Anti-lever: discount depth 7.9% at an assumed 60.0% cost ratio needs 24.6% more volume; measured 70.5%. It paid: +R$ 8,210.60.
+Counting the crowd credits 422 extra units where the comparison group allows 164: overstated by 258 units, 2.57 times the honest figure.
+Refused: 7 cut and 4 held products is under the floor of 8 each. Widen the scope.</div>
+      </div>
+      <div class="step">
+        <p><strong>Step 6 · Break it.</strong> Scope All products, rung 3, then press "Break it: shuffle which products were cut". Read where the real gap sits among 200 shuffles.</p>
+        <div class="prompt-box good"><span class="label">★ Step 6 · the break button</span>Real gap +45.5 points sits above 186 of 200 shuffles; 14 shuffles reach it. Middle 90% of shuffles: -53.9 to +50.2 points.
+At this n the gap is inside the shuffle spread: the cut-group advantage is not separable from which products happened to be cut.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="part-2">
+    <div class="section-kicker">
+      <span class="klabel">Part 2 · covers the anti-lever</span>
+      <h2>Counting the crowd: the discount that always pays</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">Drop the comparison group and October becomes the baseline for both months. The cut group's 654 November units against its 310 in October look like 344 units of discount lift, and December adds 78 more. The held group says most of that is the season: it rose 65.5% without any cut. Counting the crowd overstates the lift 2.57 times, and the same rows that did not pay at a 60% cost ratio now "paid" R$ 8,210.60.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three stacked bars for the 29 cut products, real Olist units. October: 310. November: 654, split into the October level 310, a seasonal part of 203 that the held group predicts, and 141 credited to the discount. December: 388, split into 310, a seasonal part of 55, and 23 credited to the discount. On the right: counting the crowd credits 422 extra units, the comparison allows 164, an overstatement of 258 units or 2.57 times.">
+        <defs>
+          <filter id="a6cSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="47" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a6cHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a6cAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a6cH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .a6cL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .a6cS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .a6cA { font: 700 11px Inter, sans-serif; fill: #7C1428; }
+          .a6cB { font: 800 11px Inter, sans-serif; fill: #08433A; }
+          .a6cV { font: 800 16px Inter, sans-serif; fill: #7C1428; }
+          .a6cW { font: 800 12px Inter, sans-serif; fill: #FFFFFF; }
+          .a6cR { font: 700 11px Inter, sans-serif; fill: #991B1B; }
+          .a6cN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="a6cH" x="30" y="28">THE 29 CUT PRODUCTS, UNITS PER MONTH</text>
+        <text class="a6cS" x="320" y="28">real Olist rows · the season part is what the 54 held products predict</text>
+
+        <g filter="url(#a6cSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M60 280 L480 280"/>
+          <rect x="90" y="183" width="80" height="97" rx="3" fill="#FFFFFF"/>
+          <rect x="230" y="183" width="80" height="97" rx="3" fill="#FFFFFF"/>
+          <rect x="230" y="119" width="80" height="64" rx="3" fill="url(#a6cHc)"/>
+          <rect x="230" y="75" width="80" height="44" rx="3" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <rect x="370" y="183" width="80" height="97" rx="3" fill="#FFFFFF"/>
+          <rect x="370" y="166" width="80" height="17" rx="3" fill="url(#a6cHc)"/>
+          <rect x="370" y="159" width="80" height="7" rx="2" fill="#0E6B5B" stroke="#0E6B5B"/>
+          <rect x="560" y="60" width="290" height="210" rx="12" transform="rotate(0.4 705 165)" fill="#FFFFFF"/>
+          <rect x="574" y="196" width="262" height="58" rx="8" fill="#FEF2F2" stroke="#FCA5A5"/>
+        </g>
+
+        <rect x="242" y="140" width="56" height="22" rx="4" fill="#FFFFFF"/>
+
+        <text class="a6cL" x="130" y="236" text-anchor="middle">310</text>
+        <text class="a6cL" x="270" y="236" text-anchor="middle">310</text>
+        <text class="a6cL" x="410" y="236" text-anchor="middle">310</text>
+        <text class="a6cA" x="270" y="156" text-anchor="middle">+203</text>
+        <text class="a6cW" x="270" y="102" text-anchor="middle">+141</text>
+        <text class="a6cB" x="458" y="152">discount +23</text>
+        <text class="a6cA" x="458" y="178">season +55</text>
+        <text class="a6cV" x="270" y="66" text-anchor="middle">654</text>
+        <text class="a6cV" x="410" y="150" text-anchor="middle">388</text>
+        <text class="a6cL" x="130" y="298" text-anchor="middle">Oct 2017</text>
+        <text class="a6cL" x="270" y="298" text-anchor="middle">Nov 2017</text>
+        <text class="a6cL" x="410" y="298" text-anchor="middle">Dec 2017</text>
+
+        <text class="a6cH" x="578" y="86">TWO WAYS TO COUNT THE LIFT</text>
+        <text class="a6cB" x="578" y="112">comparison: 141 + 23 = 164 units</text>
+        <text class="a6cS" x="578" y="130">only the green parts</text>
+        <text class="a6cR" x="578" y="156">crowd counted: 344 + 78 = 422 units</text>
+        <text class="a6cS" x="578" y="174">green and hatched, October as baseline</text>
+        <text class="a6cR" x="588" y="218">overstated by 258 units, 2.57 times</text>
+        <text class="a6cR" x="588" y="240">at 60%: -R$ 1,058.10 vs +R$ 8,210.60</text>
+
+        <text class="a6cN" x="30" y="322">Hatched: what the season did, read from products that held price. Green: what is left for the discount.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the hatched block is the Black Friday crowd; count it as discount lift and every promotion pays</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>Why the anti-lever is not a straw man<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>It is the default report.</strong> "Units during the promotion against the month before" is how many promo dashboards are built, because it needs no second group. In a flat month it is roughly right. In November it credits the whole season to the discount.</p>
+        <p><strong>It flips the decision.</strong> At the default 60% cost ratio, the comparison says the discount lost R$ 1,058.10 over two months. The crowd-counted version says it made R$ 8,210.60. Same rows, same prices, opposite recommendation for next year.</p>
+        <p><strong>Honest nuance.</strong> The held group is not a perfect stand-in either: products that held price may differ from products that were cut (bigger sellers, different categories). That is the parallel-trends assumption, and Part 3 tests one version of it.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>Pull-forward and carryover<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>A discount that only moves purchases earlier leaves a dip after it: December below what the held group predicts. For all products, December sits 23 units above the comparison, so at monthly grain there is no dip, if anything a small carryover. For the Home and garden scope it sits 16.6 below, a dip. Monthly data blurs this: a dip in the first week of December and a recovery by Christmas net out inside one row. Weekly or daily data would answer what this panel cannot.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>The promotion that paid every year.</strong> Kettle's November tin promotion had a dashboard showing a 60% lift every year, measured against October. When the data team added the tins that were not on promotion as a comparison, most of the lift turned out to be gifting season: unpromoted tins rose almost as much. The promotion continued, but at half the depth. Constructed Kettle &amp; Co example; the real Olist rows above show the same shape.</p>
+    </div>
+  </section>
+
+  <section class="section" id="part-3">
+    <div class="section-kicker">
+      <span class="klabel">Part 3 · covers the placebo break button</span>
+      <h2>Break it: is the gap more than which products were cut?</h2>
+      <span class="tag concept">6 min live</span>
+    </div>
+    <p class="lede">The comparison says cut products grew 45.5 points more than held ones. Would a random split of the same 83 products into 29 and 54 give a gap that big? The break button answers by shuffling the labels 200 times with a fixed seed. If the real gap sits far outside the shuffles, the split is doing more than chance. Here it does not: 14 of 200 shuffles reach it.</p>
+
+    <figure class="zoomable">
+      <svg viewBox="0 0 880 342" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A histogram of 200 placebo gaps, each the cut-minus-held lift after shuffling which of the 83 products count as cut. The gaps run from about minus 77 to plus 90 points, centred near zero. The real gap of plus 45.5 points is marked with a green line inside the right tail; the middle 90 percent of shuffles runs from minus 53.9 to plus 50.2 points, so the real gap sits inside it. 14 of 200 shuffles reach the real gap.">
+        <defs>
+          <filter id="a6dSk" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="53" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+          <pattern id="a6dHc" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B4233C" stroke-width="1" opacity=".5"/></pattern>
+          <marker id="a6dAr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#26191B" stroke-width="1.6" stroke-linecap="round"/></marker>
+        </defs>
+        <style>
+          .a6dH { font: 800 12px Inter, sans-serif; fill: #26191B; }
+          .a6dL { font: 600 12px Inter, sans-serif; fill: #26191B; }
+          .a6dS { font: 400 11px Inter, sans-serif; fill: #5F5154; }
+          .a6dA { font: 700 11px Inter, sans-serif; fill: #7C1428; }
+          .a6dB { font: 800 11px Inter, sans-serif; fill: #08433A; }
+          .a6dN { font: 400 12px Inter, sans-serif; fill: #5F5154; }
+        </style>
+
+        <text class="a6dH" x="30" y="28">200 SHUFFLES OF WHICH PRODUCTS COUNT AS CUT</text>
+        <text class="a6dS" x="380" y="28">same 83 products, same group sizes, seed 20171124 · count per 10-point bin</text>
+
+        <g filter="url(#a6dSk)" fill="none" stroke="#26191B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M80 250 L820 250"/>
+          <g fill="#FCEFF1" stroke="#B4233C" stroke-width="1.4">
+            <rect x="91" y="240" width="38" height="10"/>
+            <rect x="131" y="235" width="38" height="15"/>
+            <rect x="171" y="210" width="38" height="40"/>
+            <rect x="211" y="220" width="38" height="30"/>
+            <rect x="251" y="185" width="38" height="65"/>
+            <rect x="291" y="135" width="38" height="115"/>
+            <rect x="331" y="145" width="38" height="105"/>
+            <rect x="371" y="110" width="38" height="140"/>
+            <rect x="411" y="160" width="38" height="90"/>
+            <rect x="451" y="100" width="38" height="150"/>
+            <rect x="491" y="195" width="38" height="55"/>
+            <rect x="531" y="175" width="38" height="75"/>
+            <rect x="571" y="195" width="38" height="55"/>
+            <rect x="611" y="230" width="38" height="20"/>
+            <rect x="651" y="230" width="38" height="20"/>
+            <rect x="691" y="245" width="38" height="5"/>
+            <rect x="731" y="245" width="38" height="5"/>
+            <rect x="771" y="245" width="38" height="5"/>
+          </g>
+          <path d="M592 84 L592 250" stroke="#0E6B5B" stroke-width="3"/>
+          <path d="M194 272 L194 280 L611 280 L611 272" stroke="#7C1428"/>
+        </g>
+
+        <text class="a6dB" x="592" y="74" text-anchor="middle">real gap +45.5 points</text>
+        <text class="a6dS" x="90" y="266" text-anchor="middle">-80</text>
+        <text class="a6dS" x="250" y="266" text-anchor="middle">-40</text>
+        <text class="a6dS" x="410" y="266" text-anchor="middle">0</text>
+        <text class="a6dS" x="730" y="266" text-anchor="middle">+80</text>
+        <text class="a6dA" x="402" y="298" text-anchor="middle">middle 90% of shuffles: -53.9 to +50.2 points</text>
+        <text class="a6dA" x="420" y="316" text-anchor="middle">cut-group lift minus held-group lift, percentage points</text>
+
+        <text class="a6dL" x="660" y="110">14 of 200 shuffles</text>
+        <text class="a6dL" x="660" y="128">reach the real gap</text>
+        <text class="a6dS" x="660" y="150">at a 5% threshold: 2 of 200,</text>
+        <text class="a6dS" x="660" y="166">but picking the threshold</text>
+        <text class="a6dS" x="660" y="182">after looking is its own bias</text>
+
+        <text class="a6dN" x="30" y="336">Real Olist rows, threshold 3%. The bar heights are counts of shuffles; the green line is the real split.</text>
+      </svg>
+      <figcaption>🔍 Click to zoom - the real gap sits inside the shuffle spread: on these 83 products, chance alone produces gaps that big about one time in fourteen</figcaption>
+    </figure>
+
+    <details class="card">
+      <summary><span class="mode live">Live</span>What the break button proves, and what it does not<span class="mini">3 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p><strong>It tests the split, not the cause.</strong> Each shuffle keeps the 83 products and their real units and only reassigns the label "cut". Product sales are lumpy: a few products that tripled in November can land in either group by chance. When 14 of 200 random splits produce a gap as large as the real one, the real 45.5 points cannot be told apart from that lumpiness at this n.</p>
+        <p><strong>It does not say the discount did nothing.</strong> It says these rows cannot separate it from noise. The honest report is a range and a caveat, not a zero and not a 45.5.</p>
+        <p><strong>The forking path.</strong> At a 5% threshold the real gap of 72.8 points beats 198 of 200 shuffles. Choose the threshold before you look. Trying thresholds until the test passes turns a placebo check into a search for a story.</p>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary><span class="mode self">Self-study</span>How to get a cleaner answer next time<span class="mini">2 min</span><span class="caret">▶</span></summary>
+      <div class="body">
+        <p>Randomise. Pick the products, stores or customers that get the discount by a random draw, hold the rest back, and size the test before it starts: <a href="https://phoebefu6.github.io/learn-experimentation-with-phoebe/courses/b4-run-an-ab-test.html">Experimentation, run an A/B test ↗</a>. Use weekly data so the promotion and the weeks after it are separate rows. Record the cost per unit at the time, so rung 5 needs no assumption. If none of that is possible, the comparison group plus a placebo is the minimum, reported with its n.</p>
+      </div>
+    </details>
+
+    <div class="callout example">
+      <span class="ex-pill">Real world</span>
+      <p><strong>The honest sentence.</strong> Here is what the lab supports, on real rows at the default settings: "In November 2017 the 29 Olist products that cut price more than 3% sold 141 more units than the 54 that held would predict, 164 over two months; on 83 products that gap is inside the range random splits produce; at an assumed 60% cost ratio it did not pay, at 50% it did." Every clause is a line the lab prints. That is longer than "the discount lifted sales 75%", and it is the one you can defend.</p>
+    </div>
+  </section>
+
+  <section class="section" id="exercise">
+    <div class="section-kicker">
+      <span class="klabel">Homework</span>
+      <h2>Before you sign the next promotion</h2>
+      <span class="tag exercise">45 min</span>
+    </div>
+    <ol>
+      <li><strong>Run the ladder on your own last promotion.</strong> Find a group of products, stores or weeks that did not get it, and compute rungs 1 to 4 with their units.</li>
+      <li><strong>Get the real cost ratio</strong> for the promoted products from finance and compute rung 5 at that number and at 10 points either side.</li>
+      <li><strong>Shuffle your own labels</strong> 200 times with a fixed seed and report where the real gap sits.</li>
+      <li><strong>Write the honest sentence</strong> for your promotion in the shape of Part 3's example, every clause backed by a number you computed.</li>
+    </ol>
+  </section>
+
+  <section class="section" id="quiz">
+    <div class="section-kicker">
+      <span class="klabel">Check yourself</span>
+      <h2>Three questions</h2>
+    </div>
+    <p>Clear all three and Analyst session 6 gets stamped in your passport.</p>
+
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1 · The cut products rose 111.0% in November and the held products 65.5%. What does rung 3 credit to the discount?</p>
+      <button class="qopt" type="button">A · 111.0%, the cut group's own lift</button>
+      <button class="qopt" type="button">B · The gap, 45.5 points: 141 extra units above what the held group's growth predicts</button>
+      <button class="qopt" type="button">C · 74.7%, the whole panel</button>
+      <button class="qopt" type="button">D · Nothing, because the held group also grew</button>
+      <p class="qwhy">The held group shows what the season did without a cut. Only the part above it is credited, and only under the parallel-trends assumption.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <p class="qtext">2 · With the anti-lever on, the same rows say the discount "paid" R$ 8,210.60 at a 60% cost ratio instead of losing R$ 1,058.10. Why?</p>
+      <button class="qopt" type="button">A · The anti-lever uses a different cost ratio</button>
+      <button class="qopt" type="button">B · It uses different products</button>
+      <button class="qopt" type="button">C · It removes the Black Friday month</button>
+      <button class="qopt" type="button">D · October becomes the baseline, so the seasonal crowd is counted as discount lift: 422 units instead of 164</button>
+      <p class="qwhy">Without a comparison group the season is credited to the discount, the measured volume rise jumps from 20.4% to 70.5%, and the break-even test is passed by the calendar.</p>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">3 · The real gap of +45.5 points sits above 186 of 200 shuffles; 14 reach it. What is the honest reading?</p>
+      <button class="qopt" type="button">A · On 83 products the gap is inside the range random splits produce, so the rows cannot separate the discount from which products happened to be cut</button>
+      <button class="qopt" type="button">B · The discount did nothing</button>
+      <button class="qopt" type="button">C · The discount is proven, because 186 is more than half of 200</button>
+      <button class="qopt" type="button">D · Change the threshold until fewer shuffles reach it</button>
+      <p class="qwhy">A placebo that reaches the real gap one time in fourteen means "not separable from chance at this n", not "zero". D is the forking path: choose the threshold before you look.</p>
+    </div>
+
+    <p class="quiz-score"></p>
+  </section>
+
+  <section class="section" id="official">
+    <div class="section-kicker">
+      <span class="klabel">Sources covered</span>
+      <h2>What this session teaches, and where it came from</h2>
+    </div>
+    <div class="covered">
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Units and mean item prices by product and month, July 2017 to January 2018; every rung, the anti-lever and the shuffle</span><span class="note">Olist, Brazilian E-Commerce Public Dataset, Kaggle, CC BY-NC-SA 4.0; panel built by the Economics course; computed in your browser, matched by a Python reference</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Black Friday 2017 fell on Friday 24 November</span><span class="note">Ebit report via Mercado e Consumo, 29 November 2017; read at source</span></div>
+      <div class="covered-row"><span class="status pill solid">✓</span><span class="name">Difference-in-differences and parallel trends; randomised tests</span><span class="note">Taught in Experimentation sessions b9 and b4; linked, not re-taught</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">The cost ratio in rung 5</span><span class="note">Assumed: Olist publishes no costs; labelled on the widget</span></div>
+      <div class="covered-row"><span class="status pill light">◐</span><span class="name">Kettle &amp; Co's November tin promotion</span><span class="note">Constructed and labelled</span></div>
+    </div>
+    <p class="mono" style="margin-top:14px">Every fact on this page, and its verification tier, is recorded in the course's source map.</p>
+  </section>
+
+  <section class="cheat" id="cheatsheet">
+    <h3>Analyst session 6 cheat sheet <span>· pin this</span></h3>
+    <div class="grid-2">
+      <div class="cheat-item"><b>Five rungs</b><span>Panel, cut alone, minus held, plus the month after, did it pay.</span></div>
+      <div class="cheat-item"><b>Real canon</b><span>+74.7% naive; 141 units in November, 164 over two months.</span></div>
+      <div class="cheat-item"><b>Did it pay</b><span>Needs d / (m - d) more volume. At 60% cost: needed 24.6%, got 20.4%.</span></div>
+      <div class="cheat-item"><b>Anti-lever</b><span>No comparison group overstates the lift 2.57 times.</span></div>
+      <div class="cheat-item"><b>Break it</b><span>Shuffle who was cut. 14 of 200 reach the real gap: not separable at this n.</span></div>
+      <div class="cheat-item"><b>Say the assumptions</b><span>Monthly grain, sellers chose the cuts, cost ratio assumed.</span></div>
+    </div>
+  </section>
+
+  <div class="callout next">
+    <span class="nx-pill">Course home</span>
+    <p>That is the Analyst track. If you came here first, Business session 4 turns tonight's habits into a checklist for reading any pricing recommendation: whose elasticity, over what range, against what comparison, and what the regulators have said about prices set from personal data.</p>
+  </div>
+
+  <footer class="pagefoot">
+    <span>Analyst session 6 of 6 · learn-pricing-analytics-with-phoebe · by Phoebe Fu &nbsp;·&nbsp; 📚 <a href="https://phoebefu6.github.io/learn-with-phoebe/">Learn with Phoebe ↗</a></span>
+    <span><a href="a5-tiers-bundles-and-price-fences.html">← Prev: Tiers, bundles and price fences</a> &nbsp;·&nbsp; <a href="../index.html">Course home</a></span>
+  </footer>
+
+</main>
+
+<script src="../assets/pra-sample.js?v=1"></script>
+<script src="../assets/pra-live.js?v=1"></script>
+<script src="../assets/pra-bench.js?v=1"></script>
+<script src="../assets/app.js?v=1"></script>
+</body>
+</html>
